@@ -1,3 +1,4 @@
+import GenerateQuizInput from "../components/GenerateQuizInput";
 
 
 
@@ -5,7 +6,7 @@
 export default function Page() {
   return (
     <div>
-     hello world
+      <GenerateQuizInput/>
     </div>
   );
 }
