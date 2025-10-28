@@ -2,8 +2,8 @@ import express from "express";
 import dotenv from "dotenv"
 import cors from "cors"
 dotenv.config();
-import { quizInput, QuizResponse } from "./zod/zodTypes.js";
 import { generateQuiz } from "./ai/aiQueries.js";
+import { quizInput, QuizResponse } from "@repo/common"
 
 
 

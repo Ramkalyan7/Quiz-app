@@ -11,8 +11,13 @@
     "check-types": "next typegen && tsc --noEmit"
   },
   "dependencies": {
+    "@prisma/client": "^6.18.0",
+    "@repo/common": "*",
     "@repo/ui": "*",
+    "axios": "^1.13.0",
+    "dotenv": "^17.2.3",
     "next": "^16.0.0",
+    "prisma": "^6.18.0",
     "react": "^19.2.0",
     "react-dom": "^19.1.0"
   },

@@ -11,12 +11,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@repo/common":"*",
     "@perplexity-ai/perplexity_ai": "^0.12.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.4",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "zod": "^4.1.12"
+    "express": "^5.1.0"
   }
 }
