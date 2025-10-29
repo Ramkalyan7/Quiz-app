@@ -5,8 +5,9 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "./generated/prisma"
+  provider        = "prisma-client"
+  output          = "./generated/prisma"
+  previewFeatures = ["fullTextSearchPostgres"]
 }
 
 datasource db {
@@ -14,11 +15,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Quiz {
+  id        Int           @id @default(autoincrement())
+  title     String
+  quizData  Json
+  tags      String[]
+  attempts  QuizAttempt[]
+  createdAt DateTime      @default(now())
+}
 
+model User {
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
+  name         String
+  password     String
+  quizAttempts QuizAttempt[]
+}
 
-model Quiz{
-  id Int @id @default(autoincrement())
-  title String
-  quizData Json
-  tags String[]
+model QuizAttempt {
+  id          Int      @id @default(autoincrement())
+  score       Float
+  totalScore  Float @default(10)
+  userId      Int
+  quizId      Int
+  completedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, quizId, completedAt])
+  @@index([userId])
+  @@index([quizId])
 }

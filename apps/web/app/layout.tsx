@@ -18,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={geist.className}>
+      <body className={`${geist.className} bg-slate-100`}>
         <AppBar />
         <div>{children}</div>
       </body>

@@ -48,7 +48,9 @@ export const AnyNull = runtime.objectEnumValues.instances.AnyNull
 
 
 export const ModelName = {
-  Quiz: 'Quiz'
+  Quiz: 'Quiz',
+  User: 'User',
+  QuizAttempt: 'QuizAttempt'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -71,10 +73,33 @@ export const QuizScalarFieldEnum = {
   id: 'id',
   title: 'title',
   quizData: 'quizData',
-  tags: 'tags'
+  tags: 'tags',
+  createdAt: 'createdAt'
 } as const
 
 export type QuizScalarFieldEnum = (typeof QuizScalarFieldEnum)[keyof typeof QuizScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  name: 'name',
+  password: 'password'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const QuizAttemptScalarFieldEnum = {
+  id: 'id',
+  score: 'score',
+  totalScore: 'totalScore',
+  userId: 'userId',
+  quizId: 'quizId',
+  completedAt: 'completedAt'
+} as const
+
+export type QuizAttemptScalarFieldEnum = (typeof QuizAttemptScalarFieldEnum)[keyof typeof QuizAttemptScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -107,4 +132,21 @@ export const JsonNullValueFilter = {
 } as const
 
 export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+export const QuizOrderByRelevanceFieldEnum = {
+  title: 'title',
+  tags: 'tags'
+} as const
+
+export type QuizOrderByRelevanceFieldEnum = (typeof QuizOrderByRelevanceFieldEnum)[keyof typeof QuizOrderByRelevanceFieldEnum]
+
+
+export const UserOrderByRelevanceFieldEnum = {
+  email: 'email',
+  name: 'name',
+  password: 'password'
+} as const
+
+export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
 

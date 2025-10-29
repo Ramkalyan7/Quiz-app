@@ -37,15 +37,15 @@ app.post("/api/ai/quiz", async (req, res) => {
         const parseResult = QuizResponse.safeParse(quiz);
 
         if (!parseResult?.success || parseResult.data.quiz.length == 0) {
-            return res.status(500).json("Error while genrating the Quiz");
+            return res.status(503).json("Error while genrating the Quiz");
         }
         return res.status(200).json(quiz)
     } catch (error) {
         console.log(error);
-        return res.status(500).json("Error while genrating the Quiz")
+        return res.status(503).json("Error while genrating the Quiz")
     }
 
-});
+}); 
 
 
 

@@ -1,6 +1,6 @@
 const AppBar = () => {
   return (
-      <div className="container border-b border-gray-300 fixed top-0 right-0 left-0 bg-white z-10 min-w-screen flex flex-wrap px-7 py-2 flex-col md:flex-row items-center justify-between">
+      <div className="container border-b border-gray-300 fixed top-0 right-0 left-0 bg-slate-200 z-10 min-w-screen flex flex-wrap px-7 py-2 flex-col md:flex-row items-center justify-between">
         <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -2,7 +2,7 @@ import { QuizQuestionType } from "@repo/common";
 import { prisma } from "../../../../lib/prisma";
 import { redirect } from "next/navigation";
 
-const GenerateQuizPage = async ({
+const AttempQuizPage = async ({
   params,
 }: {
   params: Promise<{ id: string }>;
@@ -38,19 +38,24 @@ const GenerateQuizPage = async ({
   );
 };
 
-export default GenerateQuizPage;
+export default  AttempQuizPage;
+
+
+
 
 const HeaderText = ({ title , questions}: { title: string,questions:QuizQuestionType[] }) => {
   return (
     <div>
       <div className="text-3xl font-semibold py-5">Start Your Quiz</div>
       <div className="pb-5">
-        <div>{title}</div>
+        <div>{title.split(".")[0]}.</div>
       </div>
       {questions.map((question)=><QuizItem key={question.question} question={question}/>)}
     </div>
   );
 };
+
+
 
 const QuizItem = ({question}:{question:QuizQuestionType}) => {
   return (
@@ -65,6 +70,7 @@ const QuizItem = ({question}:{question:QuizQuestionType}) => {
     </div>
   );
 };
+
 
 const QuizOption = ({option}:{option:string}) => {
   return (
