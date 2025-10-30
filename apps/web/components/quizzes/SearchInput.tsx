@@ -21,7 +21,7 @@ const SearchInput = () => {
     }
     const params = new URLSearchParams(searchParams.toString());
     params.set("q", searchTerm);
-    params.set("page","1");
+    params.set("page", "1");
 
     router.replace(`${pathName}?${params.toString()}`, { scroll: false });
   };
@@ -39,7 +39,7 @@ const SearchInput = () => {
           type="text"
           id="simple-search"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-4  p-2.5 outline-none "
-          placeholder="Search branch name..."
+          placeholder="Search a topic ..."
           onChange={onSearchInputChange}
         />
       </div>

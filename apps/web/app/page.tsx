@@ -1,10 +1,12 @@
-import GenerateQuizInput from "../components/GenerateQuizInput";
+import { redirect } from "next/navigation";
+import { isAuthenticated } from "../lib/session";
 
+export default async function HomePage() {
+  const isUserLoggedIn = await isAuthenticated();
 
-export default function Page() {
-  return (
-    <div>
-      home page
-    </div>
-  );
+  if (isUserLoggedIn) {
+    redirect("/quizzes");
+  }
+
+  return <div>home page</div>;
 }

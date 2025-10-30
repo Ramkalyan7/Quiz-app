@@ -5,7 +5,7 @@ const SideBar = () => {
     <aside className="bg-slate-200 w-48 border-r border-gray-300 font-semibold px-5  h-screen  sticky top-0 bottom-0 left-0 pt-20">
       <nav>
         <div className="space-y-2">
-          <LinkComponent pageLink="quizzes?page=1" linkText="Quizzes" />
+          <LinkComponent pageLink="quizzes" linkText="Quizzes" />
           <LinkComponent pageLink="generatequiz" linkText="Generate Quiz" />
           <LinkComponent pageLink="quizhistory" linkText="History" />
         </div>

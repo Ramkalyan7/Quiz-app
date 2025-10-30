@@ -3,6 +3,9 @@ import QuizComponent from "../../../components/QuizComponent";
 import { QuizWhereInput } from "../../../prisma/generated/prisma/models";
 import PaginationBtns from "../../../components/quizzes/PaginationBtns";
 import SearchInput from "../../../components/quizzes/SearchInput";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../../lib/auth";
+import { redirect } from "next/navigation";
 
 const ITEMS_PER_PAGE = 4;
 
@@ -14,6 +17,7 @@ type Props = {
 };
 
 const quizzes = async ({ searchParams }: Props) => {
+
   const { q, page } = await searchParams;
   const searchQuery = q?.toLowerCase().trim() || "";
   let currentPage = parseInt(page || "1");
@@ -49,12 +53,11 @@ const quizzes = async ({ searchParams }: Props) => {
     },
   });
 
-
   return (
     <div className="px-5">
       <HeaderText />
       <div>
-        <SearchInput/>
+        <SearchInput />
       </div>
       <div className=" flex flex-row flex-wrap items-start justify-around">
         {quizzes?.map((quiz) => {
@@ -69,7 +72,7 @@ const quizzes = async ({ searchParams }: Props) => {
         })}
       </div>
       <div>
-        <PaginationBtns currentPage={currentPage} totalPages={totalPages}/>
+        <PaginationBtns currentPage={currentPage} totalPages={totalPages} />
       </div>
     </div>
   );
@@ -87,4 +90,3 @@ const HeaderText = () => {
     </div>
   );
 };
-
