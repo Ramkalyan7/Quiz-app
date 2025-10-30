@@ -77,11 +77,12 @@ model QuizAttempt {
   @@index([quizId])
 }
 
-//  For email verification or password reset
+//For email verification or password reset
 model VerificationToken {
-  identifier String
+  identifier String //Email Address
   token      String   @unique
   expires    DateTime
 
   @@unique([identifier, token])
+  @@map("verification_tokens")
 }
