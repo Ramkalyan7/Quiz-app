@@ -14,6 +14,8 @@ export function QuizResultPage() {
     }
   }, [context, router]);
 
+
+
   if (!context || context.state.quizId == 0) {
     return null;
   }
@@ -34,12 +36,13 @@ export function QuizResultPage() {
     router.push(`/attemptquiz/${results.quizId}`);
   };
 
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 sm:px-6 lg:px-10 py-12">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 sm:px-6 lg:px-10 py-12">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-r from-blue-600 to-purple-600 rounded-2xl mb-4">
             <svg
               className="w-8 h-8 text-white"
               fill="none"
@@ -57,7 +60,7 @@ export function QuizResultPage() {
           <h1 className="text-4xl font-bold text-gray-900 mb-2">
             Quiz Complete!
           </h1>
-          <p className="text-gray-600">Here's how you performed</p>
+          <p className="text-gray-600">Here&apos;s how you performed</p>
         </div>
 
         {/* Main Result Card */}
@@ -171,7 +174,7 @@ export function QuizResultPage() {
         <div className="flex flex-col sm:flex-row gap-4">
           <button
             onClick={handleTryAgain}
-            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-md hover:shadow-lg"
+            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold text-white bg-linear-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-md hover:shadow-lg"
           >
             <svg
               className="w-5 h-5"

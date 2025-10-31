@@ -43,7 +43,7 @@ const SearchInput = () => {
         </div>
         <button
           type="submit"
-          className="px-4 py-2.5 text-sm font-medium text-white bg-blue-400 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 transition-all duration-200"
+          className="px-4 py-2.5 text-sm font-medium text-white bg-indigo-500 rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-300 transition-all duration-200"
         >
           <svg
             className="w-4 h-4"

@@ -45,14 +45,14 @@ const VerifyEmailContent = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
         <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8 text-center">
           {status === "loading" && (
             <>
               <div className="inline-flex items-center justify-center mb-6">
                 <div className="relative w-16 h-16">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full animate-spin" 
+                  <div className="absolute inset-0 bg-linear-to-r from-blue-500 to-purple-600 rounded-full animate-spin" 
                        style={{ 
                          background: 'conic-gradient(from 0deg, #3b82f6, #9333ea, #3b82f6)',
                          WebkitMaskImage: 'radial-gradient(circle, transparent 30%, black 70%)',
@@ -73,7 +73,7 @@ const VerifyEmailContent = () => {
 
           {status === "success" && (
             <>
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-green-400 to-green-600 rounded-full mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-r from-green-400 to-green-600 rounded-full mb-6">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="none"
@@ -102,7 +102,7 @@ const VerifyEmailContent = () => {
 
           {status === "error" && (
             <>
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-red-400 to-red-600 rounded-full mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-r from-red-400 to-red-600 rounded-full mb-6">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="none"
@@ -122,7 +122,7 @@ const VerifyEmailContent = () => {
               <div className="space-y-3">
                 <Link
                   href="/login"
-                  className="inline-flex w-full items-center justify-center bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold px-6 py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-md hover:shadow-lg"
+                  className="inline-flex w-full items-center justify-center bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold px-6 py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-md hover:shadow-lg"
                 >
                   Go to Login
                 </Link>

@@ -47,7 +47,7 @@ const PaginationBtns = ({ currentPage, totalPages }: PaginationProps) => {
       <button
         onClick={goToNextPage}
         disabled={currentPage >= totalPages}
-        className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 cursor-pointer"
+        className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 cursor-pointer"
       >
         Next
       </button>

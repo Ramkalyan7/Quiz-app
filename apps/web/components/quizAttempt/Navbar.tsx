@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { QuizContext, QuizContextType } from "../../context/quizContext";
 import { useContext } from "react";
+import updateQuizResult from "../../actions/updateQuizResult";
 
 const Navbar = ({
   correctAnsCount,
@@ -15,7 +16,8 @@ const Navbar = ({
 }) => {
   const router = useRouter();
 
-  const { state, dispatch } = useContext(QuizContext) as QuizContextType;
+  const { dispatch } = useContext(QuizContext) as QuizContextType;
+
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 shadow-sm z-50">
@@ -55,6 +57,11 @@ const Navbar = ({
                   correctCount: correctAnsCount,
                 },
               });
+              updateQuizResult(
+                quizId,
+                correctAnsCount,
+                totalQuesCount
+              );
               router.push(`/quizresult`);
             }}
             className="flex items-center gap-2 px-6 py-2 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition-colors duration-200 shadow-md cursor-pointer"

@@ -4,16 +4,28 @@ const QuizComponent = ({
   id,
   title,
   tags,
+  isFromHistory = false,
+  totalScore = 0,
+  score = 0,
 }: {
   id: number;
   title: string;
   tags: string[];
+  isFromHistory?: boolean;
+  totalScore?: number;
+  score?: number;
 }) => {
   return (
     <Link href={`/attemptquiz/${id}`}>
-      <div className="h-full bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-blue-400 overflow-hidden cursor-pointer group">
+      <div className="h-full bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-blue-400 overflow-hidden cursor-pointer group relative">
         <div className="h-1 bg-linear-to-r from-blue-500 to-purple-600"></div>
-        
+
+        {isFromHistory && (
+          <div className="absolute top-4 right-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
+            {score}/{totalScore}
+          </div>
+        )}
+
         <div className="p-6 flex flex-col h-full space-y-4">
           <div className="grow">
             <h3 className="text-lg font-semibold text-gray-900 line-clamp-3 group-hover:text-blue-600 transition-colors duration-200">
@@ -22,7 +34,7 @@ const QuizComponent = ({
           </div>
 
           <div className="space-y-4 flex flex-col-reverse">
-            <button className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 text-sm font-semibold text-white bg-linear-to-r from-blue-400 to-blue-500 rounded-lg hover:from-blue-600 hover:to-blue-700 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-sm hover:shadow-md group/btn">
+            <button className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 text-sm font-semibold text-white bg-linear-to-r from-indigo-400 to-indigo-500 rounded-lg hover:from-indigo-600 hover:to-indigo-700 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-sm hover:shadow-md group/btn">
               Start Quiz
               <svg
                 className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200"

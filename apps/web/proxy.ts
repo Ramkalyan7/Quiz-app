@@ -17,7 +17,7 @@ export default withAuth(
                 const isProtected = protectedRoutes.some(route =>
                     req.nextUrl.pathname.startsWith(route)
                 )
-
+                
                 return isProtected ? !!token : true
             }
         },

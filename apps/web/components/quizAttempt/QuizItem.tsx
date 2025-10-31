@@ -126,6 +126,7 @@ const QuizOption = ({
       e.target.value?.toLocaleLowerCase() === correctOption.toLocaleLowerCase()
     ) {
       setCorrectAnsCount((prev) => prev + 1);
+      console.log("updated");
     }
   };
 

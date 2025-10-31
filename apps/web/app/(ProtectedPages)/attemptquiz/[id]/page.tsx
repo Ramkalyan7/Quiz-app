@@ -1,8 +1,6 @@
 import { QuizQuestionType } from "@repo/common";
 import { prisma } from "../../../../lib/prisma";
 import { redirect } from "next/navigation";
-import Navbar from "../../../../components/quizAttempt/Navbar";
-import QuizItemParent from "../../../../components/quizAttempt/QuizItemParent";
 import QuizAttempt from "../../../../components/quizAttempt/QuizAttempt";
 
 const AttempQuizPage = async ({
