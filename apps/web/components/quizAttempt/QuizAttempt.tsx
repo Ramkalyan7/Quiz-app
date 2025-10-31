@@ -5,6 +5,7 @@ import HeaderText from "./HeaderText";
 import Navbar from "./Navbar";
 import QuizItemParent from "./QuizItemParent";
 import { useState } from "react";
+import { QuizProvider } from "../../context/quizContext";
 
 const QuizAttempt = ({
   questions,
@@ -28,7 +29,7 @@ const QuizAttempt = ({
           </div>
         </div>
       </div>
-    </>
+   </>
   );
 };
 

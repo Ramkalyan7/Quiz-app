@@ -1,10 +1,21 @@
-"use client"
+"use client";
 
 import { useRouter } from "next/navigation";
+import { QuizContext, QuizContextType } from "../../context/quizContext";
+import { useContext } from "react";
 
-const Navbar = ({correctAnsCount,quizId,totalQuesCount}:{correctAnsCount:number;quizId:number;totalQuesCount:number}) => {
+const Navbar = ({
+  correctAnsCount,
+  quizId,
+  totalQuesCount,
+}: {
+  correctAnsCount: number;
+  quizId: number;
+  totalQuesCount: number;
+}) => {
   const router = useRouter();
 
+  const { state, dispatch } = useContext(QuizContext) as QuizContextType;
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 shadow-sm z-50">
@@ -34,9 +45,20 @@ const Navbar = ({correctAnsCount,quizId,totalQuesCount}:{correctAnsCount:number;
           </button>
 
           {/* Submit Button */}
-          <button 
-          onClick={()=>{router.push(`/quizresult?quizId=${quizId}&cc=${correctAnsCount}&tc=${totalQuesCount}`)}}
-          className="flex items-center gap-2 px-6 py-2 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition-colors duration-200 shadow-md cursor-pointer">
+          <button
+            onClick={() => {
+              dispatch({
+                type: "SET_DATA",
+                payload: {
+                  quizId: quizId,
+                  questionCount: totalQuesCount,
+                  correctCount: correctAnsCount,
+                },
+              });
+              router.push(`/quizresult`);
+            }}
+            className="flex items-center gap-2 px-6 py-2 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition-colors duration-200 shadow-md cursor-pointer"
+          >
             <svg
               className="w-5 h-5"
               fill="none"
@@ -57,6 +79,5 @@ const Navbar = ({correctAnsCount,quizId,totalQuesCount}:{correctAnsCount:number;
     </nav>
   );
 };
-
 
 export default Navbar;
