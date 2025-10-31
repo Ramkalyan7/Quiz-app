@@ -21,7 +21,7 @@ const QuizComponent = ({
         <div className="h-1 bg-linear-to-r from-blue-500 to-purple-600"></div>
 
         {isFromHistory && (
-          <div className="absolute top-4 right-2 bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
+          <div className="absolute top-4 right-2 bg-linear-to-r from-emerald-500 to-teal-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md">
             {score}/{totalScore}
           </div>
         )}

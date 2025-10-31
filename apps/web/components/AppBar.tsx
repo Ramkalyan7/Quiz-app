@@ -18,7 +18,7 @@ const AppBar = () => {
 
   return (
     <div className="fixed top-0 right-0 left-0 bg-white border-b border-gray-200 z-10 min-w-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap py-3 flex-col md:flex-row items-center justify-between gap-4">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap py-3 flex-col md:flex-row items-center justify-between gap-4">
         <a className="flex title-font font-medium items-center text-gray-900">
           <div className="w-10 h-10 bg-linear-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center shrink-0">
             <svg
@@ -55,7 +55,7 @@ const AppBar = () => {
             className={`inline-flex items-center border-0 py-2 px-4 focus:outline-none rounded-lg cursor-pointer text-sm font-semibold transition-all duration-200 ${
               isUserLoggedIn
                 ? "bg-red-600 text-white hover:bg-red-700 focus:ring-4 focus:ring-red-300"
-                : "bg-gray-900 text-white hover:bg-gray-800 focus:ring-4 focus:ring-gray-300"
+                : "bg-indigo-700 text-white hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300"
             }`}
           >
             {isUserLoggedIn ? "Log out" : "Sign in"}
