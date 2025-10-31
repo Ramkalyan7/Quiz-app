@@ -10,48 +10,57 @@ const AppBar = () => {
   const pathname = usePathname();
 
   // Hide navbar on these pages
-  const hideOnPages = ["/login", "/signup"];
+  const hideOnPages = ["/login", "/register","/verifyemail","/attemptquiz"];
 
-  if (hideOnPages.includes(pathname)) {
+  if (hideOnPages.includes(pathname) || pathname.startsWith("/attemptquiz")) {
     return null;
   }
 
   return (
-    <div className="container border-b border-gray-300 fixed top-0 right-0 left-0 bg-slate-200 z-10 min-w-screen flex flex-wrap px-7 py-2 flex-col md:flex-row items-center justify-between">
-      <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          className="w-9 h-9 text-white p-2 bg-blue-700 rounded-full"
-          viewBox="0 0 24 24"
-        >
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-        </svg>
-        <span className="ml-3 text-md font-bold">Quiz Up</span>
-      </a>
-      <div>
-        {isUserLoggedIn && (
-          <button className="mr-5 text-blue-900 inline-flex items-center bg-gray-300 border-0 py-1.5 px-3 focus:outline-none hover:bg-gray-200 rounded-md  mt-4 md:mt-0 cursor-pointer text-sm font-semibold">
-            Upgrade Now
-          </button>
-        )}
+    <div className="fixed top-0 right-0 left-0 bg-white border-b border-gray-200 z-10 min-w-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap py-3 flex-col md:flex-row items-center justify-between gap-4">
+        <a className="flex title-font font-medium items-center text-gray-900">
+          <div className="w-10 h-10 bg-linear-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center shrink-0">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              className="w-6 h-6 text-white"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+          </div>
+          <span className="ml-2 text-lg font-bold text-gray-900">Quiz Up</span>
+        </a>
 
-        <button
-          onClick={() => {
-            if (isUserLoggedIn) {
-              signOut();
-            } else {
-              redirect("/login");
-            }
-          }}
-          className={`${isUserLoggedIn ? "bg-red-500 text-white" : "bg-black text-white"}  inline-flex items-center  border-0 py-1.5 px-3 focus:outline-none hover:bg-gray-800 rounded-lg mt-4 md:mt-0 cursor-pointer text-sm font-semibold`}
-        >
-          {isUserLoggedIn ? "Log out" : "Sign in"}
-        </button>
+        <div className="flex gap-3 items-center">
+          {isUserLoggedIn && (
+            <button className="text-gray-700 font-medium px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-50 transition-colors duration-200 text-sm">
+              Upgrade Now
+            </button>
+          )}
+
+          <button
+            onClick={() => {
+              if (isUserLoggedIn) {
+                signOut();
+              } else {
+                redirect("/login");
+              }
+            }}
+            className={`inline-flex items-center border-0 py-2 px-4 focus:outline-none rounded-lg cursor-pointer text-sm font-semibold transition-all duration-200 ${
+              isUserLoggedIn
+                ? "bg-red-600 text-white hover:bg-red-700 focus:ring-4 focus:ring-red-300"
+                : "bg-gray-900 text-white hover:bg-gray-800 focus:ring-4 focus:ring-gray-300"
+            }`}
+          >
+            {isUserLoggedIn ? "Log out" : "Sign in"}
+          </button>
+        </div>
       </div>
     </div>
   );

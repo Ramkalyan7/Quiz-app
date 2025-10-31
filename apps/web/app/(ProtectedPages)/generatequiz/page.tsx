@@ -22,8 +22,10 @@ const GenerateQuizPage = () => {
   };
 
   return (
-    <div className="flex justify-center">
-      <GenerateQuizInput getQuiz={getQuiz} />
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 sm:px-6 lg:px-10 pb-12 pt-5">
+      <div className="max-w-4xl mx-auto">
+        <GenerateQuizInput getQuiz={getQuiz} />
+      </div>
     </div>
   );
 };

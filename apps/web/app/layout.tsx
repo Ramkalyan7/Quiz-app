@@ -4,8 +4,6 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import AppBar from "../components/AppBar";
 import { Providers } from "./providers";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../lib/auth";
 
 const geist = Geist({ subsets: ["latin"] });
 
@@ -21,7 +19,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${geist.className} bg-slate-100`}>
+      <body className={`${geist.className} `}>
         <Providers>
           <AppBar />
           {children}

@@ -3,11 +3,8 @@ import QuizComponent from "../../../components/QuizComponent";
 import { QuizWhereInput } from "../../../prisma/generated/prisma/models";
 import PaginationBtns from "../../../components/quizzes/PaginationBtns";
 import SearchInput from "../../../components/quizzes/SearchInput";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../../../lib/auth";
-import { redirect } from "next/navigation";
 
-const ITEMS_PER_PAGE = 4;
+const ITEMS_PER_PAGE = 8;
 
 type Props = {
   searchParams: Promise<{
@@ -17,7 +14,6 @@ type Props = {
 };
 
 const quizzes = async ({ searchParams }: Props) => {
-
   const { q, page } = await searchParams;
   const searchQuery = q?.toLowerCase().trim() || "";
   let currentPage = parseInt(page || "1");
@@ -54,24 +50,22 @@ const quizzes = async ({ searchParams }: Props) => {
   });
 
   return (
-    <div className="px-5">
-      <HeaderText />
-      <div>
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 sm:px-6 lg:px-10 pb-12">
+      <div className="max-w-6xl mx-auto space-y-8">
+        <HeaderText />
         <SearchInput />
-      </div>
-      <div className=" flex flex-row flex-wrap items-start justify-around">
-        {quizzes?.map((quiz) => {
-          return (
-            <QuizComponent
-              key={quiz.id}
-              title={quiz.title}
-              tags={quiz.tags}
-              id={quiz.id}
-            />
-          );
-        })}
-      </div>
-      <div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {quizzes?.map((quiz) => {
+            return (
+              <QuizComponent
+                key={quiz.id}
+                title={quiz.title}
+                tags={quiz.tags}
+                id={quiz.id}
+              />
+            );
+          })}
+        </div>
         <PaginationBtns currentPage={currentPage} totalPages={totalPages} />
       </div>
     </div>
@@ -82,11 +76,15 @@ export default quizzes;
 
 const HeaderText = () => {
   return (
-    <div className="text-center mb-10">
-      <div className="mt-10 mb-5 text-4xl font-semibold ">Ready to Learn?</div>
-      <div className="text-gray-700 ">
-        Choose a quiz and start testing your knowledge
+    <div className="text-center space-y-4">
+      <div className="inline-flex items-center justify-center gap-3">
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
+          Ready to Learn?
+        </h1>
       </div>
+      <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        Choose a quiz and start testing your knowledge
+      </p>
     </div>
   );
 };

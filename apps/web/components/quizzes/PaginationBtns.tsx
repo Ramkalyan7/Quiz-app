@@ -31,27 +31,28 @@ const PaginationBtns = ({ currentPage, totalPages }: PaginationProps) => {
   };
 
   return (
-    <div className="py-12 flex flex-row justify-between items-center">
+    <div className="py-12 flex items-center justify-between gap-4">
       <button
         onClick={goToPrevPage}
         disabled={currentPage <= 1}
-        className="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 cursor-pointer"
       >
-        Prev
+        Previous
       </button>
-      <span className="text-sm text-gray-700">
-        Page {currentPage} of {totalPages}
-      </span>
+
+      <div className="text-sm text-gray-600 font-medium">
+        Page <span className="text-gray-900 font-bold">{currentPage}</span> of <span className="text-gray-900 font-bold">{totalPages}</span>
+      </div>
+
       <button
         onClick={goToNextPage}
         disabled={currentPage >= totalPages}
-        className="px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 cursor-pointer"
       >
         Next
       </button>
     </div>
   );
 };
-
 
 export default PaginationBtns;

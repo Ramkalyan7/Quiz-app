@@ -1,6 +1,6 @@
 import Link from "next/link";
 
- const QuizComponent = ({
+const QuizComponent = ({
   id,
   title,
   tags,
@@ -9,41 +9,53 @@ import Link from "next/link";
   title: string;
   tags: string[];
 }) => {
-
   return (
     <Link href={`/attemptquiz/${id}`}>
-    <div className="max-w-lg p-6 my-3 bg-gray-200 border-2 border-gray-300 rounded-lg shadow-sm cursor-pointer">
-      <p className="mb-3 font-normal text-gray-700 ">{title.length>30 ? `${title.substring(0,150)} . . . . .` : title}</p>
-      <div
-        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
-      >
-        Start Quiz
-        <svg
-          className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 14 10"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M1 5h12m0 0L9 1m4 4L9 9"
-          />
-        </svg>
+      <div className="h-full bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-blue-400 overflow-hidden cursor-pointer group">
+        <div className="h-1 bg-linear-to-r from-blue-500 to-purple-600"></div>
+        
+        <div className="p-6 flex flex-col h-full space-y-4">
+          <div className="grow">
+            <h3 className="text-lg font-semibold text-gray-900 line-clamp-3 group-hover:text-blue-600 transition-colors duration-200">
+              {title.length > 100 ? `${title.substring(0, 100)}...` : title}
+            </h3>
+          </div>
+
+          <div className="space-y-4 flex flex-col-reverse">
+            <button className="inline-flex items-center justify-center gap-2 w-full px-4 py-2.5 text-sm font-semibold text-white bg-linear-to-r from-blue-400 to-blue-500 rounded-lg hover:from-blue-600 hover:to-blue-700 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-sm hover:shadow-md group/btn">
+              Start Quiz
+              <svg
+                className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 10"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M1 5h12m0 0L9 1m4 4L9 9"
+                />
+              </svg>
+            </button>
+
+            <div className="flex flex-wrap gap-2 py-5">
+              {tags.map((tag) => {
+                return (
+                  <span
+                    key={tag}
+                    className="inline-flex items-center bg-blue-50 text-blue-700 text-xs font-medium px-3 py-1 rounded-full border border-blue-200 hover:border-blue-300 transition-colors duration-200"
+                  >
+                    {tag}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="pt-3">
-        {tags.map((tag) => {
-          return (
-            <span key={tag} className="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm  ">
-             {tag}
-            </span>
-          );
-        })}
-      </div>
-    </div>
     </Link>
   );
 };
