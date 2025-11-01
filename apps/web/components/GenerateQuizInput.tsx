@@ -3,16 +3,30 @@
 import React, { useState } from "react";
 
 interface GenerateQuizProps {
-  getQuiz: (prompt: string) => void;
+  getQuiz: (prompt: string, mode: "learn" | "compete") => void;
+  isCompeteModeOnly?: boolean;
 }
 
-const GenerateQuizInput = ({ getQuiz }: GenerateQuizProps) => {
+const GenerateQuizInput = ({
+  getQuiz,
+  isCompeteModeOnly = false,
+}: GenerateQuizProps) => {
   const [prompt, setPrompt] = useState("");
-  const [isLoading,setIsLoading]=useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [selectedMode, setSelectedMode] = useState<"learn" | "compete" | null>(
+    null
+  );
+
+  const handleGenerateQuiz = (mode: "learn" | "compete") => {
+    if (prompt.length < 10) return;
+    setIsLoading(true);
+    setSelectedMode(mode);
+    getQuiz(prompt, mode);
+  };
 
   return (
     <div className="space-y-8">
-      <HeaderText />
+      <HeaderText isCompeteModeOnly={isCompeteModeOnly} />
       <form className="max-w-3xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden hover:shadow-2xl transition-shadow duration-300">
           <div className="bg-linear-to-r from-blue-500 to-purple-600 px-6 py-4">
@@ -49,47 +63,141 @@ const GenerateQuizInput = ({ getQuiz }: GenerateQuizProps) => {
               minLength={10}
             ></textarea>
 
-            <div className="flex items-center justify-between ">
+            <div className="flex items-center justify-between">
               <div className="text-sm text-gray-500">
                 <span className="font-medium text-gray-700">
                   {prompt.length}
                 </span>
                 <span> characters (minimum 10 required)</span>
               </div>
+            </div>
+
+            {/* Mode Selection with Dual Buttons */}
+            <div className="grid md:grid-cols-2 gap-4 pt-4">
+              {/* Learn Button */}
+              {!isCompeteModeOnly && (
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleGenerateQuiz("learn");
+                  }}
+                  disabled={
+                    prompt.length < 10 ||
+                    (isLoading && selectedMode !== "learn")
+                  }
+                  className="group relative inline-flex items-center justify-center gap-2 py-3 px-6 text-sm font-semibold text-center text-white bg-linear-to-r from-blue-800 to-blue-900 rounded-lg hover:from-blue-700 hover:to-blue-800 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isLoading && selectedMode === "learn" ? (
+                    <>
+                      <svg
+                        className="animate-spin h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      Generating...
+                    </>
+                  ) : (
+                    <div>📚 Learn Solo</div>
+                  )}
+                </button>
+              )}
+
               <button
-                className="inline-flex items-center gap-2 py-3 px-6 text-sm font-semibold text-center text-white bg-linear-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={(e) => {
                   e.preventDefault();
-                  setIsLoading(true);
-                  getQuiz(prompt);
+                  handleGenerateQuiz("compete");
                 }}
-                type="submit"
-                disabled={prompt.length < 10 || isLoading}
+                disabled={
+                  prompt.length < 10 ||
+                  (isLoading && selectedMode !== "compete")
+                }
+                className="group relative inline-flex items-center justify-center gap-2 py-3 px-6 text-sm font-semibold text-center text-white bg-linear-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 focus:ring-4 focus:ring-purple-300 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                  />
-                </svg>
-                {isLoading ? "Generating..." : "Generate Quiz"}
+                {isLoading && selectedMode === "compete" ? (
+                  <>
+                    <svg
+                      className="animate-spin h-5 w-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    Generating...
+                  </>
+                ) : (
+                  <>
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 10V3L4 14h7v7l9-11h-7z"
+                      />
+                    </svg>
+                    🏆 Compete with Friends
+                  </>
+                )}
               </button>
             </div>
           </div>
 
           <div className="bg-linear-to-r from-blue-50 to-purple-50 px-6 py-3 border-t border-gray-200">
-            <p className="text-xs text-gray-600">
-              <span className="font-semibold text-gray-700">💡 Tip:</span> Be
-              specific with your topic and include key concepts you want covered
-              in the quiz for best results.
-            </p>
+            <div className="space-y-2">
+              <p className="text-xs text-gray-600">
+                <span className="font-semibold text-gray-700">💡 Tip:</span> Be
+                specific with your topic and include key concepts you want
+                covered in the quiz for best results.
+              </p>
+              {!isCompeteModeOnly && (
+                <div className="grid md:grid-cols-2 gap-2 text-xs text-gray-600">
+                  <div className="flex items-start gap-2">
+                    <span className="text-blue-600 font-bold">📚</span>
+                    <span>
+                      <span className="font-semibold">Learn Mode:</span>{" "}
+                      Practice alone with instant feedback
+                    </span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-purple-600 font-bold">🏆</span>
+                    <span>
+                      <span className="font-semibold">Compete Mode:</span> Share
+                      a room code and race against friends!
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </form>
@@ -99,7 +207,7 @@ const GenerateQuizInput = ({ getQuiz }: GenerateQuizProps) => {
 
 export default GenerateQuizInput;
 
-const HeaderText = () => {
+const HeaderText = ({ isCompeteModeOnly }: { isCompeteModeOnly: boolean }) => {
   return (
     <div className="text-center space-y-4 mb-8">
       <div className="inline-flex items-center justify-center gap-3 mb-4">
@@ -112,8 +220,8 @@ const HeaderText = () => {
           using AI.
         </p>
         <p className="text-base text-gray-600">
-          Perfect for learners, educators, and anyone who wants instant,
-          engaging quiz content.
+          Choose your mode: Learn solo with instant feedback or compete with
+          friends in real-time!
         </p>
       </div>
 
@@ -128,12 +236,14 @@ const HeaderText = () => {
             Instant Generation
           </span>
         </div>
-        <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-gray-200 shadow-sm">
-          <span className="text-xl">🎯</span>
-          <span className="text-sm font-medium text-gray-700">
-            Fully Customizable
-          </span>
-        </div>
+        {!isCompeteModeOnly && (
+          <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-gray-200 shadow-sm">
+            <span className="text-xl">🎯</span>
+            <span className="text-sm font-medium text-gray-700">
+              Two Game Modes
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

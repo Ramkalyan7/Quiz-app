@@ -5,7 +5,7 @@ import { prisma } from "../lib/prisma";
 import { QuizResponseType } from "@repo/common";
 
 
-const AIServerBaseUrl = "http://localhost:4000/api"
+const AIServerBaseUrl = process.env.AI_SERVER_BASE_URL;
 
 export const generateAndStoreQuiz = async (prompt: string) => {
     try {

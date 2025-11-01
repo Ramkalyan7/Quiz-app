@@ -6,8 +6,6 @@ import { usePathname } from "next/navigation";
 const SideBar = () => {
   const pathname = usePathname();
 
-
-
   if (pathname.startsWith("/attemptquiz")) {
     return null;
   }
@@ -19,20 +17,26 @@ const SideBar = () => {
           Navigation
         </h2>
         <nav className="space-y-1">
-          <LinkComponent 
-            pageLink="quizzes" 
+          <LinkComponent
+            pageLink="quizzes"
             linkText="Quizzes"
             isActive={pathname === "/quizzes"}
             icon="📋"
           />
-          <LinkComponent 
-            pageLink="generatequiz" 
+          <LinkComponent
+            pageLink="generatequiz"
             linkText="Generate Quiz"
             isActive={pathname === "/generatequiz"}
             icon="✨"
           />
-          <LinkComponent 
-            pageLink="quizhistory" 
+          <LinkComponent
+            pageLink="compete"
+            linkText="Compete"
+            isActive={pathname === "/compete"}
+            icon="🏆"
+          />
+          <LinkComponent
+            pageLink="quizhistory"
             linkText="History"
             isActive={pathname === "/quizhistory"}
             icon="🕐"
@@ -44,7 +48,8 @@ const SideBar = () => {
         <div className="bg-linear-to-br from-blue-50 to-purple-50 rounded-lg p-4">
           <p className="text-xs font-semibold text-gray-700 mb-2">Quick Tip</p>
           <p className="text-xs text-gray-600 leading-relaxed">
-            Generate quizzes on any topic instantly using AI. Perfect for studying!
+            Generate quizzes on any topic instantly using AI. Perfect for
+            studying!
           </p>
         </div>
       </div>

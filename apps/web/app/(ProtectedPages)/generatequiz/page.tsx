@@ -3,9 +3,13 @@
 import React from "react";
 import GenerateQuizInput from "../../../components/GenerateQuizInput";
 import { generateAndStoreQuiz } from "../../../actions/quiz";
-import { redirect } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 
 const GenerateQuizPage = () => {
+
+  const params = useSearchParams();
+ 
+
   const getQuiz = async (prompt: string) => {
     if (prompt.length < 10) {
       window.alert("enter atleast 10 charachters");
@@ -21,10 +25,14 @@ const GenerateQuizPage = () => {
     }
   };
 
+  const getQuizAndStartCompetition=async()=>{
+    
+  }
+
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 sm:px-6 lg:px-10 pb-12 pt-5">
       <div className="max-w-4xl mx-auto">
-        <GenerateQuizInput getQuiz={getQuiz} />
+        <GenerateQuizInput getQuiz={getQuiz} isCompeteModeOnly={params.get("mode")==="compete"} />
       </div>
     </div>
   );
