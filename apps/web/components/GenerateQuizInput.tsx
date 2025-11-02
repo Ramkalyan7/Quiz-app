@@ -1,6 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import { useCreateQuiz } from "../hooks/useCreateQuiz";
+import { useSession } from "next-auth/react";
+import { useWebSocket } from "../context/socketContex";
 
 interface GenerateQuizProps {
   getQuiz: (prompt: string, mode: "learn" | "compete") => void;
@@ -16,13 +19,42 @@ const GenerateQuizInput = ({
   const [selectedMode, setSelectedMode] = useState<"learn" | "compete" | null>(
     null
   );
+  const [error, setError] = useState("");
+  const { isConnected } = useWebSocket();
 
-  const handleGenerateQuiz = (mode: "learn" | "compete") => {
+  // Get create quiz hook
+  const {
+    createQuiz,
+    error: createError,
+    loading: createLoading,
+  } = useCreateQuiz();
+
+  const session = useSession();
+
+  const handleGenerateQuiz = async (mode: "learn" | "compete") => {
     if (prompt.length < 10) return;
+
+    if (mode === "compete") {
+      if (!isConnected) {
+        setError("WebSocket not connected. Please refresh the page.");
+        return;
+      }
+    }
+
     setIsLoading(true);
     setSelectedMode(mode);
-    getQuiz(prompt, mode);
+    setError("");
+
+    if (mode === "compete") {
+      await createQuiz(prompt, session.data?.user.name || "");
+    } else {
+      getQuiz(prompt, mode);
+    }
+
+    setIsLoading(false);
   };
+
+  const displayError = error || createError;
 
   return (
     <div className="space-y-8">
@@ -51,16 +83,30 @@ const GenerateQuizInput = ({
           </div>
 
           <div className="p-6 space-y-4">
+            {displayError && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-red-700 text-sm">
+                ❌ {displayError}
+              </div>
+            )}
+
+            {!isCompeteModeOnly && !isConnected && (
+              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-yellow-700 text-sm">
+                ⚠️ WebSocket not connected. Compete mode may not work.
+              </div>
+            )}
+
             <textarea
               id="prompt"
               onChange={(e) => {
                 setPrompt(e.target.value);
+                setError("");
               }}
               rows={5}
               className="w-full px-4 py-3 text-base text-gray-900 bg-gray-50 border-2 border-gray-200 rounded-xl outline-none resize-none placeholder-gray-500 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 transition-all duration-200"
               placeholder="e.g., Create a quiz about Programming fundamentals covering variables, loops, functions, and object-oriented programming concepts....."
               required
               minLength={10}
+              disabled={isLoading || createLoading}
             ></textarea>
 
             <div className="flex items-center justify-between">
@@ -83,7 +129,8 @@ const GenerateQuizInput = ({
                   }}
                   disabled={
                     prompt.length < 10 ||
-                    (isLoading && selectedMode !== "learn")
+                    (isLoading && selectedMode !== "learn") ||
+                    createLoading
                   }
                   className="group relative inline-flex items-center justify-center gap-2 py-3 px-6 text-sm font-semibold text-center text-white bg-linear-to-r from-blue-800 to-blue-900 rounded-lg hover:from-blue-700 hover:to-blue-800 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                 >
@@ -123,11 +170,13 @@ const GenerateQuizInput = ({
                 }}
                 disabled={
                   prompt.length < 10 ||
-                  (isLoading && selectedMode !== "compete")
+                  isLoading ||
+                  createLoading ||
+                  !isConnected
                 }
                 className="group relative inline-flex items-center justify-center gap-2 py-3 px-6 text-sm font-semibold text-center text-white bg-linear-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 focus:ring-4 focus:ring-purple-300 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isLoading && selectedMode === "compete" ? (
+                {(isLoading || createLoading) && selectedMode === "compete" ? (
                   <>
                     <svg
                       className="animate-spin h-5 w-5"

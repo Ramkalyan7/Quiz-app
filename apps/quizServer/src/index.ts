@@ -474,7 +474,6 @@ wss.on("connection", (ws) => {
         console.log("client disconnected")
     })
 
-    ws.send("hello form server")
 })
 
 

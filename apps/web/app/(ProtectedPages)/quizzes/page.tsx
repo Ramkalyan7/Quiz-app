@@ -33,7 +33,7 @@ const quizzes = async ({ searchParams }: Props) => {
     where: whereClause,
   });
   const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
-  if (currentPage > totalPages) currentPage = totalPages;
+  if (currentPage > totalPages && totalPages>0) currentPage = totalPages;
 
   // Fetch paginated quizzes
   const quizzes = await prisma.quiz.findMany({
@@ -48,6 +48,8 @@ const quizzes = async ({ searchParams }: Props) => {
       createdAt: true,
     },
   });
+
+  console.log(quizzes)
 
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 sm:px-6 lg:px-10 pb-12">
