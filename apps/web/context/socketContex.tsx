@@ -90,7 +90,7 @@ export const WebSocketProvider = ({
       console.log("Successfully joined room:", data.roomCode);
       setRoomCode(data.roomCode);
       setLoading(false);
-      router.push(`/lobby/${data.roomCode}`);
+      router.push(`/lobby`);
     };
 
     const handleError = (data: any) => {
@@ -131,7 +131,7 @@ export const WebSocketProvider = ({
     const handleQuizStarted = (data: any) => {
       console.log("Quiz started!");
       setLoading(false);
-      router.push(`/competequiz/${data.roomCode}`);
+      router.push(`/competequiz`);
     };
 
     const handleNewQuestion = (data: any) => {
@@ -167,7 +167,7 @@ export const WebSocketProvider = ({
       }
 
       setTimeout(() => {
-        router.push(`/results/${roomCode}`);
+        router.push(`/results`);
       }, 2000);
     };
 

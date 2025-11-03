@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 interface Player {
   userId: string;
@@ -22,21 +22,21 @@ interface LeaderboardEntry {
   username: string;
   score: number;
   streak?: number;
-  maxStreak?:number,
+  maxStreak?: number;
   answered?: boolean;
 }
 
 interface CompeteContextType {
   // User info
   userId: string | null;
-  setUserId: (id: string) => void;
+  setUserId: (id: string | null) => void;
 
   username: string | null;
-  setUsername: (name: string) => void;
+  setUsername: (name: string | null) => void;
 
   // Room info
   roomCode: string | null;
-  setRoomCode: (code: string) => void;
+  setRoomCode: (code: string | null) => void;
 
   isHost: boolean;
   setIsHost: (host: boolean) => void;
@@ -59,17 +59,24 @@ interface CompeteContextType {
   correctAnswerIndex: number | null;
   setCorrectAnswerIndex: (index: number | null) => void;
 
-  //Results
+  // Results
   finalLeaderboard: LeaderboardEntry[];
   setFinalLeaderboard: (lb: LeaderboardEntry[]) => void;
+
   userRank: number | null;
   setUserRank: (rank: number | null) => void;
+
   userScore: number | null;
   setUserScore: (score: number | null) => void;
+
   quizTitle: string | null;
-  setQuizTitle: (title: string) => void;
-  loading:boolean
-  setLoading:(loading:boolean)=>void
+  setQuizTitle: (title: string | null) => void;
+
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
+
+  // Reset all state
+  reset: () => void;
 }
 
 const competeContext = createContext<CompeteContextType | undefined>(undefined);
@@ -95,6 +102,7 @@ export function CompeteProvider({ children }: { children: React.ReactNode }) {
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState<number | null>(
     null
   );
+
   // Results state
   const [finalLeaderboard, setFinalLeaderboard] = useState<LeaderboardEntry[]>(
     []
@@ -102,9 +110,25 @@ export function CompeteProvider({ children }: { children: React.ReactNode }) {
   const [userRank, setUserRank] = useState<number | null>(null);
   const [userScore, setUserScore] = useState<number | null>(null);
   const [quizTitle, setQuizTitle] = useState<string | null>(null);
-  const [loading ,setLoading]=useState(false);
+  const [loading, setLoading] = useState(false);
 
-
+  // 🧹 Reset function
+  const reset = () => {
+    setUserId(null);
+    setUsername(null);
+    setRoomCode(null);
+    setIsHost(false);
+    setCurrentQuestion(null);
+    setAnswered(false);
+    setPlayers([]);
+    setLeaderboard([]);
+    setCorrectAnswerIndex(null);
+    setFinalLeaderboard([]);
+    setUserRank(null);
+    setUserScore(null);
+    setQuizTitle(null);
+    setLoading(false);
+  };
 
   return (
     <competeContext.Provider
@@ -136,7 +160,8 @@ export function CompeteProvider({ children }: { children: React.ReactNode }) {
         quizTitle,
         setQuizTitle,
         loading,
-        setLoading
+        setLoading,
+        reset, // 👈 Added here
       }}
     >
       {children}
@@ -146,10 +171,8 @@ export function CompeteProvider({ children }: { children: React.ReactNode }) {
 
 export function useCompete() {
   const context = useContext(competeContext);
-
   if (!context) {
-    throw new Error("useQuiz must be within CompeteProvider");
+    throw new Error("useCompete must be used within CompeteProvider");
   }
-
   return context;
 }

@@ -403,7 +403,6 @@ function handleNextQuestionAuto(roomCode: string) {
             message: "Quiz complete!"
         });
 
-        // TODO: Save results to database
 
         setTimeout(() => {
             rooms.delete(roomCode);

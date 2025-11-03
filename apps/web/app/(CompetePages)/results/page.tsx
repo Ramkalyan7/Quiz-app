@@ -1,14 +1,20 @@
 "use client";
 
-import { useParams } from "next/navigation";
 import Link from "next/link";
-import { useCompete } from "../../../../context/competeContext";
+import { useCompete } from "../../../context/competeContext";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function ResultsPage() {
-  const params = useParams();
-  const roomCode = params.roomCode as string;
+  const { finalLeaderboard, username, roomCode } = useCompete();
+  const router = useRouter();
 
-  const { finalLeaderboard, username } = useCompete();
+  useEffect(() => {
+    if (!username) {
+      router.push("/generatequiz");
+      return;
+    }
+  }, [router, username]);
 
   // If no results yet, show loading
   if (finalLeaderboard.length === 0) {
@@ -27,7 +33,7 @@ export default function ResultsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 py-12">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 py-12">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <h1 className="text-5xl font-bold text-center text-gray-900 mb-10">
@@ -53,7 +59,9 @@ export default function ResultsPage() {
             </div>
 
             {userEntry.maxStreak !== undefined && (
-              <p className="text-lg mt-3">🔥 Best streak: {userEntry.maxStreak}</p>
+              <p className="text-lg mt-3">
+                🔥 Best streak: {userEntry.maxStreak}
+              </p>
             )}
           </div>
         )}
@@ -105,13 +113,13 @@ export default function ResultsPage() {
         {/* Actions */}
         <div className="flex gap-4 justify-center mb-10">
           <Link href="/">
-            <button className="px-6 py-3 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl">
+            <button className="px-6 py-3 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer">
               🏠 Home
             </button>
           </Link>
 
           <Link href="/compete">
-            <button className="px-6 py-3 text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-300">
+            <button className="px-6 py-3 text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 cursor-pointer">
               🎮 Join Another Quiz
             </button>
           </Link>

@@ -171,6 +171,7 @@ const {loading , setLoading} = useCompete();
                   onChange={(e) => {
                     setRoomCode(e.target.value);
                   }}
+                  disabled={loading}
                   type="text"
                   placeholder="e.g., QUIZ42"
                   maxLength={6}
@@ -191,6 +192,7 @@ const {loading , setLoading} = useCompete();
                   onChange={(e) => {
                     setName(e.target.value);
                   }}
+                  disabled={loading}
                   type="text"
                   placeholder="Enter your name"
                   className="w-full px-4 py-3 text-gray-900 bg-gray-50 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all duration-200"
@@ -200,7 +202,7 @@ const {loading , setLoading} = useCompete();
               {/* Join Button */}
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition-all duration-300 shadow-lg hover:shadow-xl text-lg flex items-center justify-center gap-2disabled:cursor-no-drop"
+                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition-all duration-300 shadow-lg hover:shadow-xl text-lg flex items-center justify-center gap-2disabled:cursor-no-drop cursor-pointer"
                 disabled={loading}
               >
                 <svg

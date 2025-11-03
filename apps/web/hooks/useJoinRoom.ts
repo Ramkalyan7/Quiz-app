@@ -6,13 +6,14 @@ import { useWebSocket } from "../context/socketContex";
 export function useJoinRoom() {
   const [error, setError] = useState("");
   const { send } = useWebSocket();
-  const { setUserId, setUsername,username , setLoading} = useCompete();
+  const { setUserId, setUsername,username , setLoading,reset} = useCompete();
   const session = useSession();
 
 
 
   const joinRoom = useCallback(
     (roomCode: string, name?: string) => {
+      reset();
       setLoading(true)
       const userId = session.data?.user.id as string;
 

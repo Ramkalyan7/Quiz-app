@@ -1,17 +1,13 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import { useCompete } from "../../../../context/competeContext";
-import { useSubmitAnswer } from "../../../../hooks/useSubmitAnswer";
-import { useQuestionTimer } from "../../../../hooks/useQuestionTimer";
+import { useCompete } from "../../../context/competeContext";
+import { useSubmitAnswer } from "../../../hooks/useSubmitAnswer";
+import { useQuestionTimer } from "../../../hooks/useQuestionTimer";
 import { useEffect } from "react";
-import { useWebSocket } from "../../../../context/socketContex";
+import { useWebSocket } from "../../../context/socketContex";
 
 export default function QuestionPage() {
-  const params = useParams();
-  const roomCode = params.roomCode as string;
-  const router = useRouter();
-
   const {
     currentQuestion,
     answered,
@@ -20,11 +16,13 @@ export default function QuestionPage() {
     setFinalLeaderboard,
     setUserRank,
     setUserScore,
+    roomCode,
   } = useCompete();
-
+  const { isConnected } = useWebSocket();
   const { submitAnswer } = useSubmitAnswer();
   const { timeLeft } = useQuestionTimer();
   const { on } = useWebSocket();
+  const router = useRouter();
 
   useEffect(() => {
     const unsubscribe = on("quiz_ended", (data: any) => {
@@ -42,7 +40,7 @@ export default function QuestionPage() {
       }
 
       setTimeout(() => {
-        router.push(`/results/${roomCode}`);
+        router.push(`/results`);
       }, 2000);
     });
 
@@ -56,6 +54,13 @@ export default function QuestionPage() {
     setUserRank,
     setUserScore,
   ]);
+
+  useEffect(() => {
+    if (!isConnected || !roomCode || roomCode.length <= 0) {
+      router.push("/generatequiz");
+      return;
+    }
+  }, [isConnected, roomCode, router]);
 
   if (!currentQuestion) {
     return (

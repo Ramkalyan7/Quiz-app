@@ -11,13 +11,14 @@ export function useCreateQuiz() {
     const [error, setError] = useState("");
 
     const { send } = useWebSocket();
-    const {  setUserId, setUsername, setIsHost,loading,setLoading } = useCompete();
+    const {  setUserId, setUsername, setIsHost,loading,setLoading ,reset} = useCompete();
     const router = useRouter();
 
    
 
     const createQuiz = useCallback(
         async (prompt: string, username: string) => {
+            reset()
             setLoading(true);
             setError("");
 
