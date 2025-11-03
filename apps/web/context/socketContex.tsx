@@ -1,8 +1,6 @@
 "use client";
 import React, {
   createContext,
-  use,
-  useCallback,
   useContext,
   useEffect,
   useRef,
@@ -34,10 +32,10 @@ export const WebSocketProvider = ({
     setPlayers,
     setLeaderboard,
     setCorrectAnswerIndex,
-    setShowingResults,
     setFinalLeaderboard,
     setUserRank,
     setUserScore,
+    setLoading,
   } = useCompete();
 
   const ws = useRef<WebSocket | null>(null);
@@ -45,6 +43,7 @@ export const WebSocketProvider = ({
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
+    console.log("WebSocketProvider mounted");
     const wsUrl =
       process.env.NEXT_PUBLIC_WS_SERVER_BASE_URL || "ws://localhost:5000";
 
@@ -70,39 +69,46 @@ export const WebSocketProvider = ({
     ws.current.onclose = () => {
       console.log("WebSocket disconnected");
       setIsConnected(false);
+      setLoading(false);
     };
 
     ws.current.onerror = (error) => {
       console.log("WebSocket error:", error);
       setIsConnected(false);
+      setLoading(false);
     };
 
     return () => {
       console.log("WebSocketProvider unmounted");
+      setLoading(false);
       ws.current?.close();
     };
-  }, []);
+  }, [setLoading]);
 
   useEffect(() => {
     const handleJoinSuccess = (data: any) => {
       console.log("Successfully joined room:", data.roomCode);
       setRoomCode(data.roomCode);
-
+      setLoading(false);
       router.push(`/lobby/${data.roomCode}`);
     };
 
     const handleError = (data: any) => {
       console.log("Error:", data.message);
+      setLoading(false);
+      window.alert(data.message);
     };
 
     const handlePlayersUpdated = (data: any) => {
       console.log("Players updated:", data.players);
       setPlayers(data.players);
+      setLoading(false);
     };
 
     const handleAnswerReceived = (data: any) => {
       console.log("Answer submitted:", data.timeToAnswer);
       setAnswered(true);
+      setLoading(false);
     };
 
     const handlePlayerAnswered = (data: any) => {
@@ -120,17 +126,19 @@ export const WebSocketProvider = ({
       console.log("Correct answer:", data.correctAnswerIndex);
 
       setCorrectAnswerIndex(data.correctAnswerIndex);
-      setShowingResults(true);
-
     };
 
     const handleQuizStarted = (data: any) => {
       console.log("Quiz started!");
+      setLoading(false);
+      router.push(`/competequiz/${data.roomCode}`);
     };
 
     const handleNewQuestion = (data: any) => {
       console.log("New question received:", data.questionIndex);
       console.log("handleNewQuestion");
+      setAnswered(false);
+      setLoading(false);
       const question = {
         questionIndex: data.questionIndex,
         totalQuestions: data.totalQuestions,
@@ -141,14 +149,12 @@ export const WebSocketProvider = ({
       };
 
       setCurrentQuestion(question);
-      setAnswered(false);
-
     };
 
     const handleQuizEnded = (data: any) => {
       console.log("Quiz ended!");
       console.log("Final leaderboard:", data.finalLeaderboard);
-
+      setLoading(false);
       setFinalLeaderboard(data.finalLeaderboard);
 
       const userEntry = data.finalLeaderboard.find(
@@ -175,10 +181,23 @@ export const WebSocketProvider = ({
     on("question_results", handleQuestionResults);
 
     on("players_updated", handlePlayersUpdated);
-
     on("join_success", handleJoinSuccess);
     on("error", handleError);
-  }, [roomCode, router, setAnswered, setCorrectAnswerIndex, setCurrentQuestion, setFinalLeaderboard, setLeaderboard, setPlayers, setRoomCode, setShowingResults, setUserRank, setUserScore, username]);
+  }, [
+    roomCode,
+    router,
+    setAnswered,
+    setCorrectAnswerIndex,
+    setCurrentQuestion,
+    setFinalLeaderboard,
+    setLeaderboard,
+    setLoading,
+    setPlayers,
+    setRoomCode,
+    setUserRank,
+    setUserScore,
+    username,
+  ]);
 
   const send = (message: any) => {
     if (ws.current && ws.current.readyState === WebSocket.OPEN) {
@@ -191,13 +210,12 @@ export const WebSocketProvider = ({
   };
 
   return (
-    <WebSocketContext.Provider value={{ send, isConnected,on }}>
+    <WebSocketContext.Provider value={{ send, isConnected, on }}>
       {children}
     </WebSocketContext.Provider>
   );
 };
 
-// Hook to use WebSocket anywhere
 export const useWebSocket = () => {
   const context = useContext(WebSocketContext);
   if (!context) {

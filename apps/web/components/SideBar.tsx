@@ -6,7 +6,13 @@ import { usePathname } from "next/navigation";
 const SideBar = () => {
   const pathname = usePathname();
 
-  if (pathname.startsWith("/attemptquiz")) {
+  if (
+    pathname.startsWith("/attemptquiz") ||
+    pathname.startsWith("/attemptquiz") ||
+    pathname.startsWith("/lobby") ||
+    pathname.startsWith("/results") ||
+    pathname.startsWith("/competequiz")
+  ) {
     return null;
   }
 

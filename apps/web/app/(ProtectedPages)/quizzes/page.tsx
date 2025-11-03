@@ -49,7 +49,6 @@ const quizzes = async ({ searchParams }: Props) => {
     },
   });
 
-  console.log(quizzes)
 
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 sm:px-6 lg:px-10 pb-12">

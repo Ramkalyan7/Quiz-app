@@ -22,6 +22,7 @@ interface LeaderboardEntry {
   username: string;
   score: number;
   streak?: number;
+  maxStreak?:number,
   answered?: boolean;
 }
 
@@ -58,9 +59,6 @@ interface CompeteContextType {
   correctAnswerIndex: number | null;
   setCorrectAnswerIndex: (index: number | null) => void;
 
-  showingResults: boolean;
-  setShowingResults: (showing: boolean) => void;
-
   //Results
   finalLeaderboard: LeaderboardEntry[];
   setFinalLeaderboard: (lb: LeaderboardEntry[]) => void;
@@ -70,6 +68,8 @@ interface CompeteContextType {
   setUserScore: (score: number | null) => void;
   quizTitle: string | null;
   setQuizTitle: (title: string) => void;
+  loading:boolean
+  setLoading:(loading:boolean)=>void
 }
 
 const competeContext = createContext<CompeteContextType | undefined>(undefined);
@@ -95,8 +95,6 @@ export function CompeteProvider({ children }: { children: React.ReactNode }) {
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState<number | null>(
     null
   );
-  const [showingResults, setShowingResults] = useState(false);
-
   // Results state
   const [finalLeaderboard, setFinalLeaderboard] = useState<LeaderboardEntry[]>(
     []
@@ -104,6 +102,7 @@ export function CompeteProvider({ children }: { children: React.ReactNode }) {
   const [userRank, setUserRank] = useState<number | null>(null);
   const [userScore, setUserScore] = useState<number | null>(null);
   const [quizTitle, setQuizTitle] = useState<string | null>(null);
+  const [loading ,setLoading]=useState(false);
 
 
 
@@ -128,8 +127,6 @@ export function CompeteProvider({ children }: { children: React.ReactNode }) {
         setLeaderboard,
         correctAnswerIndex,
         setCorrectAnswerIndex,
-        showingResults,
-        setShowingResults,
         finalLeaderboard,
         setFinalLeaderboard,
         userRank,
@@ -138,6 +135,8 @@ export function CompeteProvider({ children }: { children: React.ReactNode }) {
         setUserScore,
         quizTitle,
         setQuizTitle,
+        loading,
+        setLoading
       }}
     >
       {children}

@@ -13,6 +13,7 @@ interface Player {
     ws: any;
     score: number;
     streak: number;
+    maxStreak:number;
     currentAnswer: number | null;
     answeredAt: number | null;
 }
@@ -83,7 +84,7 @@ app.post("/api/rooms/create", (req, res) => {
             currentQuestionIndex: 0,
             isActive: false,
             timerStartedAt: 0,
-            timePerQuestion: 30
+            timePerQuestion: 15
         }
 
         rooms.set(roomCode, room);
@@ -169,6 +170,7 @@ function handleJoinRoom(ws: any, roomCode: string, userId: string, username: str
         ws,
         score: 0,
         streak: 0,
+        maxStreak:0,
         currentAnswer: null,
         answeredAt: null
     }
@@ -225,6 +227,7 @@ function handleStartQuiz(ws: any, roomCode: string, userId: string) {
 
     broadcastToRoom(roomCode, {
         type: "quiz_started",
+        roomCode,
         message: "Quiz has started!"
     });
 
@@ -324,19 +327,6 @@ function handleSubmitAnswer(ws: any, roomCode: string, userId: string, answerInd
         answeredAt: questionElapsedTime.toFixed(2)
     });
 
-    const leaderboard = Array.from(room.players.values())
-        .sort((a, b) => b.score - a.score)
-        .map((p, index) => ({
-            rank: index + 1,
-            username: p.username,
-            score: p.score,
-            answered: p.currentAnswer !== null
-        }));
-
-    broadcastToRoom(roomCode, {
-        type: "leaderboard_updated",
-        leaderboard
-    })
 }
 
 
@@ -364,6 +354,9 @@ function handleNextQuestionAuto(roomCode: string) {
         if (player.currentAnswer === correctAnswerIndex) {
             player.score += 10;
             player.streak += 1;
+            if(player.streak>player.maxStreak){
+                player.maxStreak=player.streak;
+            }
 
         } else {
             player.streak = 0;
@@ -387,7 +380,8 @@ function handleNextQuestionAuto(roomCode: string) {
             rank: index + 1,
             username: p.username,
             score: p.score,
-            streak: p.streak
+            streak: p.streak,
+            maxStreak:p.maxStreak
         }));
 
     broadcastToRoom(roomCode, {

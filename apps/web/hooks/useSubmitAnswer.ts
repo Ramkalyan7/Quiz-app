@@ -7,18 +7,17 @@ export function useSubmitAnswer() {
   const {
     userId,
     roomCode,
-    setAnswered,
-    setLeaderboard,
-    setCorrectAnswerIndex,
-    setShowingResults,
+    setLoading
   } = useCompete();
 
- 
+
 
   const submitAnswer = useCallback(
     (answerIndex: number) => {
+      setLoading(true)
       if (!userId || !roomCode) {
         console.error("Missing userId or roomCode");
+        setLoading(false)
         return;
       }
 
@@ -31,7 +30,7 @@ export function useSubmitAnswer() {
         answerIndex,
       });
     },
-    [send, userId, roomCode]
+    [setLoading, userId, roomCode, send]
   );
 
   return { submitAnswer };

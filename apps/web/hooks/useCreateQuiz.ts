@@ -9,10 +9,9 @@ import { useWebSocket } from "../context/socketContex";
 export function useCreateQuiz() {
     const session = useSession();
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
 
     const { send } = useWebSocket();
-    const { setRoomCode, setUserId, setUsername, setIsHost } = useCompete();
+    const {  setUserId, setUsername, setIsHost,loading,setLoading } = useCompete();
     const router = useRouter();
 
    
@@ -83,7 +82,7 @@ export function useCreateQuiz() {
                 setLoading(false);
             }
         },
-        [session.data?.user.id, setUserId, setUsername, setIsHost, send, router]
+        [setLoading, session.data?.user.id, setUserId, setUsername, setIsHost, send, router]
     );
 
     return { createQuiz, error, loading };

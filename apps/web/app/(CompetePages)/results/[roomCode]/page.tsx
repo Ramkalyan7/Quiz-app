@@ -8,13 +8,15 @@ export default function ResultsPage() {
   const params = useParams();
   const roomCode = params.roomCode as string;
 
-  const { finalLeaderboard,  username } = useCompete();
+  const { finalLeaderboard, username } = useCompete();
 
   // If no results yet, show loading
   if (finalLeaderboard.length === 0) {
     return (
-      <div style={{ textAlign: "center", padding: "40px" }}>
-        <p>⏳ Loading results...</p>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+        <p className="text-xl font-semibold text-gray-700">
+          ⏳ Loading results...
+        </p>
       </div>
     );
   }
@@ -25,121 +27,103 @@ export default function ResultsPage() {
   );
 
   return (
-    <div style={{ padding: "40px", maxWidth: "800px", margin: "0 auto" }}>
-      {/* Header */}
-      <h1 style={{ textAlign: "center", marginBottom: "40px" }}>
-        🎉 Quiz Complete!
-      </h1>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 py-12">
+      <div className="max-w-3xl mx-auto">
+        {/* Header */}
+        <h1 className="text-5xl font-bold text-center text-gray-900 mb-10">
+          🎉 Quiz Complete!
+        </h1>
 
-      {/* User's result (highlighted) */}
-      {userEntry && (
-        <div
-          style={{
-            backgroundColor: "#d4edda",
-            border: "3px solid green",
-            borderRadius: "10px",
-            padding: "30px",
-            textAlign: "center",
-            marginBottom: "40px",
-          }}
-        >
-          <div style={{ fontSize: "48px", marginBottom: "10px" }}>
-            {userEntry.rank === 1 && "🥇"}
-            {userEntry.rank === 2 && "🥈"}
-            {userEntry.rank === 3 && "🥉"}
-            {userEntry.rank > 3 && "🏅"}
+        {/* User's result (highlighted) */}
+        {userEntry && (
+          <div className="bg-gradient-to-br from-green-500 to-emerald-600 border-4 border-green-400 rounded-2xl p-8 text-center text-white mb-10 shadow-xl">
+            <div className="text-6xl mb-3">
+              {userEntry.rank === 1 && "🥇"}
+              {userEntry.rank === 2 && "🥈"}
+              {userEntry.rank === 3 && "🥉"}
+              {userEntry.rank > 3 && "🏅"}
+            </div>
+
+            <h2 className="text-2xl font-bold mb-3">
+              You finished #{userEntry.rank}
+            </h2>
+
+            <div className="text-5xl font-bold mb-4">
+              {userEntry.score} points
+            </div>
+
+            {userEntry.maxStreak !== undefined && (
+              <p className="text-lg mt-3">🔥 Best streak: {userEntry.maxStreak}</p>
+            )}
           </div>
+        )}
 
-          <h2 style={{ margin: "10px 0" }}>You finished #{userEntry.rank}</h2>
+        {/* Final Leaderboard */}
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8 mb-10">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            🏆 Final Leaderboard
+          </h2>
 
-          <div style={{ fontSize: "36px", fontWeight: "bold", color: "green" }}>
-            {userEntry.score} points
-          </div>
-
-          {userEntry.streak !== undefined && (
-            <p style={{ marginTop: "10px" }}>
-              🔥 Best streak: {userEntry.streak}
-            </p>
-          )}
-        </div>
-      )}
-
-      {/* Final Leaderboard */}
-      <div>
-        <h2 style={{ marginBottom: "20px" }}>🏆 Final Leaderboard</h2>
-
-        <div>
-          {finalLeaderboard.map((entry) => (
-            <div
-              key={entry.username}
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "15px",
-                marginBottom: "10px",
-                backgroundColor:
-                  entry.username === username ? "#f0f0f0" : "#fff",
-                border:
-                  entry.username === username
-                    ? "2px solid green"
-                    : "1px solid #ddd",
-                borderRadius: "8px",
-              }}
-            >
+          <div className="space-y-3">
+            {finalLeaderboard.map((entry) => (
               <div
-                style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                key={entry.username}
+                className={`flex justify-between items-center p-4 rounded-xl border-2 transition-all duration-200 ${
+                  entry.username === username
+                    ? "bg-blue-50 border-blue-300"
+                    : "bg-white border-gray-200"
+                }`}
               >
-                <span style={{ fontSize: "24px", minWidth: "40px" }}>
-                  {entry.rank === 1 && "🥇"}
-                  {entry.rank === 2 && "🥈"}
-                  {entry.rank === 3 && "🥉"}
-                  {entry.rank > 3 && `#${entry.rank}`}
-                </span>
+                <div className="flex items-center gap-3">
+                  <span className="text-3xl min-w-10">
+                    {entry.rank === 1 && "🥇"}
+                    {entry.rank === 2 && "🥈"}
+                    {entry.rank === 3 && "🥉"}
+                    {entry.rank > 3 && `#${entry.rank}`}
+                  </span>
 
-                <div>
-                  <div style={{ fontWeight: "bold" }}>{entry.username}</div>
-                  {entry.streak !== undefined && (
-                    <div style={{ fontSize: "12px", color: "#666" }}>
-                      🔥 Streak: {entry.streak}
+                  <div>
+                    <div className="font-bold text-gray-900">
+                      {entry.username}
                     </div>
-                  )}
+                    {entry.maxStreak !== undefined && (
+                      <div className="text-xs text-gray-600">
+                        🔥 Streak: {entry.maxStreak}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="font-bold text-xl text-gray-900">
+                  {entry.score}
                 </div>
               </div>
-
-              <div style={{ fontWeight: "bold", fontSize: "18px" }}>
-                {entry.score}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* Actions */}
-      <div
-        style={{
-          marginTop: "40px",
-          display: "flex",
-          gap: "10px",
-          justifyContent: "center",
-        }}
-      >
-        <Link href="/">
-          <button style={{ padding: "12px 24px", fontSize: "16px" }}>
-            🏠 Home
-          </button>
-        </Link>
+        {/* Actions */}
+        <div className="flex gap-4 justify-center mb-10">
+          <Link href="/">
+            <button className="px-6 py-3 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl">
+              🏠 Home
+            </button>
+          </Link>
 
-        <Link href="/join">
-          <button style={{ padding: "12px 24px", fontSize: "16px" }}>
-            🎮 Join Another Quiz
-          </button>
-        </Link>
-      </div>
+          <Link href="/compete">
+            <button className="px-6 py-3 text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-300">
+              🎮 Join Another Quiz
+            </button>
+          </Link>
+        </div>
 
-      {/* Room code display */}
-      <div style={{ marginTop: "40px", textAlign: "center", color: "#666" }}>
-        <p>Room code: {roomCode}</p>
+        {/* Room code display */}
+        <div className="text-center text-gray-600">
+          <p>
+            Room code:{" "}
+            <span className="font-mono font-semibold">{roomCode}</span>
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ const AppBar = () => {
   // Hide navbar on these pages
   const hideOnPages = ["/login", "/register","/verifyemail","/attemptquiz"];
 
-  if (hideOnPages.includes(pathname) || pathname.startsWith("/attemptquiz")) {
+  if (hideOnPages.includes(pathname) || pathname.startsWith("/attemptquiz")||pathname.startsWith("/lobby") || pathname.startsWith("/results") || pathname.startsWith("/competequiz")) { 
     return null;
   }
 

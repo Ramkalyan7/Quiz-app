@@ -32,26 +32,31 @@ const GenerateQuizInput = ({
   const session = useSession();
 
   const handleGenerateQuiz = async (mode: "learn" | "compete") => {
-    if (prompt.length < 10) return;
+    try {
+      if (prompt.length < 10) return;
 
-    if (mode === "compete") {
-      if (!isConnected) {
-        setError("WebSocket not connected. Please refresh the page.");
-        return;
+      if (mode === "compete") {
+        if (!isConnected) {
+          setError("WebSocket not connected. Please refresh the page.");
+          return;
+        }
       }
+
+      setIsLoading(true);
+      setSelectedMode(mode);
+      setError("");
+
+      if (mode === "compete") {
+        await createQuiz(prompt, session.data?.user.name || "");
+      } else {
+        getQuiz(prompt, mode);
+      }
+
+      setIsLoading(false);
+    } catch (error) {
+      console.log("handleGenerateQuiz", error);
+      setIsLoading(false);
     }
-
-    setIsLoading(true);
-    setSelectedMode(mode);
-    setError("");
-
-    if (mode === "compete") {
-      await createQuiz(prompt, session.data?.user.name || "");
-    } else {
-      getQuiz(prompt, mode);
-    }
-
-    setIsLoading(false);
   };
 
   const displayError = error || createError;

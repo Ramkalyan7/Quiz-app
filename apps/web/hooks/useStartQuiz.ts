@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import { useRouter } from "next/navigation";
 import { useCompete } from "../context/competeContext";
 import { useWebSocket } from "../context/socketContex";
 
@@ -7,18 +6,15 @@ export function useStartQuiz() {
     const { send } = useWebSocket();
     const { userId,
         roomCode,
-        username,
-        setCurrentQuestion,
-        setAnswered,
-        setFinalLeaderboard,
-        setUserRank,
-        setUserScore, } = useCompete();
-    const router = useRouter();
+        setLoading
+    } = useCompete();
 
 
     const startQuiz = useCallback(() => {
+        setLoading(true)
         if (!userId || !roomCode) {
             console.error("Missing userId or roomCode");
+            setLoading(false)
             return;
         }
 
@@ -29,7 +25,7 @@ export function useStartQuiz() {
             roomCode,
             userId,
         });
-    }, [send, userId, roomCode]);
+    }, [setLoading, userId, roomCode, send]);
 
     return { startQuiz };
 }
