@@ -6,7 +6,7 @@ import { useWebSocket } from "../context/socketContex";
 export function useJoinRoom() {
   const [error, setError] = useState("");
   const { send } = useWebSocket();
-  const { setUserId, setUsername,username , setLoading,reset} = useCompete();
+  const { setUserId, setUsername, setLoading, reset} = useCompete();
   const session = useSession();
 
 
@@ -18,23 +18,25 @@ export function useJoinRoom() {
       const userId = session.data?.user.id as string;
 
       setUserId(userId);
-      if (name && name.length && name.length > 0) {
+      let userName: string;
+      if (name && name.length > 0) {
         setUsername(name);
+        userName = name;
       }
-      else{
-        setUsername(session.data?.user.name||"")
+      else {
+        setUsername(session.data?.user.name || "")
+        userName = session.data?.user.name || "";
       }
       setError("");
 
-      console.log("use join romm",name,username)
       send({
         type: "join_room",
         roomCode: roomCode.toUpperCase(),
         userId,
-        username,
+        username: userName,
       });
     },
-    [send, session.data?.user.id, session.data?.user.name, setLoading, setUserId, setUsername, username]
+    [reset, send, session.data?.user.id, session.data?.user.name, setLoading, setUserId, setUsername]
   );
 
   return { joinRoom, error };
