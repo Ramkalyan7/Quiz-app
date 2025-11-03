@@ -36,6 +36,7 @@ export const WebSocketProvider = ({
     setUserRank,
     setUserScore,
     setLoading,
+    setQuestions
   } = useCompete();
 
   const ws = useRef<WebSocket | null>(null);
@@ -89,6 +90,7 @@ export const WebSocketProvider = ({
     const handleJoinSuccess = (data: any) => {
       console.log("Successfully joined room:", data.roomCode);
       setRoomCode(data.roomCode);
+      setQuestions(data.quiz)
       setLoading(false);
       router.push(`/lobby`);
     };

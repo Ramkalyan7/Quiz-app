@@ -1,5 +1,6 @@
 "use client";
 
+import { QuizQuestionType } from "@repo/common";
 import { createContext, useContext, useState } from "react";
 
 interface Player {
@@ -75,6 +76,8 @@ interface CompeteContextType {
   loading: boolean;
   setLoading: (loading: boolean) => void;
 
+  questions: QuizQuestionType[];
+  setQuestions:(questions:QuizQuestionType[])=>void;
   // Reset all state
   reset: () => void;
 }
@@ -112,6 +115,8 @@ export function CompeteProvider({ children }: { children: React.ReactNode }) {
   const [quizTitle, setQuizTitle] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
+  const [questions,setQuestions]=useState<QuizQuestionType[]>([]);
+
   // 🧹 Reset function
   const reset = () => {
     setUserId(null);
@@ -128,6 +133,7 @@ export function CompeteProvider({ children }: { children: React.ReactNode }) {
     setUserScore(null);
     setQuizTitle(null);
     setLoading(false);
+    setQuestions([])
   };
 
   return (
@@ -161,7 +167,9 @@ export function CompeteProvider({ children }: { children: React.ReactNode }) {
         setQuizTitle,
         loading,
         setLoading,
-        reset, // 👈 Added here
+        reset,
+        questions,
+        setQuestions
       }}
     >
       {children}

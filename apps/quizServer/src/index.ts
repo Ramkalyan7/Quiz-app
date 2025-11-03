@@ -13,7 +13,7 @@ interface Player {
     ws: any;
     score: number;
     streak: number;
-    maxStreak:number;
+    maxStreak: number;
     currentAnswer: number | null;
     answeredAt: number | null;
 }
@@ -170,7 +170,7 @@ function handleJoinRoom(ws: any, roomCode: string, userId: string, username: str
         ws,
         score: 0,
         streak: 0,
-        maxStreak:0,
+        maxStreak: 0,
         currentAnswer: null,
         answeredAt: null
     }
@@ -183,7 +183,8 @@ function handleJoinRoom(ws: any, roomCode: string, userId: string, username: str
     ws.send(JSON.stringify({
         type: "join_success",
         roomCode,
-        playerCount: room.players.size
+        playerCount: room.players.size,
+        quiz: room.questions
     }));
 
     broadcastToRoom(roomCode, {
@@ -354,8 +355,8 @@ function handleNextQuestionAuto(roomCode: string) {
         if (player.currentAnswer === correctAnswerIndex) {
             player.score += 10;
             player.streak += 1;
-            if(player.streak>player.maxStreak){
-                player.maxStreak=player.streak;
+            if (player.streak > player.maxStreak) {
+                player.maxStreak = player.streak;
             }
 
         } else {
@@ -381,7 +382,7 @@ function handleNextQuestionAuto(roomCode: string) {
             username: p.username,
             score: p.score,
             streak: p.streak,
-            maxStreak:p.maxStreak
+            maxStreak: p.maxStreak
         }));
 
     broadcastToRoom(roomCode, {
