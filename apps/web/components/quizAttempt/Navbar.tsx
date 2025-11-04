@@ -51,22 +51,20 @@ const Navbar = ({
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 shadow-sm z-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-10 py-4">
-        <div className="flex items-center justify-between">
+      <div className="w-full max-w-4xl mx-auto px-3 sm:px-4 lg:px-10 py-2.5 sm:py-4">
+        <div className="flex items-center justify-between gap-2 sm:gap-4">
           {/* Back Button */}
           <button
             onClick={() => {
               router.push("/quizzes");
             }}
             disabled={loading}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium hover:bg-gray-50 transition-colors duration-200 shadow-sm ${
-              loading
-                ? "opacity-50 cursor-not-allowed"
-                : "cursor-pointer"
+            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg border border-gray-300 bg-white text-gray-700 font-medium text-xs sm:text-sm hover:bg-gray-50 transition-colors duration-200 shadow-sm ${
+              loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
             }`}
           >
             <svg
-              className="w-5 h-5"
+              className="w-4 h-4 sm:w-5 sm:h-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -78,23 +76,21 @@ const Navbar = ({
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-            Back
+            <span className="hidden sm:inline">Back</span>
           </button>
 
           {/* Submit Button */}
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className={`flex items-center gap-2 px-6 py-2 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition-colors duration-200 shadow-md ${
-              loading
-                ? "opacity-75 cursor-wait"
-                : "cursor-pointer"
+            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-1.5 sm:py-2 rounded-lg bg-indigo-600 text-white font-medium text-xs sm:text-sm hover:bg-indigo-700 transition-colors duration-200 shadow-md ${
+              loading ? "opacity-75 cursor-wait" : "cursor-pointer"
             }`}
           >
             {loading ? (
               <>
                 <svg
-                  className="animate-spin h-5 w-5"
+                  className="animate-spin h-4 w-4 sm:h-5 sm:w-5"
                   fill="none"
                   viewBox="0 0 24 24"
                 >
@@ -112,12 +108,13 @@ const Navbar = ({
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   ></path>
                 </svg>
-                Submitting...
+                <span className="hidden sm:inline">Submitting...</span>
+                <span className="sm:hidden">Submit...</span>
               </>
             ) : (
               <>
                 <svg
-                  className="w-5 h-5"
+                  className="w-4 h-4 sm:w-5 sm:h-5"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

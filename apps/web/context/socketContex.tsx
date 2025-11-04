@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import { useCompete } from "./competeContext";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 type WebSocketContextType = {
   send: (message: any) => void;
@@ -36,7 +37,7 @@ export const WebSocketProvider = ({
     setUserRank,
     setUserScore,
     setLoading,
-    setQuestions
+    setQuestions,
   } = useCompete();
 
   const ws = useRef<WebSocket | null>(null);
@@ -90,7 +91,7 @@ export const WebSocketProvider = ({
     const handleJoinSuccess = (data: any) => {
       console.log("Successfully joined room:", data.roomCode);
       setRoomCode(data.roomCode);
-      setQuestions(data.quiz)
+      setQuestions(data.quiz);
       setLoading(false);
       router.push(`/lobby`);
     };
@@ -98,7 +99,7 @@ export const WebSocketProvider = ({
     const handleError = (data: any) => {
       console.log("Error:", data.message);
       setLoading(false);
-      window.alert(data.message);
+      toast.error(data.message);
     };
 
     const handlePlayersUpdated = (data: any) => {
@@ -115,8 +116,7 @@ export const WebSocketProvider = ({
 
     const handlePlayerAnswered = (data: any) => {
       console.log(`${data.username} answered in ${data.answeredAt}s`);
-      // You could show a notification or list of who answered
-      // For now, just log it
+      toast.success(data.message);
     };
 
     const handleLeaderboardUpdated = (data: any) => {
@@ -125,8 +125,6 @@ export const WebSocketProvider = ({
     };
 
     const handleQuestionResults = (data: any) => {
-      console.log("Correct answer:", data.correctAnswerIndex);
-
       setCorrectAnswerIndex(data.correctAnswerIndex);
     };
 
@@ -195,6 +193,7 @@ export const WebSocketProvider = ({
     setLeaderboard,
     setLoading,
     setPlayers,
+    setQuestions,
     setRoomCode,
     setUserRank,
     setUserScore,

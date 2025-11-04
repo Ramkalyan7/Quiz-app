@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
@@ -44,35 +44,35 @@ const QuizComponent = ({
 
   return (
     <Link href={`/attemptquiz/${id}`} onClick={handleClick}>
-      <div className="h-full bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-blue-400 overflow-hidden cursor-pointer group relative">
-        <div className="h-1.5 bg-gradient-to-r from-blue-500 to-purple-600"></div>
+      <div className="h-full bg-white rounded-lg sm:rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-blue-400 overflow-hidden cursor-pointer group relative">
+        <div className="h-1 sm:h-1.5 bg-gradient-to-r from-blue-500 to-purple-600"></div>
 
         {isFromHistory && (
-          <div className="absolute top-4 right-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-2 py-2 rounded-xl text-sm font-bold shadow-lg z-10">
-            <div className="flex items-center gap-2">
+          <div className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-2 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold shadow-lg z-10">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               {score}/{totalScore}
             </div>
           </div>
         )}
 
-        <div className="p-6 flex flex-col h-full space-y-4">
+        <div className="p-4 sm:p-6 flex flex-col h-full space-y-3 sm:space-y-4">
           <div className="grow">
-            <h3 className="text-xl font-bold text-gray-900 line-clamp-3 group-hover:text-blue-600 transition-colors duration-200 leading-snug">
+            <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 line-clamp-3 group-hover:text-blue-600 transition-colors duration-200 leading-snug">
               {title.length > 100 ? `${title.substring(0, 100)}...` : title}
             </h3>
           </div>
 
-          <div className="space-y-4 flex flex-col-reverse">
+          <div className="space-y-3 sm:space-y-4 flex flex-col-reverse">
             <button
               disabled={loading}
-              className={`inline-flex items-center justify-center gap-2 w-full px-5 py-3 text-base font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl hover:from-blue-700 hover:to-indigo-700 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-md hover:shadow-lg group/btn ${
+              className={`inline-flex items-center justify-center gap-2 w-full px-4 sm:px-5 py-2.5 sm:py-3 text-sm sm:text-base font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg sm:rounded-xl hover:from-blue-700 hover:to-indigo-700 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-md hover:shadow-lg group/btn ${
                 loading ? "opacity-75 cursor-wait" : ""
               }`}
             >
               {loading ? (
                 <>
                   <svg
-                    className="animate-spin h-5 w-5"
+                    className="animate-spin h-4 w-4 sm:h-5 sm:w-5"
                     fill="none"
                     viewBox="0 0 24 24"
                   >
@@ -95,7 +95,7 @@ const QuizComponent = ({
               ) : (
                 <>
                   <svg
-                    className="w-5 h-5"
+                    className="w-4 h-4 sm:w-5 sm:h-5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -115,7 +115,7 @@ const QuizComponent = ({
                   </svg>
                   {isFromHistory ? "Retake Quiz" : "Start Quiz"}
                   <svg
-                    className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200"
+                    className="w-3 h-3 sm:w-4 sm:h-4 group-hover/btn:translate-x-1 transition-transform duration-200"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 14 10"
@@ -133,15 +133,15 @@ const QuizComponent = ({
             </button>
 
             {tags.length > 0 && (
-              <div className="flex flex-wrap gap-2 py-3">
+              <div className="flex flex-wrap gap-2 py-2 sm:py-3">
                 {tags.slice(0, 4).map((tag) => {
                   return (
                     <span
                       key={tag}
-                      className="inline-flex items-center bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-blue-200 hover:border-blue-400 hover:bg-blue-100 transition-all duration-200"
+                      className="inline-flex items-center bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-blue-200 hover:border-blue-400 hover:bg-blue-100 transition-all duration-200"
                     >
                       <svg
-                        className="w-3 h-3 mr-1.5"
+                        className="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-1"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -156,7 +156,7 @@ const QuizComponent = ({
                   );
                 })}
                 {tags.length > 4 && (
-                  <span className="inline-flex items-center bg-gray-100 text-gray-600 text-xs font-semibold px-3 py-1.5 rounded-full border border-gray-300">
+                  <span className="inline-flex items-center bg-gray-100 text-gray-600 text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-gray-300">
                     +{tags.length - 4} more
                   </span>
                 )}

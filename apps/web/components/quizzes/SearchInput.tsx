@@ -1,6 +1,7 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { toast } from "react-toastify";
 
 const SearchInput = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const SearchInput = () => {
   const onSearchButtonClick = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (searchTerm.length == 0) {
-      window.alert("Please enter Something");
+      toast.error("Please enter Something");
       return;
     }
     const params = new URLSearchParams(searchParams.toString());

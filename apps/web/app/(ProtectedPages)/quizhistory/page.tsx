@@ -3,6 +3,7 @@ import QuizComponent from "../../../components/QuizComponent";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../../lib/auth";
 import { prisma } from "../../../lib/prisma";
+import { toast } from "react-toastify";
 
 const QuizHistory = async () => {
   const getUserQuizHistory = async () => {
@@ -29,6 +30,7 @@ const QuizHistory = async () => {
       return quizzes;
     } catch (error) {
       console.log("get user history", error);
+      toast.error("Unexpected error while fetching history");
       return [];
     }
   };
@@ -59,14 +61,13 @@ const QuizHistory = async () => {
 
 const HeaderText = () => {
   return (
-    <div className="text-center mb-10">
-      <div className="mt-10 mb-5 text-4xl font-semibold ">
+    <div className="text-center mb-8 sm:mb-10 px-4">
+      <div className="mt-6 sm:mt-10 mb-3 sm:mb-5 text-2xl sm:text-3xl md:text-4xl font-bold">
         Your Quiz History
       </div>
-      <div className="text-gray-700 ">
+      <div className="text-sm sm:text-base text-gray-700">
         All your quiz attempts and scores in one place.
       </div>
-      <div></div>
     </div>
   );
 };

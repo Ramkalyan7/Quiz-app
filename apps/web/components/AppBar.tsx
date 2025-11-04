@@ -24,13 +24,13 @@ const AppBar = () => {
   }
 
   return (
-    <div className="fixed top-0 right-0 left-0 bg-white border-b border-gray-200 z-10 min-w-screen">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap py-3 flex-col md:flex-row items-center justify-between gap-4">
+    <div className="fixed top-0 right-0 left-0 bg-white border-b border-gray-200 z-50 w-full">
+      <div className="mx-auto px-3 sm:px-4 lg:px-8 flex py-2 sm:py-3 items-center justify-between">
         <Link
           href="/"
           className="flex title-font font-medium items-center text-gray-900"
         >
-          <div className="w-10 h-10 bg-linear-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center shrink-0">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center shrink-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -38,33 +38,33 @@ const AppBar = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth="2"
-              className="w-6 h-6 text-white"
+              className="w-5 h-5 sm:w-6 sm:h-6 text-white"
               viewBox="0 0 24 24"
             >
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
             </svg>
           </div>
-          <span className="ml-2 text-lg font-bold text-gray-900">Quiz Up</span>
+          <span className="ml-1.5 sm:ml-2 text-base sm:text-lg font-bold text-gray-900">
+            Quiz Up
+          </span>
         </Link>
 
-        <div className="flex gap-3 items-center">
-          <button
-            onClick={() => {
-              if (isUserLoggedIn) {
-                signOut();
-              } else {
-                redirect("/login");
-              }
-            }}
-            className={`inline-flex items-center border-0 py-2 px-4 focus:outline-none rounded-lg cursor-pointer text-sm font-semibold transition-all duration-200 ${
-              isUserLoggedIn
-                ? "bg-red-600 text-white hover:bg-red-700 focus:ring-4 focus:ring-red-300"
-                : "bg-indigo-700 text-white hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300"
-            }`}
-          >
-            {isUserLoggedIn ? "Log out" : "Sign in"}
-          </button>
-        </div>
+        <button
+          onClick={() => {
+            if (isUserLoggedIn) {
+              signOut();
+            } else {
+              redirect("/login");
+            }
+          }}
+          className={`inline-flex items-center border-0 py-1.5 sm:py-2 px-3 sm:px-4 focus:outline-none rounded-lg cursor-pointer text-xs sm:text-sm font-semibold transition-all duration-200 ${
+            isUserLoggedIn
+              ? "bg-red-600 text-white hover:bg-red-700 focus:ring-4 focus:ring-red-300"
+              : "bg-indigo-700 text-white hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300"
+          }`}
+        >
+          {isUserLoggedIn ? "Log out" : "Sign in"}
+        </button>
       </div>
     </div>
   );

@@ -33,7 +33,7 @@ const quizzes = async ({ searchParams }: Props) => {
     where: whereClause,
   });
   const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
-  if (currentPage > totalPages && totalPages>0) currentPage = totalPages;
+  if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
 
   // Fetch paginated quizzes
   const quizzes = await prisma.quiz.findMany({
@@ -48,7 +48,6 @@ const quizzes = async ({ searchParams }: Props) => {
       createdAt: true,
     },
   });
-
 
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 sm:px-6 lg:px-10 pb-12">
@@ -77,13 +76,13 @@ export default quizzes;
 
 const HeaderText = () => {
   return (
-    <div className="text-center space-y-4">
-      <div className="inline-flex items-center justify-center gap-3">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
+    <div className="text-center space-y-3 sm:space-y-4 px-4">
+      <div className="inline-flex items-center justify-center gap-2 sm:gap-3">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900">
           Ready to Learn?
         </h1>
       </div>
-      <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+      <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
         Choose a quiz and start testing your knowledge
       </p>
     </div>

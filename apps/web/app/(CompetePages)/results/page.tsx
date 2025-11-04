@@ -22,8 +22,8 @@ export default function ResultsPage() {
   // If no results yet, show loading
   if (finalLeaderboard.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
-        <p className="text-xl font-semibold text-gray-700">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4">
+        <p className="text-base sm:text-lg lg:text-xl font-semibold text-gray-700">
           ⏳ Loading results...
         </p>
       </div>
@@ -36,33 +36,33 @@ export default function ResultsPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 py-12">
-      <div className="max-w-3xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-3 sm:px-4 lg:px-6 py-6 sm:py-12">
+      <div className="w-full max-w-3xl mx-auto">
         {/* Header */}
-        <h1 className="text-5xl font-bold text-center text-gray-900 mb-10">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-900 mb-6 sm:mb-10">
           🎉 Quiz Complete!
         </h1>
 
         {/* User's result (highlighted) */}
         {userEntry && (
-          <div className="bg-gradient-to-br from-green-500 to-emerald-600 border-4 border-green-400 rounded-2xl p-8 text-center text-white mb-10 shadow-xl">
-            <div className="text-6xl mb-3">
+          <div className="bg-gradient-to-br from-green-500 to-emerald-600 border-4 border-green-400 rounded-lg sm:rounded-2xl p-6 sm:p-8 text-center text-white mb-6 sm:mb-10 shadow-xl">
+            <div className="text-4xl sm:text-5xl lg:text-6xl mb-2 sm:mb-3">
               {userEntry.rank === 1 && "🥇"}
               {userEntry.rank === 2 && "🥈"}
               {userEntry.rank === 3 && "🥉"}
               {userEntry.rank > 3 && "🏅"}
             </div>
 
-            <h2 className="text-2xl font-bold mb-3">
+            <h2 className="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3">
               You finished #{userEntry.rank}
             </h2>
 
-            <div className="text-5xl font-bold mb-4">
+            <div className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4">
               {userEntry.score} points
             </div>
 
             {userEntry.maxStreak !== undefined && (
-              <p className="text-lg mt-3">
+              <p className="text-sm sm:text-base lg:text-lg mt-2 sm:mt-3">
                 🔥 Best streak: {userEntry.maxStreak}
               </p>
             )}
@@ -70,31 +70,31 @@ export default function ResultsPage() {
         )}
 
         {/* Final Leaderboard */}
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8 mb-10">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+        <div className="bg-white rounded-lg sm:rounded-2xl shadow-xl border border-gray-200 p-5 sm:p-6 lg:p-8 mb-6 sm:mb-10">
+          <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
             🏆 Final Leaderboard
           </h2>
 
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             {finalLeaderboard.map((entry) => (
               <div
                 key={entry.username}
-                className={`flex justify-between items-center p-4 rounded-xl border-2 transition-all duration-200 ${
+                className={`flex justify-between items-center p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 transition-all duration-200 ${
                   entry.username === username
                     ? "bg-blue-50 border-blue-300"
                     : "bg-white border-gray-200"
                 }`}
               >
-                <div className="flex items-center gap-3">
-                  <span className="text-3xl min-w-10">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                  <span className="text-2xl sm:text-3xl min-w-8">
                     {entry.rank === 1 && "🥇"}
                     {entry.rank === 2 && "🥈"}
                     {entry.rank === 3 && "🥉"}
                     {entry.rank > 3 && `#${entry.rank}`}
                   </span>
 
-                  <div>
-                    <div className="font-bold text-gray-900">
+                  <div className="min-w-0">
+                    <div className="font-bold text-xs sm:text-sm lg:text-base text-gray-900 truncate">
                       {entry.username}
                     </div>
                     {entry.maxStreak !== undefined && (
@@ -105,7 +105,7 @@ export default function ResultsPage() {
                   </div>
                 </div>
 
-                <div className="font-bold text-xl text-gray-900">
+                <div className="font-bold text-base sm:text-lg lg:text-xl text-gray-900 flex-shrink-0">
                   {entry.score}
                 </div>
               </div>
@@ -115,11 +115,11 @@ export default function ResultsPage() {
 
         {/* Questions & Answers Section */}
         {questions && questions.length > 0 && (
-          <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8 mb-10">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+          <div className="bg-white rounded-lg sm:rounded-2xl shadow-xl border border-gray-200 p-5 sm:p-6 lg:p-8 mb-6 sm:mb-10">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
+              <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 flex items-center gap-2">
                 <svg
-                  className="w-6 h-6 text-purple-600"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -135,34 +135,34 @@ export default function ResultsPage() {
               </h2>
               <button
                 onClick={() => setShowAnswers(!showAnswers)}
-                className="px-4 py-2 text-sm font-semibold text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-all duration-200"
+                className="w-full sm:w-auto px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-all duration-200"
               >
                 {showAnswers ? "Hide Answers" : "Show Answers"}
               </button>
             </div>
 
             {showAnswers && (
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 {questions.map((q, index) => (
                   <div
                     key={index}
-                    className="bg-gray-50 rounded-xl p-6 border border-gray-200"
+                    className="bg-gray-50 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-gray-200"
                   >
-                    <div className="flex items-start gap-4 mb-4">
-                      <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    <div className="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                      <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xs sm:text-sm">
                         {index + 1}
                       </div>
-                      <h3 className="text-lg font-bold text-gray-900 flex-grow pt-0.5">
+                      <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 flex-grow pt-0.5">
                         {q.question}
                       </h3>
                     </div>
 
                     {/* Correct Answer */}
-                    <div className="ml-12 mb-4">
-                      <div className="bg-green-50 border-l-4 border-green-500 rounded-r-lg p-4">
-                        <div className="flex items-start gap-3">
+                    <div className="ml-8 sm:ml-10 lg:ml-12 mb-3 sm:mb-4">
+                      <div className="bg-green-50 border-l-4 border-green-500 rounded-r-lg p-3 sm:p-4">
+                        <div className="flex items-start gap-2 sm:gap-3">
                           <svg
-                            className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5"
+                            className="w-5 h-5 sm:w-6 sm:h-6 text-green-600 flex-shrink-0 mt-0.5"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -173,10 +173,10 @@ export default function ResultsPage() {
                             />
                           </svg>
                           <div>
-                            <p className="text-sm font-bold text-green-900 mb-1">
+                            <p className="text-xs sm:text-sm font-bold text-green-900 mb-1">
                               ✓ Correct Answer
                             </p>
-                            <p className="text-base font-semibold text-green-800">
+                            <p className="text-sm sm:text-base font-semibold text-green-800">
                               {q.answer}
                             </p>
                           </div>
@@ -185,10 +185,10 @@ export default function ResultsPage() {
                     </div>
 
                     {/* Explanation */}
-                    <div className="ml-12 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg p-4">
-                      <div className="flex items-start gap-3">
+                    <div className="ml-8 sm:ml-10 lg:ml-12 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg p-3 sm:p-4">
+                      <div className="flex items-start gap-2 sm:gap-3">
                         <svg
-                          className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"
+                          className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 flex-shrink-0 mt-0.5"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -201,10 +201,10 @@ export default function ResultsPage() {
                           />
                         </svg>
                         <div>
-                          <p className="text-sm font-bold text-blue-900 mb-1">
+                          <p className="text-xs sm:text-sm font-bold text-blue-900 mb-1">
                             💡 Explanation
                           </p>
-                          <p className="text-sm text-blue-800 leading-relaxed">
+                          <p className="text-xs sm:text-sm text-blue-800 leading-relaxed">
                             {q.explanation}
                           </p>
                         </div>
@@ -218,18 +218,18 @@ export default function ResultsPage() {
         )}
 
         {/* Actions */}
-        <div className="flex gap-4 justify-center mb-10">
-          <Link href="/" onClick={() => setHomeLoading(true)}>
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-6 sm:mb-10">
+          <Link href="/" onClick={() => setHomeLoading(true)} className="flex-1 sm:flex-none">
             <button
               disabled={homeLoading}
-              className={`px-6 py-3 text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2 ${
+              className={`w-full px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm lg:text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 ${
                 homeLoading ? "opacity-75 cursor-wait" : "cursor-pointer"
               }`}
             >
               {homeLoading ? (
                 <>
                   <svg
-                    className="animate-spin h-5 w-5"
+                    className="animate-spin h-4 w-4 sm:h-5 sm:w-5"
                     fill="none"
                     viewBox="0 0 24 24"
                   >
@@ -247,7 +247,8 @@ export default function ResultsPage() {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     ></path>
                   </svg>
-                  Loading...
+                  <span className="hidden sm:inline">Loading...</span>
+                  <span className="sm:hidden">Loading</span>
                 </>
               ) : (
                 "🏠 Home"
@@ -255,17 +256,17 @@ export default function ResultsPage() {
             </button>
           </Link>
 
-          <Link href="/compete" onClick={() => setJoinLoading(true)}>
+          <Link href="/compete" onClick={() => setJoinLoading(true)} className="flex-1 sm:flex-none">
             <button
               disabled={joinLoading}
-              className={`px-6 py-3 text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 flex items-center gap-2 ${
+              className={`w-full px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm lg:text-base font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all duration-300 flex items-center justify-center gap-2 ${
                 joinLoading ? "opacity-75 cursor-wait" : "cursor-pointer"
               }`}
             >
               {joinLoading ? (
                 <>
                   <svg
-                    className="animate-spin h-5 w-5"
+                    className="animate-spin h-4 w-4 sm:h-5 sm:w-5"
                     fill="none"
                     viewBox="0 0 24 24"
                   >
@@ -283,20 +284,24 @@ export default function ResultsPage() {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     ></path>
                   </svg>
-                  Loading...
+                  <span className="hidden sm:inline">Loading...</span>
+                  <span className="sm:hidden">Loading</span>
                 </>
               ) : (
-                "🎮 Join Another Quiz"
+                <>
+                  <span className="hidden sm:inline">🎮 Join Another Quiz</span>
+                  <span className="sm:hidden">🎮 Join Quiz</span>
+                </>
               )}
             </button>
           </Link>
         </div>
 
         {/* Room code display */}
-        <div className="text-center text-gray-600">
+        <div className="text-center text-xs sm:text-sm text-gray-600">
           <p>
             Room code:{" "}
-            <span className="font-mono font-semibold">{roomCode}</span>
+            <span className="font-mono font-semibold break-all">{roomCode}</span>
           </p>
         </div>
       </div>
