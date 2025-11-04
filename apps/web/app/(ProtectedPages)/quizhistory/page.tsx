@@ -36,10 +36,10 @@ const QuizHistory = async () => {
   const history = await getUserQuizHistory();
 
   return (
-    <div className="px-10">
+    <div className="px-10 max-w-7xl mx-auto pb-10">
       <HeaderText />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {history?.map(({quiz,totalScore,score}) => {
+        {history?.map(({ quiz, totalScore, score }) => {
           return (
             <QuizComponent
               key={quiz.id}

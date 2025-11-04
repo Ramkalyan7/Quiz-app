@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useCreateQuiz } from "../hooks/useCreateQuiz";
 import { useSession } from "next-auth/react";
 import { useWebSocket } from "../context/socketContex";
@@ -21,6 +21,8 @@ const GenerateQuizInput = ({
   );
   const [error, setError] = useState("");
   const { isConnected } = useWebSocket();
+  const learnTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const competeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Get create quiz hook
   const {
@@ -48,16 +50,37 @@ const GenerateQuizInput = ({
 
       if (mode === "compete") {
         await createQuiz(prompt, session.data?.user.name || "");
+        // Auto-remove loader after 3 seconds for compete
+        competeTimeoutRef.current = setTimeout(() => {
+          setIsLoading(false);
+          setSelectedMode(null);
+        }, 35000);
       } else {
         getQuiz(prompt, mode);
+        // Auto-remove loader after 3 seconds for learn
+        learnTimeoutRef.current = setTimeout(() => {
+          setIsLoading(false);
+          setSelectedMode(null);
+        }, 30000);
       }
-
-      setIsLoading(false);
     } catch (error) {
       console.log("handleGenerateQuiz", error);
       setIsLoading(false);
+      setSelectedMode(null);
     }
   };
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (learnTimeoutRef.current) {
+        clearTimeout(learnTimeoutRef.current);
+      }
+      if (competeTimeoutRef.current) {
+        clearTimeout(competeTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const displayError = error || createError;
 
@@ -66,7 +89,7 @@ const GenerateQuizInput = ({
       <HeaderText isCompeteModeOnly={isCompeteModeOnly} />
       <form className="max-w-3xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden hover:shadow-2xl transition-shadow duration-300">
-          <div className="bg-linear-to-r from-blue-500 to-purple-600 px-6 py-4">
+          <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-4">
             <div className="flex items-center gap-3">
               <svg
                 className="w-6 h-6 text-white shrink-0"
@@ -107,7 +130,9 @@ const GenerateQuizInput = ({
                 setError("");
               }}
               rows={5}
-              className="w-full px-4 py-3 text-base text-gray-900 bg-gray-50 border-2 border-gray-200 rounded-xl outline-none resize-none placeholder-gray-500 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 transition-all duration-200"
+              className={`w-full px-4 py-3 text-base text-gray-900 bg-gray-50 border-2 border-gray-200 rounded-xl outline-none resize-none placeholder-gray-500 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 transition-all duration-200 ${
+                isLoading || createLoading ? "opacity-50" : ""
+              }`}
               placeholder="e.g., Create a quiz about Programming fundamentals covering variables, loops, functions, and object-oriented programming concepts....."
               required
               minLength={10}
@@ -137,7 +162,13 @@ const GenerateQuizInput = ({
                     (isLoading && selectedMode !== "learn") ||
                     createLoading
                   }
-                  className="group relative inline-flex items-center justify-center gap-2 py-3 px-6 text-sm font-semibold text-center text-white bg-linear-to-r from-blue-800 to-blue-900 rounded-lg hover:from-blue-700 hover:to-blue-800 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                  className={`group relative inline-flex items-center justify-center gap-2 py-3 px-6 text-sm font-semibold text-center text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg hover:from-blue-700 hover:to-blue-800 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-lg hover:shadow-xl ${
+                    prompt.length < 10 ||
+                    (isLoading && selectedMode !== "learn") ||
+                    createLoading
+                      ? "opacity-50 cursor-not-allowed"
+                      : "cursor-pointer"
+                  }`}
                 >
                   {isLoading && selectedMode === "learn" ? (
                     <>
@@ -163,11 +194,12 @@ const GenerateQuizInput = ({
                       Generating...
                     </>
                   ) : (
-                    <div>📚 Learn Solo</div>
+                    <>📚 Learn Solo</>
                   )}
                 </button>
               )}
 
+              {/* Compete Button */}
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -175,13 +207,20 @@ const GenerateQuizInput = ({
                 }}
                 disabled={
                   prompt.length < 10 ||
-                  isLoading ||
+                  (isLoading && selectedMode !== "compete") ||
                   createLoading ||
                   !isConnected
                 }
-                className="group relative inline-flex items-center justify-center gap-2 py-3 px-6 text-sm font-semibold text-center text-white bg-linear-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 focus:ring-4 focus:ring-purple-300 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                className={`group relative inline-flex items-center justify-center gap-2 py-3 px-6 text-sm font-semibold text-center text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 focus:ring-4 focus:ring-purple-300 transition-all duration-200 shadow-lg hover:shadow-xl ${
+                  prompt.length < 10 ||
+                  (isLoading && selectedMode !== "compete") ||
+                  createLoading ||
+                  !isConnected
+                    ? "opacity-50 cursor-not-allowed"
+                    : "cursor-pointer"
+                }`}
               >
-                {(isLoading || createLoading) && selectedMode === "compete" ? (
+                {isLoading && selectedMode === "compete" ? (
                   <>
                     <svg
                       className="animate-spin h-5 w-5"
@@ -226,7 +265,7 @@ const GenerateQuizInput = ({
             </div>
           </div>
 
-          <div className="bg-linear-to-r from-blue-50 to-purple-50 px-6 py-3 border-t border-gray-200">
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-3 border-t border-gray-200">
             <div className="space-y-2">
               <p className="text-xs text-gray-600">
                 <span className="font-semibold text-gray-700">💡 Tip:</span> Be

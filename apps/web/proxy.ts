@@ -12,6 +12,11 @@ export default withAuth(
                     '/attemptquiz',
                     '/quizhistory',
                     '/quizzes',
+                    "/lobby",
+                    "/compete",
+                    "/competequiz",
+                    "/results",
+                    "/quizresults"
                 ]
 
                 const isProtected = protectedRoutes.some(route =>

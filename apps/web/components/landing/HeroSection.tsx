@@ -38,7 +38,7 @@ export default function HeroSection() {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-          <Link href="/generatequiz">
+          <Link href="/login">
             <button className="group relative px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition-all duration-300 shadow-xl hover:shadow-2xl overflow-hidden">
               <span className="relative z-10 flex items-center justify-center gap-2">
                 <svg
@@ -60,24 +60,26 @@ export default function HeroSection() {
             </button>
           </Link>
 
-          <button className="group relative px-8 py-4 text-lg font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-xl hover:border-purple-600 hover:text-purple-600 focus:ring-4 focus:ring-purple-300 transition-all duration-300 shadow-lg hover:shadow-xl">
-            <span className="relative z-10 flex items-center justify-center gap-2">
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                />
-              </svg>
-              Join Room
-            </span>
-          </button>
+          <Link href={"/login"}>
+            <button className="group relative px-8 py-4 text-lg font-semibold text-gray-700 bg-white border-2 border-gray-300 rounded-xl hover:border-purple-600 hover:text-purple-600 focus:ring-4 focus:ring-purple-300 transition-all duration-300 shadow-lg hover:shadow-xl">
+              <span className="relative z-10 flex items-center justify-center gap-2">
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
+                </svg>
+                Join Room
+              </span>
+            </button>
+          </Link>
         </div>
 
         {/* Stats */}

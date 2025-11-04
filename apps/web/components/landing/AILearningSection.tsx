@@ -218,7 +218,7 @@ export default function AILearningSection() {
             </div>
 
             <div className="pt-4">
-              <Link href="/generatequiz">
+              <Link href="/login">
                 <button className="inline-flex items-center gap-2 px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 focus:ring-4 focus:ring-purple-300 transition-all duration-300 shadow-lg hover:shadow-xl">
                   Start Learning Now
                   <svg

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect, useRef } from "react";
 import { useJoinRoom } from "../../../hooks/useJoinRoom";
 import { useCompete } from "../../../context/competeContext";
 
@@ -10,9 +10,19 @@ export default function Compete() {
   const router = useRouter();
   const [roomCode, setRoomCode] = useState("");
   const [name, setName] = useState("");
+  const [hostLoading, setHostLoading] = useState(false);
+  const [joinLoading, setJoinLoading] = useState(false);
   const { joinRoom } = useJoinRoom();
-const {loading , setLoading} = useCompete();
+  const hostTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const joinTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   const handleHostQuiz = () => {
+    setHostLoading(true);
+
+    hostTimeoutRef.current = setTimeout(() => {
+      setHostLoading(false);
+    }, 3000);
+
     router.push("/generatequiz?mode=compete");
   };
 
@@ -22,12 +32,29 @@ const {loading , setLoading} = useCompete();
       window.alert("room code length should be atleast 6");
       return;
     }
-    setLoading(true);
+    setJoinLoading(true);
+
+    joinTimeoutRef.current = setTimeout(() => {
+      setJoinLoading(false);
+    }, 3000);
+
     joinRoom(roomCode, name);
   };
 
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (hostTimeoutRef.current) {
+        clearTimeout(hostTimeoutRef.current);
+      }
+      if (joinTimeoutRef.current) {
+        clearTimeout(joinTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className="pt-20 min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 sm:px-6 lg:px-8 py-12">
+    <div className="pt-20 min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 sm:px-6 lg:px-8 py-12">
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-12">
@@ -57,10 +84,7 @@ const {loading , setLoading} = useCompete();
         {/* Two Column Layout */}
         <div className="grid md:grid-cols-2 gap-8">
           {/* Host a Quiz Card */}
-          <Link
-            href={"/generatequiz?mode=compete"}
-            className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl shadow-xl border border-purple-300 p-10 text-white hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-          >
+          <div className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl shadow-xl border border-purple-300 p-10 text-white hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
             <div className="flex items-center justify-center w-14 h-14 bg-white/20 rounded-2xl mb-6 backdrop-blur">
               <svg
                 className="w-8 h-8"
@@ -115,25 +139,54 @@ const {loading , setLoading} = useCompete();
 
             <button
               onClick={handleHostQuiz}
-              className="w-full bg-white text-purple-600 font-bold py-4 rounded-xl hover:bg-gray-100 focus:ring-4 focus:ring-purple-300 transition-all duration-300 shadow-lg hover:shadow-xl text-lg flex items-center justify-center gap-2 cursor-pointer disabled:cursor-no-drop"
-              disabled={loading}
+              disabled={hostLoading}
+              className={`w-full bg-white text-purple-600 font-bold py-4 rounded-xl hover:bg-gray-100 focus:ring-4 focus:ring-purple-300 transition-all duration-300 shadow-lg hover:shadow-xl text-lg flex items-center justify-center gap-2 ${
+                hostLoading ? "opacity-75 cursor-wait" : "cursor-pointer"
+              }`}
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 4v16m8-8H4"
-                />
-              </svg>
-              Create & Host
+              {hostLoading ? (
+                <>
+                  <svg
+                    className="animate-spin h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Loading...
+                </>
+              ) : (
+                <>
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 4v16m8-8H4"
+                    />
+                  </svg>
+                  Create & Host
+                </>
+              )}
             </button>
-          </Link>
+          </div>
 
           {/* Join a Quiz Card */}
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-10 hover:shadow-2xl transition-all duration-300">
@@ -171,12 +224,14 @@ const {loading , setLoading} = useCompete();
                   onChange={(e) => {
                     setRoomCode(e.target.value);
                   }}
-                  disabled={loading}
+                  disabled={joinLoading}
                   type="text"
                   placeholder="e.g., QUIZ42"
                   maxLength={6}
                   required
-                  className="w-full px-6 py-4 text-2xl font-bold text-center text-gray-900 bg-gray-50 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all duration-200 uppercase"
+                  className={`w-full px-6 py-4 text-2xl font-bold text-center text-gray-900 bg-gray-50 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all duration-200 uppercase ${
+                    joinLoading ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
                 />
                 <p className="text-xs text-gray-500 mt-2">
                   Ask your friend for the room code
@@ -192,33 +247,64 @@ const {loading , setLoading} = useCompete();
                   onChange={(e) => {
                     setName(e.target.value);
                   }}
-                  disabled={loading}
+                  disabled={joinLoading}
                   type="text"
                   placeholder="Enter your name"
-                  className="w-full px-4 py-3 text-gray-900 bg-gray-50 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all duration-200"
+                  className={`w-full px-4 py-3 text-gray-900 bg-gray-50 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all duration-200 ${
+                    joinLoading ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
                 />
               </div>
 
               {/* Join Button */}
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition-all duration-300 shadow-lg hover:shadow-xl text-lg flex items-center justify-center gap-2disabled:cursor-no-drop cursor-pointer"
-                disabled={loading}
+                disabled={joinLoading}
+                className={`w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition-all duration-300 shadow-lg hover:shadow-xl text-lg flex items-center justify-center gap-2 ${
+                  joinLoading ? "opacity-75 cursor-wait" : "cursor-pointer"
+                }`}
               >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                  />
-                </svg>
-                Join Quiz
+                {joinLoading ? (
+                  <>
+                    <svg
+                      className="animate-spin h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    Joining...
+                  </>
+                ) : (
+                  <>
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 10V3L4 14h7v7l9-11h-7z"
+                      />
+                    </svg>
+                    Join Quiz
+                  </>
+                )}
               </button>
             </form>
           </div>
@@ -261,9 +347,12 @@ const {loading , setLoading} = useCompete();
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={handleHostQuiz}
-              className="px-8 py-3 bg-white text-purple-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg cursor-pointer"
+              disabled={hostLoading}
+              className={`px-8 py-3 bg-white text-purple-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg ${
+                hostLoading ? "opacity-75 cursor-wait" : "cursor-pointer"
+              }`}
             >
-              Host a Quiz
+              {hostLoading ? "Loading..." : "Host a Quiz"}
             </button>
           </div>
         </div>

@@ -84,7 +84,7 @@ app.post("/api/rooms/create", (req, res) => {
             currentQuestionIndex: 0,
             isActive: false,
             timerStartedAt: 0,
-            timePerQuestion: 15
+            timePerQuestion: 10
         }
 
         rooms.set(roomCode, room);
@@ -148,6 +148,7 @@ function broadcastToRoom(roomCode: string, message: any) {
 function handleJoinRoom(ws: any, roomCode: string, userId: string, username: string) {
     const room = rooms.get(roomCode);
 
+
     if (!room) {
         ws.send(JSON.stringify({
             type: "error",
@@ -160,6 +161,14 @@ function handleJoinRoom(ws: any, roomCode: string, userId: string, username: str
         ws.send(JSON.stringify({
             type: "error",
             message: "Quiz already started"
+        }));
+        return;
+    }
+
+    if (room.players.size == 10) {
+        ws.send(JSON.stringify({
+            type: "error",
+            message: "Only 5 Players Can Participate in a Quiz"
         }));
         return;
     }

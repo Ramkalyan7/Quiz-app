@@ -117,11 +117,7 @@ export default function QuestionPage() {
                 </span>
                 <span
                   className={`text-2xl font-bold transition-colors duration-300 ${
-                    timeLeft > 10
-                      ? "text-green-600"
-                      : timeLeft > 5
-                        ? "text-orange-600"
-                        : "text-red-600"
+                    timeLeft > 5 ? "text-green-600" : "text-red-600"
                   }`}
                 >
                   {timeLeft}s
@@ -130,10 +126,8 @@ export default function QuestionPage() {
               <div className="w-full bg-gray-200 rounded-full h-4 overflow-hidden">
                 <div
                   className={`h-4 rounded-full transition-all duration-300 ${
-                    timeLeft > 10
+                    timeLeft > 5
                       ? "bg-gradient-to-r from-green-500 to-emerald-600"
-                      : timeLeft > 5
-                        ? "bg-gradient-to-r from-orange-500 to-orange-600"
                         : "bg-gradient-to-r from-red-500 to-red-600"
                   }`}
                   style={{ width: `${progressPercentage}%` }}
