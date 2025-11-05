@@ -53,11 +53,11 @@ export default function Compete() {
   }, []);
 
   return (
-    <div className="pt-20 min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <div className="pt-20 min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-8 sm:mb-12">
-          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl mb-3 sm:mb-4">
+          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-linear-to-r from-purple-600 to-pink-600 rounded-2xl mb-3 sm:mb-4">
             <svg
               className="w-6 h-6 sm:w-8 sm:h-8 text-white"
               fill="none"
@@ -83,7 +83,7 @@ export default function Compete() {
         {/* Two Column Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {/* Host a Quiz Card */}
-          <div className="bg-gradient-to-br from-purple-600 to-pink-600 rounded-xl sm:rounded-2xl shadow-xl border border-purple-300 p-6 sm:p-10 text-white hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+          <div className="bg-linear-to-br from-purple-600 to-pink-600 rounded-xl sm:rounded-2xl shadow-xl border border-purple-300 p-6 sm:p-10 text-white hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
             <div className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-white/20 rounded-2xl mb-4 sm:mb-6 backdrop-blur">
               <svg
                 className="w-6 h-6 sm:w-8 sm:h-8"
@@ -127,7 +127,7 @@ export default function Compete() {
                     Full Control
                   </p>
                   <p className="text-xs sm:text-sm text-white/80">
-                    Start the quiz whenever you're ready
+                    Start the quiz whenever you&apos;re ready
                   </p>
                 </div>
               </div>
@@ -197,7 +197,7 @@ export default function Compete() {
 
           {/* Join a Quiz Card */}
           <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl border border-gray-200 p-6 sm:p-10 hover:shadow-2xl transition-all duration-300">
-            <div className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl mb-4 sm:mb-6">
+            <div className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-linear-to-r from-blue-600 to-purple-600 rounded-2xl mb-4 sm:mb-6">
               <svg
                 className="w-6 h-6 sm:w-8 sm:h-8 text-white"
                 fill="none"
@@ -267,7 +267,7 @@ export default function Compete() {
               <button
                 type="submit"
                 disabled={joinLoading}
-                className={`w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 sm:py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition-all duration-300 shadow-lg hover:shadow-xl text-base sm:text-lg flex items-center justify-center gap-2 ${
+                className={`w-full bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 sm:py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition-all duration-300 shadow-lg hover:shadow-xl text-base sm:text-lg flex items-center justify-center gap-2 ${
                   joinLoading ? "opacity-75 cursor-wait" : "cursor-pointer"
                 }`}
               >
@@ -351,12 +351,12 @@ export default function Compete() {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-10 sm:mt-12 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8 text-white text-center">
+        <div className="mt-10 sm:mt-12 bg-linear-to-r from-blue-600 via-purple-600 to-pink-600 rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8 text-white text-center">
           <h2 className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-3">
             Ready to Compete?
           </h2>
           <p className="text-sm sm:text-base md:text-lg opacity-90 mb-4 sm:mb-6">
-            Choose your role: Host a new quiz or join your friend's room to
+            Choose your role: Host a new quiz or join your friend&apos;s room to
             start competing now!
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
