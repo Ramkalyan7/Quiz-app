@@ -3,7 +3,6 @@ import QuizComponent from "../../../components/QuizComponent";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../../lib/auth";
 import { prisma } from "../../../lib/prisma";
-import { toast } from "react-toastify";
 
 const QuizHistory = async () => {
   const getUserQuizHistory = async () => {
@@ -30,7 +29,6 @@ const QuizHistory = async () => {
       return quizzes;
     } catch (error) {
       console.log("get user history", error);
-      toast.error("Unexpected error while fetching history");
       return [];
     }
   };
