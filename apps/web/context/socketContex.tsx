@@ -46,8 +46,7 @@ export const WebSocketProvider = ({
 
   useEffect(() => {
     console.log("WebSocketProvider mounted");
-    const wsUrl =
-      process.env.WS_SERVER_BASE_URL || "ws://localhost:5000";
+    const wsUrl = process.env.WS_SERVER_BASE_URL || "";
 
     if (!ws.current) {
       ws.current = new WebSocket(wsUrl);
