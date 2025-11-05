@@ -7,16 +7,18 @@ interface FeatureProps {
 
 function FeatureCard({ icon, title, description, bgColor }: FeatureProps) {
   return (
-    <div className="bg-white rounded-xl p-8 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-      <div className="flex items-start gap-4">
+    <div className="bg-white rounded-lg sm:rounded-xl p-5 sm:p-6 lg:p-8 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+      <div className="flex items-start gap-3 sm:gap-4">
         <div
-          className={`flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg ${bgColor}`}
+          className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg ${bgColor}`}
         >
           {icon}
         </div>
         <div>
-          <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
-          <p className="text-gray-600">{description}</p>
+          <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-1 sm:mb-2">
+            {title}
+          </h3>
+          <p className="text-sm sm:text-base text-gray-600">{description}</p>
         </div>
       </div>
     </div>
@@ -28,7 +30,7 @@ export default function FeaturesSection() {
     {
       icon: (
         <svg
-          className="w-6 h-6 text-blue-600"
+          className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -49,7 +51,7 @@ export default function FeaturesSection() {
     {
       icon: (
         <svg
-          className="w-6 h-6 text-purple-600"
+          className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -70,7 +72,7 @@ export default function FeaturesSection() {
     {
       icon: (
         <svg
-          className="w-6 h-6 text-pink-600"
+          className="w-5 h-5 sm:w-6 sm:h-6 text-pink-600"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -91,7 +93,7 @@ export default function FeaturesSection() {
     {
       icon: (
         <svg
-          className="w-6 h-6 text-green-600"
+          className="w-5 h-5 sm:w-6 sm:h-6 text-green-600"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -112,13 +114,13 @@ export default function FeaturesSection() {
   ];
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8">
+    <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-4xl font-bold text-center text-gray-900 mb-16">
+        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-gray-900 mb-8 sm:mb-12 lg:mb-16">
           Why You'll Love It
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {features.map((feature, index) => (
             <FeatureCard key={index} {...feature} />
           ))}

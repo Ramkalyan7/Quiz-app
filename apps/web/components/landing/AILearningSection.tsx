@@ -9,15 +9,17 @@ interface BenefitProps {
 
 function BenefitItem({ icon, title, description, bgColor }: BenefitProps) {
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-3 sm:gap-4">
       <div
-        className={`flex-shrink-0 h-10 w-10 flex items-center justify-center rounded-lg ${bgColor}`}
+        className={`flex-shrink-0 h-8 w-8 sm:h-10 sm:w-10 flex items-center justify-center rounded-lg ${bgColor}`}
       >
         {icon}
       </div>
       <div>
-        <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
-        <p className="text-gray-600">{description}</p>
+        <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900">
+          {title}
+        </h3>
+        <p className="text-xs sm:text-sm text-gray-600">{description}</p>
       </div>
     </div>
   );
@@ -27,51 +29,55 @@ function MockQuizInterface() {
   return (
     <div className="relative">
       <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-400 rounded-2xl blur-2xl opacity-20"></div>
-      <div className="relative bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden p-8">
-        <div className="space-y-6">
+      <div className="relative bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-gray-200 overflow-hidden p-4 sm:p-6 lg:p-8">
+        <div className="space-y-4 sm:space-y-6">
           {/* Header */}
-          <div className="flex items-center justify-between pb-6 border-b border-gray-200">
-            <h3 className="text-lg font-bold text-gray-900">
+          <div className="flex items-center justify-between pb-4 sm:pb-6 border-b border-gray-200">
+            <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900">
               JavaScript Fundamentals
             </h3>
-            <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
-              Question 3 of 10
+            <span className="px-2 sm:px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold whitespace-nowrap">
+              Q 3/10
             </span>
           </div>
 
           {/* Question */}
-          <div className="space-y-4">
-            <p className="text-lg font-semibold text-gray-900">
+          <div className="space-y-3 sm:space-y-4">
+            <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900">
               What is the difference between let and const in JavaScript?
             </p>
 
             {/* Options */}
-            <div className="space-y-3">
-              <div className="p-4 rounded-lg border-2 border-gray-200 hover:border-blue-400 cursor-pointer transition-all duration-200">
-                <p className="text-gray-700">let and const are identical</p>
+            <div className="space-y-2 sm:space-y-3">
+              <div className="p-3 sm:p-4 rounded-lg border-2 border-gray-200 hover:border-blue-400 cursor-pointer transition-all duration-200">
+                <p className="text-xs sm:text-sm text-gray-700">
+                  let and const are identical
+                </p>
               </div>
-              <div className="p-4 rounded-lg border-2 border-green-500 bg-green-50">
-                <p className="text-gray-700 font-medium">
+              <div className="p-3 sm:p-4 rounded-lg border-2 border-green-500 bg-green-50">
+                <p className="text-xs sm:text-sm text-gray-700 font-medium">
                   ✓ let is reassignable, const is not
                 </p>
               </div>
-              <div className="p-4 rounded-lg border-2 border-gray-200 hover:border-blue-400 cursor-pointer transition-all duration-200">
-                <p className="text-gray-700">
+              <div className="p-3 sm:p-4 rounded-lg border-2 border-gray-200 hover:border-blue-400 cursor-pointer transition-all duration-200">
+                <p className="text-xs sm:text-sm text-gray-700">
                   const is reassignable, let is not
                 </p>
               </div>
-              <div className="p-4 rounded-lg border-2 border-gray-200 hover:border-blue-400 cursor-pointer transition-all duration-200">
-                <p className="text-gray-700">Neither can be reassigned</p>
+              <div className="p-3 sm:p-4 rounded-lg border-2 border-gray-200 hover:border-blue-400 cursor-pointer transition-all duration-200">
+                <p className="text-xs sm:text-sm text-gray-700">
+                  Neither can be reassigned
+                </p>
               </div>
             </div>
           </div>
 
           {/* Explanation */}
-          <div className="bg-blue-50 border-l-4 border-blue-500 rounded-r-lg p-4">
-            <p className="text-sm text-blue-900 font-semibold mb-2">
+          <div className="bg-blue-50 border-l-4 border-blue-500 rounded-r-lg p-3 sm:p-4">
+            <p className="text-xs sm:text-sm text-blue-900 font-semibold mb-1 sm:mb-2">
               💡 Explanation:
             </p>
-            <p className="text-sm text-blue-800">
+            <p className="text-xs sm:text-sm text-blue-800">
               let allows you to reassign values, while const prevents
               reassignment. Both are block-scoped, unlike var which is
               function-scoped.
@@ -79,12 +85,14 @@ function MockQuizInterface() {
           </div>
 
           {/* Progress Bar */}
-          <div className="pt-4">
+          <div className="pt-3 sm:pt-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-600">
+              <span className="text-xs sm:text-sm font-medium text-gray-600">
                 Progress
               </span>
-              <span className="text-sm font-medium text-gray-900">30%</span>
+              <span className="text-xs sm:text-sm font-medium text-gray-900">
+                30%
+              </span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
               <div
@@ -104,7 +112,7 @@ export default function AILearningSection() {
     {
       icon: (
         <svg
-          className="h-6 w-6 text-green-600"
+          className="h-5 w-5 sm:h-6 sm:w-6 text-green-600"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -124,7 +132,7 @@ export default function AILearningSection() {
     {
       icon: (
         <svg
-          className="h-6 w-6 text-blue-600"
+          className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -145,7 +153,7 @@ export default function AILearningSection() {
     {
       icon: (
         <svg
-          className="h-6 w-6 text-purple-600"
+          className="h-5 w-5 sm:h-6 sm:w-6 text-purple-600"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -166,7 +174,7 @@ export default function AILearningSection() {
     {
       icon: (
         <svg
-          className="h-6 w-6 text-pink-600"
+          className="h-5 w-5 sm:h-6 sm:w-6 text-pink-600"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -186,18 +194,18 @@ export default function AILearningSection() {
   ];
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
+    <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
           {/* Left Content */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             <div className="inline-block">
-              <span className="px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold">
+              <span className="px-3 sm:px-4 py-1.5 sm:py-2 bg-purple-100 text-purple-700 rounded-full text-xs sm:text-sm font-semibold">
                 📚 Learning Mode
               </span>
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
               Master Any Topic with
               <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                 {" "}
@@ -205,24 +213,24 @@ export default function AILearningSection() {
               </span>
             </h2>
 
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed">
               Not feeling competitive? Create AI-powered quizzes just for
               learning. Get instant feedback on every answer and understand your
               knowledge gaps.
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {benefits.map((benefit, index) => (
                 <BenefitItem key={index} {...benefit} />
               ))}
             </div>
 
-            <div className="pt-4">
+            <div className="pt-3 sm:pt-4">
               <Link href="/login">
-                <button className="inline-flex items-center gap-2 px-6 py-3 text-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 focus:ring-4 focus:ring-purple-300 transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer">
+                <button className="inline-flex items-center gap-2 px-4 sm:px-5 lg:px-6 py-2.5 sm:py-3 text-sm sm:text-base lg:text-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 focus:ring-4 focus:ring-purple-300 transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer">
                   Start Learning Now
                   <svg
-                    className="w-5 h-5"
+                    className="w-4 h-4 sm:w-5 sm:h-5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
