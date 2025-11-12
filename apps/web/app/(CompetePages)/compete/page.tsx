@@ -53,7 +53,7 @@ export default function Compete() {
   }, []);
 
   return (
-    <div className="pt-20 min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <div className="md:pt-20 min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-8 sm:mb-12 pt-15">
