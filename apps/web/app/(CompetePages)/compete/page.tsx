@@ -56,22 +56,7 @@ export default function Compete() {
     <div className="pt-20 min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       <div className="max-w-4xl mx-auto">
         {/* Header Section */}
-        <div className="text-center mb-8 sm:mb-12">
-          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-linear-to-r from-purple-600 to-pink-600 rounded-2xl mb-3 sm:mb-4">
-            <svg
-              className="w-6 h-6 sm:w-8 sm:h-8 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 10V3L4 14h7v7l9-11h-7z"
-              />
-            </svg>
-          </div>
+        <div className="text-center mb-8 sm:mb-12 pt-15">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2 sm:mb-3">
             Multiplayer Quiz
           </h1>
