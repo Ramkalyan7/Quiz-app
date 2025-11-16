@@ -63,7 +63,7 @@ export default function HowItWorksSection() {
       number: 3,
       title: "See Live Results",
       description:
-        "Watch the leaderboard update in real-time as answers are submitted. The fastest wins! 🏅",
+        "Watch the leaderboard update in real-time as answers are submitted. The fastest wins!",
       gradientFrom: "from-pink-500",
       gradientTo: "to-red-600",
       borderColor: "pink-400",

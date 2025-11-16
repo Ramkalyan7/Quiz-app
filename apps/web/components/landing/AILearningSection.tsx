@@ -75,7 +75,7 @@ function MockQuizInterface() {
           {/* Explanation */}
           <div className="bg-blue-50 border-l-4 border-blue-500 rounded-r-lg p-3 sm:p-4">
             <p className="text-xs sm:text-sm text-blue-900 font-semibold mb-1 sm:mb-2">
-              💡 Explanation:
+               Explanation:
             </p>
             <p className="text-xs sm:text-sm text-blue-800">
               let allows you to reassign values, while const prevents
@@ -201,7 +201,7 @@ export default function AILearningSection() {
           <div className="space-y-4 sm:space-y-6">
             <div className="inline-block">
               <span className="px-3 sm:px-4 py-1.5 sm:py-2 bg-purple-100 text-purple-700 rounded-full text-xs sm:text-sm font-semibold">
-                📚 Learning Mode
+                 Learning Mode
               </span>
             </div>
 

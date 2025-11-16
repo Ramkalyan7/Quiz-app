@@ -95,7 +95,6 @@ export default function Compete() {
 
             <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
               <div className="flex items-start gap-2 sm:gap-3">
-                <span className="text-xl sm:text-2xl">✨</span>
                 <div>
                   <p className="font-semibold text-sm sm:text-base">
                     AI Generated
@@ -106,7 +105,6 @@ export default function Compete() {
                 </div>
               </div>
               <div className="flex items-start gap-2 sm:gap-3">
-                <span className="text-xl sm:text-2xl">📊</span>
                 <div>
                   <p className="font-semibold text-sm sm:text-base">
                     Full Control
@@ -117,7 +115,6 @@ export default function Compete() {
                 </div>
               </div>
               <div className="flex items-start gap-2 sm:gap-3">
-                <span className="text-xl sm:text-2xl">👥</span>
                 <div>
                   <p className="font-semibold text-sm sm:text-base">
                     Invite Friends
@@ -305,7 +302,6 @@ export default function Compete() {
         {/* Features Section */}
         <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
           <div className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200 text-center shadow-md hover:shadow-lg transition-all duration-300">
-            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">⚡</div>
             <h3 className="font-bold text-base sm:text-lg text-gray-900 mb-1 sm:mb-2">
               Real-Time
             </h3>
@@ -315,7 +311,6 @@ export default function Compete() {
           </div>
 
           <div className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200 text-center shadow-md hover:shadow-lg transition-all duration-300">
-            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🏆</div>
             <h3 className="font-bold text-base sm:text-lg text-gray-900 mb-1 sm:mb-2">
               Competitive
             </h3>
@@ -325,7 +320,6 @@ export default function Compete() {
           </div>
 
           <div className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200 text-center shadow-md hover:shadow-lg transition-all duration-300">
-            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">👥</div>
             <h3 className="font-bold text-base sm:text-lg text-gray-900 mb-1 sm:mb-2">
               Multiplayer
             </h3>

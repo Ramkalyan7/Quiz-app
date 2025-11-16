@@ -199,8 +199,8 @@ const GenerateQuizInput = ({
                     </>
                   ) : (
                     <>
-                      <span className="hidden sm:inline">📚 Learn Solo</span>
-                      <span className="sm:hidden">📚 Learn</span>
+                      <span className="hidden sm:inline"> Learn Solo</span>
+                      <span className="sm:hidden"> Learn</span>
                     </>
                   )}
                 </button>
@@ -267,9 +267,9 @@ const GenerateQuizInput = ({
                       />
                     </svg>
                     <span className="hidden sm:inline">
-                      🏆 Compete with Friends
+                       Compete with Friends
                     </span>
-                    <span className="sm:hidden">🏆 Compete</span>
+                    <span className="sm:hidden"> Compete</span>
                   </>
                 )}
               </button>
@@ -280,21 +280,20 @@ const GenerateQuizInput = ({
           <div className="hidden sm:block bg-gradient-to-r from-blue-50 to-purple-50 px-4 sm:px-6 py-3 border-t border-gray-200">
             <div className="space-y-2">
               <p className="text-xs text-gray-600">
-                <span className="font-semibold text-gray-700">💡 Tip:</span> Be
+                <span className="font-semibold text-gray-700"> Tip:</span> Be
                 specific with your topic and include key concepts you want
                 covered in the quiz for best results.
               </p>
               {!isCompeteModeOnly && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-600">
                   <div className="flex items-start gap-2">
-                    <span className="text-blue-600 font-bold">📚</span>
+                    <span className="text-blue-600 font-bold"></span>
                     <span>
                       <span className="font-semibold">Learn Mode:</span>{" "}
                       Practice alone with instant feedback
                     </span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <span className="text-purple-600 font-bold">🏆</span>
                     <span>
                       <span className="font-semibold">Compete Mode:</span> Share
                       a room code and race against friends!
@@ -336,20 +335,17 @@ const HeaderText = ({ isCompeteModeOnly }: { isCompeteModeOnly: boolean }) => {
       {/* Features badges - hidden on mobile */}
       <div className="hidden sm:flex justify-center gap-2 sm:gap-4 mt-4 sm:mt-6 pt-3 sm:pt-4 flex-wrap">
         <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-gray-200 shadow-sm">
-          <span className="text-base sm:text-xl">✨</span>
           <span className="text-xs sm:text-sm font-medium text-gray-700">
             AI-Powered
           </span>
         </div>
         <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-gray-200 shadow-sm">
-          <span className="text-base sm:text-xl">⚡</span>
           <span className="text-xs sm:text-sm font-medium text-gray-700">
             Instant Generation
           </span>
         </div>
         {!isCompeteModeOnly && (
           <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-gray-200 shadow-sm">
-            <span className="text-base sm:text-xl">🎯</span>
             <span className="text-xs sm:text-sm font-medium text-gray-700">
               Two Game Modes
             </span>

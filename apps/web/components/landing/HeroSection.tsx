@@ -32,7 +32,7 @@ export default function HeroSection() {
 
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-2xl mx-auto leading-relaxed px-4">
             Create AI-powered quizzes, share a room code, and compete with
-            friends live. Winner takes all! 🎯
+            friends live. Winner takes all!
           </p>
         </div>
 
@@ -80,34 +80,6 @@ export default function HeroSection() {
               </span>
             </button>
           </Link>
-        </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 pt-8 sm:pt-12 px-4">
-          <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 border border-gray-200 shadow-md">
-            <div className="text-2xl sm:text-3xl font-bold text-blue-600">
-              ⚡
-            </div>
-            <p className="text-xs sm:text-sm text-gray-600 mt-1 sm:mt-2">
-              Real-Time
-            </p>
-          </div>
-          <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 border border-gray-200 shadow-md">
-            <div className="text-2xl sm:text-3xl font-bold text-purple-600">
-              🤖
-            </div>
-            <p className="text-xs sm:text-sm text-gray-600 mt-1 sm:mt-2">
-              AI-Powered
-            </p>
-          </div>
-          <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 border border-gray-200 shadow-md">
-            <div className="text-2xl sm:text-3xl font-bold text-pink-600">
-              🏆
-            </div>
-            <p className="text-xs sm:text-sm text-gray-600 mt-1 sm:mt-2">
-              Competitive
-            </p>
-          </div>
         </div>
       </div>
     </section>

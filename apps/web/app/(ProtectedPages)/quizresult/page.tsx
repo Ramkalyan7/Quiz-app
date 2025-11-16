@@ -170,7 +170,7 @@ export function QuizResultPage() {
               isPassed ? "text-green-900" : "text-blue-900"
             }`}
           >
-            {isPassed ? "🎉 Great Job!" : "💡 Keep Learning"}
+            {isPassed ? " Great Job!" : " Keep Learning"}
           </p>
           <p
             className={`text-xs sm:text-sm ${isPassed ? "text-green-800" : "text-blue-800"}`}

@@ -78,28 +78,24 @@ const SideBar = () => {
               pageLink="quizzes"
               linkText="Quizzes"
               isActive={pathname === "/quizzes"}
-              icon="📋"
               onClick={() => setIsOpen(false)}
             />
             <LinkComponent
               pageLink="generatequiz"
               linkText="Generate Quiz"
               isActive={pathname === "/generatequiz"}
-              icon="✨"
               onClick={() => setIsOpen(false)}
             />
             <LinkComponent
               pageLink="compete"
               linkText="Compete"
               isActive={pathname === "/compete"}
-              icon="🏆"
               onClick={() => setIsOpen(false)}
             />
             <LinkComponent
               pageLink="quizhistory"
               linkText="History"
               isActive={pathname === "/quizhistory"}
-              icon="🕐"
               onClick={() => setIsOpen(false)}
             />
           </nav>
@@ -127,7 +123,6 @@ interface LinkComponentProps {
   pageLink: string;
   linkText: string;
   isActive: boolean;
-  icon: string;
   onClick?: () => void;
 }
 
@@ -135,7 +130,6 @@ const LinkComponent = ({
   pageLink,
   linkText,
   isActive,
-  icon,
   onClick,
 }: LinkComponentProps) => {
   return (
@@ -151,7 +145,6 @@ const LinkComponent = ({
       {isActive && (
         <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-600 to-purple-600"></div>
       )}
-      <span className="text-xl">{icon}</span>
       <span className="text-sm">{linkText}</span>
     </Link>
   );
