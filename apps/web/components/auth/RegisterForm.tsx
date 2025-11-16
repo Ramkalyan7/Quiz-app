@@ -160,7 +160,6 @@ const RegisterForm = () => {
                 required
               />
               <p className="text-xs text-gray-500 mt-2 flex items-center gap-1">
-                <span className="text-blue-600">ℹ</span>
                 At least 6 characters required
               </p>
             </div>

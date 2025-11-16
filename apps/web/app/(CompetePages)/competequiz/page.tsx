@@ -88,7 +88,7 @@ export default function QuestionPage() {
             </svg>
           </div>
           <p className="text-base sm:text-xl font-semibold text-gray-700">
-            ⏳ Loading question...
+             Loading question...
           </p>
         </div>
       </div>

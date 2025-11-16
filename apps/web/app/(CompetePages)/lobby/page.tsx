@@ -132,9 +132,6 @@ export default function LobbyPage() {
 
               {players.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-8 sm:py-12">
-                  <div className="text-4xl sm:text-5xl lg:text-6xl mb-2 sm:mb-4 animate-bounce">
-                    👋
-                  </div>
                   <p className="text-sm sm:text-base lg:text-lg text-gray-600 font-medium text-center">
                     Waiting for players to join...
                   </p>
@@ -169,7 +166,7 @@ export default function LobbyPage() {
                             {player.username}
                             {player.userId === userId && isHost && (
                               <span className="px-2 py-1 text-xs font-bold text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-full shadow-sm flex-shrink-0">
-                                👑 HOST
+                                HOST
                               </span>
                             )}
                           </p>

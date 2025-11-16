@@ -24,7 +24,7 @@ export default function ResultsPage() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4">
         <p className="text-base sm:text-lg lg:text-xl font-semibold text-gray-700">
-          ⏳ Loading results...
+          Loading results...
         </p>
       </div>
     );
@@ -40,7 +40,7 @@ export default function ResultsPage() {
       <div className="w-full max-w-3xl mx-auto">
         {/* Header */}
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-900 mb-6 sm:mb-10">
-          🎉 Quiz Complete!
+           Quiz Complete!
         </h1>
 
         {/* User's result (highlighted) */}
@@ -63,7 +63,7 @@ export default function ResultsPage() {
 
             {userEntry.maxStreak !== undefined && (
               <p className="text-sm sm:text-base lg:text-lg mt-2 sm:mt-3">
-                🔥 Best streak: {userEntry.maxStreak}
+                 Best streak: {userEntry.maxStreak}
               </p>
             )}
           </div>
@@ -72,7 +72,7 @@ export default function ResultsPage() {
         {/* Final Leaderboard */}
         <div className="bg-white rounded-lg sm:rounded-2xl shadow-xl border border-gray-200 p-5 sm:p-6 lg:p-8 mb-6 sm:mb-10">
           <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
-            🏆 Final Leaderboard
+             Final Leaderboard
           </h2>
 
           <div className="space-y-2 sm:space-y-3">
@@ -99,7 +99,7 @@ export default function ResultsPage() {
                     </div>
                     {entry.maxStreak !== undefined && (
                       <div className="text-xs text-gray-600">
-                        🔥 Streak: {entry.maxStreak}
+                         Streak: {entry.maxStreak}
                       </div>
                     )}
                   </div>
@@ -202,7 +202,7 @@ export default function ResultsPage() {
                         </svg>
                         <div>
                           <p className="text-xs sm:text-sm font-bold text-blue-900 mb-1">
-                            💡 Explanation
+                             Explanation
                           </p>
                           <p className="text-xs sm:text-sm text-blue-800 leading-relaxed">
                             {q.explanation}
@@ -251,7 +251,7 @@ export default function ResultsPage() {
                   <span className="sm:hidden">Loading</span>
                 </>
               ) : (
-                "🏠 Home"
+                " Home"
               )}
             </button>
           </Link>
@@ -289,8 +289,8 @@ export default function ResultsPage() {
                 </>
               ) : (
                 <>
-                  <span className="hidden sm:inline">🎮 Join Another Quiz</span>
-                  <span className="sm:hidden">🎮 Join Quiz</span>
+                  <span className="hidden sm:inline">Join Another Quiz</span>
+                  <span className="sm:hidden">Join Quiz</span>
                 </>
               )}
             </button>
