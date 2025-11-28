@@ -5,7 +5,7 @@ import nodemailer from "nodemailer"
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_SERVER_HOST,
   port: Number(process.env.EMAIL_SERVER_PORT),
-  secure: process.env.EMAIL_SERVER_PORT === '465', 
+  secure: process.env.EMAIL_SERVER_PORT === '465',
   auth: {
     user: process.env.EMAIL_SERVER_USER,
     pass: process.env.EMAIL_SERVER_PASSWORD,
@@ -20,7 +20,7 @@ export async function sendVerificationEmail(email: string, token: string) {
     to: email,
     subject: 'Verify your email - Quiz App',
     html: `
-      <!DOCTYPE html>
+    <!DOCTYPE html>
       <html>
         <head>
           <style>
@@ -37,7 +37,7 @@ export async function sendVerificationEmail(email: string, token: string) {
             .button {
               display: inline-block;
               padding: 12px 24px;
-              background-color: #3B82F6;
+              background-color: #10b981;
               color: white;
               text-decoration: none;
               border-radius: 6px;

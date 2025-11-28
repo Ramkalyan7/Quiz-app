@@ -32,12 +32,10 @@ export default function LobbyPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 px-3 sm:px-4 lg:px-8 py-6 sm:py-12">
       <div className="w-full max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-          {/* Main Content */}
           <div className="lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
-            {/* Quiz Info Card */}
             <div className="bg-white rounded-lg sm:rounded-2xl shadow-xl border border-gray-200 p-4 sm:p-6 lg:p-8">
               <div className="flex flex-col sm:flex-row items-start justify-between gap-4 sm:gap-6 mb-4 sm:mb-6">
                 <div className="flex-1">
@@ -58,13 +56,12 @@ export default function LobbyPage() {
                   <p className="text-xs text-gray-500 font-medium mb-1 sm:mb-2 uppercase tracking-wide">
                     Room Code
                   </p>
-                  <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text break-all">
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-transparent bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text break-all">
                     {roomCode}
                   </div>
                 </div>
               </div>
 
-              {/* Copy Button */}
               <button
                 onClick={handleCopy}
                 className={`w-full sm:w-auto inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-lg transition-all duration-200 ${
@@ -111,11 +108,10 @@ export default function LobbyPage() {
               </button>
             </div>
 
-            {/* Players List */}
             <div className="bg-white rounded-lg sm:rounded-2xl shadow-xl border border-gray-200 p-4 sm:p-6 lg:p-8">
               <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
                 <svg
-                  className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-green-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -144,19 +140,18 @@ export default function LobbyPage() {
                   {players.map((player, index) => (
                     <div
                       key={player.userId}
-                      className="flex items-center justify-between gap-2 sm:gap-4 p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 group"
+                      className="flex items-center justify-between gap-2 sm:gap-4 p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200 group"
                     >
-                      {/* Avatar and Name/Info */}
                       <div className="flex items-center gap-2 sm:gap-4 min-w-0 flex-1">
                         <div
                           className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-r ${
                             index === 0
                               ? "from-yellow-400 to-orange-500"
                               : index === 1
-                                ? "from-blue-400 to-blue-600"
+                                ? "from-green-400 to-green-600"
                                 : index === 2
-                                  ? "from-purple-400 to-purple-600"
-                                  : "from-pink-400 to-pink-600"
+                                  ? "from-emerald-400 to-emerald-600"
+                                  : "from-teal-400 to-teal-600"
                           } flex items-center justify-center text-lg sm:text-xl font-bold text-white shadow-md flex-shrink-0`}
                         >
                           {player.username?.charAt(0).toUpperCase()}
@@ -176,7 +171,6 @@ export default function LobbyPage() {
                         </div>
                       </div>
 
-                      {/* Score and Icon */}
                       <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
                         <div className="text-right">
                           <p className="text-xs text-gray-500 font-medium hidden sm:block">
@@ -207,9 +201,7 @@ export default function LobbyPage() {
             </div>
           </div>
 
-          {/* Sidebar - Status & Actions */}
           <div className="lg:col-span-1">
-            {/* Connection Status */}
             {!isConnected && (
               <div className="mb-4 sm:mb-6 bg-yellow-50 border-l-4 border-yellow-500 rounded-r-xl p-3 sm:p-4 shadow-md">
                 <div className="flex items-start gap-2 sm:gap-3">
@@ -234,7 +226,6 @@ export default function LobbyPage() {
               </div>
             )}
 
-            {/* Start Button - Host */}
             {isHost ? (
               <div className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg sm:rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 text-white space-y-4 sm:space-y-6 sticky top-4 lg:top-24">
                 <div>
@@ -300,8 +291,7 @@ export default function LobbyPage() {
                 </p>
               </div>
             ) : (
-              /* Waiting Status - Player */
-              <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg sm:rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 text-white space-y-4 sm:space-y-6 sticky top-4 lg:top-24">
+              <div className="bg-gradient-to-br from-green-600 to-emerald-600 rounded-lg sm:rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 text-white space-y-4 sm:space-y-6 sticky top-4 lg:top-24">
                 <div>
                   <div className="inline-flex items-center gap-2 mb-1 sm:mb-2">
                     <span className="text-xl sm:text-2xl">⏳</span>

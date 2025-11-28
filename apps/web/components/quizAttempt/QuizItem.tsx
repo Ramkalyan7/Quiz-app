@@ -1,4 +1,3 @@
-// QuizItem.tsx
 "use client";
 
 import { Dispatch, SetStateAction, useState } from "react";
@@ -19,9 +18,9 @@ const QuizItem = ({
     <div
       className={`bg-white rounded-lg sm:rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden ${isSelected && "pointer-events-none"}`}
     >
-      <div className="bg-gradient-to-r bg-indigo-500 px-4 sm:px-6 py-3 sm:py-4">
+      <div className="bg-gradient-to-r bg-emerald-500 px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-start gap-2 sm:gap-4">
-          <div className="shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center text-blue-600 font-bold text-sm sm:text-lg shadow-md">
+          <div className="shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-full flex items-center justify-center text-green-600 font-bold text-sm sm:text-lg shadow-md">
             {index + 1}
           </div>
           <h3 className="text-sm sm:text-lg lg:text-xl font-semibold text-white pt-0.5 sm:pt-1 leading-relaxed">
@@ -71,11 +70,10 @@ const QuizItem = ({
             </div>
           </div>
 
-          {/* Explanation Section */}
-          <div className="bg-blue-50 border-l-4 border-blue-500 rounded-r-lg p-3 sm:p-4">
+          <div className="bg-green-50 border-l-4 border-green-500 rounded-r-lg p-3 sm:p-4">
             <div className="flex items-start gap-2 sm:gap-3">
               <svg
-                className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 shrink-0 mt-0.5"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-green-600 shrink-0 mt-0.5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -88,10 +86,10 @@ const QuizItem = ({
                 />
               </svg>
               <div>
-                <p className="text-xs sm:text-sm font-semibold text-blue-800 mb-1">
+                <p className="text-xs sm:text-sm font-semibold text-green-800 mb-1">
                   Explanation
                 </p>
-                <p className="text-xs sm:text-sm text-blue-700 leading-relaxed">
+                <p className="text-xs sm:text-sm text-green-700 leading-relaxed">
                   {question.explanation}
                 </p>
               </div>
@@ -104,7 +102,6 @@ const QuizItem = ({
 };
 
 export default QuizItem;
-
 
 const QuizOption = ({
   option,
@@ -132,7 +129,6 @@ const QuizOption = ({
     }
   };
 
-  // Determine style based on selection
   const isSelected = selected === option;
   const isCorrect = selected === correctOption && isSelected;
   const isWrong = isSelected && selected !== correctOption;
@@ -167,7 +163,7 @@ const QuizOption = ({
       >
         <div className="shrink-0 w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 border-gray-300 transition-colors duration-200 flex items-center justify-center">
           <div
-            className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-blue-500 transition-opacity duration-200 ${
+            className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-green-500 transition-opacity duration-200 ${
               isSelected ? "opacity-100" : "opacity-0"
             }`}
           ></div>
@@ -188,4 +184,3 @@ const QuizOption = ({
     </div>
   );
 };
-

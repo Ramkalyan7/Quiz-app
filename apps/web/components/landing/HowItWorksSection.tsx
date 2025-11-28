@@ -46,27 +46,27 @@ export default function HowItWorksSection() {
       title: "Create or Join",
       description:
         "Create a new quiz on any topic or join a friend's room using their unique code. Just 6 characters!",
-      gradientFrom: "from-blue-500",
-      gradientTo: "to-purple-600",
-      borderColor: "blue-400",
+      gradientFrom: "from-green-500",
+      gradientTo: "to-emerald-600",
+      borderColor: "green-400",
     },
     {
       number: 2,
       title: "Answer Together",
       description:
         "See the same questions at the same time with a 30-second timer. Speed and accuracy both matter!",
-      gradientFrom: "from-purple-500",
-      gradientTo: "to-pink-600",
-      borderColor: "purple-400",
+      gradientFrom: "from-emerald-500",
+      gradientTo: "to-teal-600",
+      borderColor: "emerald-400",
     },
     {
       number: 3,
       title: "See Live Results",
       description:
         "Watch the leaderboard update in real-time as answers are submitted. The fastest wins!",
-      gradientFrom: "from-pink-500",
-      gradientTo: "to-red-600",
-      borderColor: "pink-400",
+      gradientFrom: "from-teal-500",
+      gradientTo: "to-cyan-600",
+      borderColor: "teal-400",
     },
   ];
 

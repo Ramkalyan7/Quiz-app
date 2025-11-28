@@ -28,6 +28,7 @@ export function useCreateQuiz() {
                 const quizResult = await generateAndStoreQuiz(prompt);
 
                 if (!quizResult?.success) {
+                    console.log("error")
                     setError(quizResult?.error as string);
                     setLoading(false);
                     return;
@@ -78,12 +79,12 @@ export function useCreateQuiz() {
                     username,
                 });
             } catch (err: any) {
-                console.error("Error creating quiz:", err);
+                console.log("Error creating quiz:", err);
                 setError(err.message || "Failed to create quiz");
                 setLoading(false);
             }
         },
-        [setLoading, session.data?.user.id, setUserId, setUsername, setIsHost, send, router]
+        [reset, setLoading, session.data?.user.id, setUserId, setUsername, setIsHost, send, router]
     );
 
     return { createQuiz, error, loading };

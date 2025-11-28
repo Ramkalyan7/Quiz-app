@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef , Dispatch , SetStateAction } from "react";
 import { useCreateQuiz } from "../hooks/useCreateQuiz";
 import { useSession } from "next-auth/react";
 import { useWebSocket } from "../context/socketContex";
@@ -9,14 +9,17 @@ import { toast } from "react-toastify";
 interface GenerateQuizProps {
   getQuiz: (prompt: string, mode: "learn" | "compete") => void;
   isCompeteModeOnly?: boolean;
+  isLoading:boolean;
+  setLoading:Dispatch<SetStateAction<boolean>>;
 }
 
 const GenerateQuizInput = ({
   getQuiz,
   isCompeteModeOnly = false,
+  isLoading,
+  setLoading
 }: GenerateQuizProps) => {
   const [prompt, setPrompt] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [selectedMode, setSelectedMode] = useState<"learn" | "compete" | null>(
     null
   );
@@ -25,7 +28,6 @@ const GenerateQuizInput = ({
   const learnTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const competeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Get create quiz hook
   const {
     createQuiz,
     error: createError,
@@ -45,32 +47,30 @@ const GenerateQuizInput = ({
         }
       }
 
-      setIsLoading(true);
       setSelectedMode(mode);
       setError("");
 
       if (mode === "compete") {
+        setLoading(true)
         await createQuiz(prompt, session.data?.user.name || "");
         competeTimeoutRef.current = setTimeout(() => {
-          setIsLoading(false);
           setSelectedMode(null);
         }, 35000);
+        setLoading(false)
       } else {
         getQuiz(prompt, mode);
         learnTimeoutRef.current = setTimeout(() => {
-          setIsLoading(false);
           setSelectedMode(null);
         }, 30000);
       }
     } catch (error) {
       console.log("handleGenerateQuiz", error);
       toast.error("Error while generating Quiz !");
-      setIsLoading(false);
       setSelectedMode(null);
+      setLoading(false)
     }
   };
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (learnTimeoutRef.current) {
@@ -89,7 +89,7 @@ const GenerateQuizInput = ({
       <HeaderText isCompeteModeOnly={isCompeteModeOnly} />
       <form className="max-w-3xl mx-auto">
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl border border-gray-200 overflow-hidden hover:shadow-2xl transition-shadow duration-300">
-          <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 sm:px-6 py-3 sm:py-4">
+          <div className="bg-gradient-to-r from-green-500 to-emerald-600 px-4 sm:px-6 py-3 sm:py-4">
             <div className="flex items-center gap-2 sm:gap-3">
               <svg
                 className="w-5 h-5 sm:w-6 sm:h-6 text-white shrink-0"
@@ -113,24 +113,25 @@ const GenerateQuizInput = ({
           <div className="p-4 sm:p-6 space-y-4">
             {displayError && (
               <div className="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4 text-red-700 text-xs sm:text-sm">
-                ❌ {displayError}
+                 {displayError}
               </div>
             )}
 
             {!isCompeteModeOnly && !isConnected && (
               <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 sm:p-4 text-yellow-700 text-xs sm:text-sm">
-                ⚠️ WebSocket not connected. Compete mode may not work.
+                 WebSocket not connected. Compete mode may not work.
               </div>
             )}
 
             <textarea
               id="prompt"
               onChange={(e) => {
-                setPrompt(e.target.value);
+                const promptText=e.target.value.trim();
+                setPrompt(promptText);
                 setError("");
               }}
               rows={5}
-              className={`w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-gray-900 bg-gray-50 border-2 border-gray-200 rounded-xl outline-none resize-none placeholder-gray-500 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 transition-all duration-200 ${
+              className={`w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-gray-900 bg-gray-50 border-2 border-gray-200 rounded-xl outline-none resize-none placeholder-gray-500 focus:border-green-500 focus:bg-white focus:ring-2 focus:ring-green-200 transition-all duration-200 ${
                 isLoading || createLoading ? "opacity-50" : ""
               }`}
               placeholder="e.g., Create a quiz about Programming fundamentals covering variables, loops, functions, and object-oriented programming concepts....."
@@ -144,16 +145,14 @@ const GenerateQuizInput = ({
                 <span className="font-medium text-gray-700">
                   {prompt.length}
                 </span>
-                <span >
+                <span>
                   {" "}
                   characters (minimum 10 required)
                 </span>
               </div>
             </div>
 
-            {/* Mode Selection with Dual Buttons */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 pt-4">
-              {/* Learn Button */}
               {!isCompeteModeOnly && (
                 <button
                   onClick={(e) => {
@@ -165,7 +164,7 @@ const GenerateQuizInput = ({
                     (isLoading && selectedMode !== "learn") ||
                     createLoading
                   }
-                  className={`group relative inline-flex items-center justify-center gap-2 py-3 px-4 sm:px-6 text-sm font-semibold text-center text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg hover:from-blue-700 hover:to-blue-800 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-lg hover:shadow-xl ${
+                  className={`group relative inline-flex items-center justify-center gap-2 py-3 px-4 sm:px-6 text-sm font-semibold text-center text-white bg-gradient-to-r from-green-600 to-green-700 rounded-lg hover:from-green-700 hover:to-green-800 focus:ring-4 focus:ring-green-300 transition-all duration-200 shadow-lg hover:shadow-xl ${
                     prompt.length < 10 ||
                     (isLoading && selectedMode !== "learn") ||
                     createLoading
@@ -206,7 +205,6 @@ const GenerateQuizInput = ({
                 </button>
               )}
 
-              {/* Compete Button */}
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -218,7 +216,7 @@ const GenerateQuizInput = ({
                   createLoading ||
                   !isConnected
                 }
-                className={`group relative inline-flex items-center justify-center gap-2 py-3 px-4 sm:px-6 text-sm font-semibold text-center text-white bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 focus:ring-4 focus:ring-purple-300 transition-all duration-200 shadow-lg hover:shadow-xl ${
+                className={`group relative inline-flex items-center justify-center gap-2 py-3 px-4 sm:px-6 text-sm font-semibold text-center text-white bg-gradient-to-r from-emerald-600 to-teal-600 rounded-lg hover:from-emerald-700 hover:to-teal-700 focus:ring-4 focus:ring-emerald-300 transition-all duration-200 shadow-lg hover:shadow-xl ${
                   prompt.length < 10 ||
                   (isLoading && selectedMode !== "compete") ||
                   createLoading ||
@@ -276,8 +274,7 @@ const GenerateQuizInput = ({
             </div>
           </div>
 
-          {/* Tips section - hidden on mobile */}
-          <div className="hidden sm:block bg-gradient-to-r from-blue-50 to-purple-50 px-4 sm:px-6 py-3 border-t border-gray-200">
+          <div className="hidden sm:block bg-gradient-to-r from-green-50 to-emerald-50 px-4 sm:px-6 py-3 border-t border-gray-200">
             <div className="space-y-2">
               <p className="text-xs text-gray-600">
                 <span className="font-semibold text-gray-700"> Tip:</span> Be
@@ -287,7 +284,7 @@ const GenerateQuizInput = ({
               {!isCompeteModeOnly && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-600">
                   <div className="flex items-start gap-2">
-                    <span className="text-blue-600 font-bold"></span>
+                    <span className="text-green-600 font-bold"></span>
                     <span>
                       <span className="font-semibold">Learn Mode:</span>{" "}
                       Practice alone with instant feedback
@@ -320,7 +317,6 @@ const HeaderText = ({ isCompeteModeOnly }: { isCompeteModeOnly: boolean }) => {
         </h1>
       </div>
 
-      {/* Description - hidden on mobile */}
       <div className="hidden sm:block max-w-2xl mx-auto space-y-2">
         <p className="text-base sm:text-lg text-gray-700 font-medium">
           Effortlessly generate and customize high-quality quizzes on any topic
@@ -332,7 +328,6 @@ const HeaderText = ({ isCompeteModeOnly }: { isCompeteModeOnly: boolean }) => {
         </p>
       </div>
 
-      {/* Features badges - hidden on mobile */}
       <div className="hidden sm:flex justify-center gap-2 sm:gap-4 mt-4 sm:mt-6 pt-3 sm:pt-4 flex-wrap">
         <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-gray-200 shadow-sm">
           <span className="text-xs sm:text-sm font-medium text-gray-700">

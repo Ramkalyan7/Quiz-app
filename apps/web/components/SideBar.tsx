@@ -19,10 +19,9 @@ const SideBar = () => {
 
   return (
     <>
-      {/* Mobile Menu Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-4 right-4 z-50 lg:hidden w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full shadow-lg flex items-center justify-center text-white hover:shadow-xl transition-all duration-200"
+        className="fixed bottom-4 right-4 z-50 lg:hidden w-14 h-14 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full shadow-lg flex items-center justify-center text-white hover:shadow-xl transition-all duration-200"
       >
         {isOpen ? (
           <svg
@@ -55,7 +54,6 @@ const SideBar = () => {
         )}
       </button>
 
-      {/* Overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
@@ -63,7 +61,6 @@ const SideBar = () => {
         ></div>
       )}
 
-      {/* Sidebar */}
       <aside
         className={`fixed lg:sticky top-0 bottom-0 left-0 bg-white w-68 border-r border-gray-200 font-medium px-4 h-screen pt-24 overflow-y-auto flex flex-col z-40 transition-transform duration-300 lg:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
@@ -102,7 +99,7 @@ const SideBar = () => {
         </div>
 
         <div className="mt-auto pt-6 border-t border-gray-200 mb-4">
-          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-4">
+          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4">
             <p className="text-xs font-semibold text-gray-700 mb-2">
               Quick Tip
             </p>
@@ -138,12 +135,12 @@ const LinkComponent = ({
       onClick={onClick}
       className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group relative overflow-hidden ${
         isActive
-          ? "bg-gradient-to-r from-blue-50 to-purple-50 text-blue-600 font-semibold"
+          ? "bg-gradient-to-r from-green-50 to-emerald-50 text-green-600 font-semibold"
           : "text-gray-700 hover:bg-gray-50 hover:text-gray-900"
       }`}
     >
       {isActive && (
-        <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-600 to-purple-600"></div>
+        <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-green-600 to-emerald-600"></div>
       )}
       <span className="text-sm">{linkText}</span>
     </Link>

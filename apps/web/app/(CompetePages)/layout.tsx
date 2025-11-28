@@ -1,8 +1,5 @@
 "use client";
 import SideBar from "../../components/SideBar";
-import { CompeteProvider } from "../../context/competeContext";
-import { QuizProvider } from "../../context/quizContext";
-import { WebSocketProvider } from "../../context/socketContex";
 
 export default function RootLayout({
   children,
@@ -10,7 +7,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-row bg-slate-100">
+    <div className="flex flex-row bg-linear-to-br from-green-50 via-emerald-50 to-teal-50">
       <SideBar />
       <div className="w-full">{children}</div>
     </div>

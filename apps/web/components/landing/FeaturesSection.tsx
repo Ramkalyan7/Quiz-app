@@ -30,7 +30,7 @@ export default function FeaturesSection() {
     {
       icon: (
         <svg
-          className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600"
+          className="w-5 h-5 sm:w-6 sm:h-6 text-green-600"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -46,12 +46,12 @@ export default function FeaturesSection() {
       title: "AI-Generated Questions",
       description:
         "Just describe the topic and our AI creates 10 perfect questions instantly.",
-      bgColor: "bg-blue-100",
+      bgColor: "bg-green-100",
     },
     {
       icon: (
         <svg
-          className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600"
+          className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -67,12 +67,12 @@ export default function FeaturesSection() {
       title: "Competitive Fun",
       description:
         "Real-time scoring rewards both speed and accuracy. Who will be champion?",
-      bgColor: "bg-purple-100",
+      bgColor: "bg-emerald-100",
     },
     {
       icon: (
         <svg
-          className="w-5 h-5 sm:w-6 sm:h-6 text-pink-600"
+          className="w-5 h-5 sm:w-6 sm:h-6 text-teal-600"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -88,7 +88,7 @@ export default function FeaturesSection() {
       title: "Easy to Share",
       description:
         "Just share a 6-character room code. Your friends can join instantly via text or link.",
-      bgColor: "bg-pink-100",
+      bgColor: "bg-teal-100",
     },
     {
       icon: (

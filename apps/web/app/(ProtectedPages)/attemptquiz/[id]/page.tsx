@@ -30,8 +30,6 @@ const AttempQuizPage = async ({
     redirect("/");
   }
 
-
-
   return (
     <>
       <QuizAttempt questions={questions} title={quiz.title||""} quizId={quiz.id}/>
@@ -40,4 +38,3 @@ const AttempQuizPage = async ({
 };
 
 export default AttempQuizPage;
-

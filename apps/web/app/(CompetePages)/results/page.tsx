@@ -19,10 +19,9 @@ export default function ResultsPage() {
     }
   }, [router, username]);
 
-  // If no results yet, show loading
   if (finalLeaderboard.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 flex items-center justify-center px-4">
         <p className="text-base sm:text-lg lg:text-xl font-semibold text-gray-700">
           Loading results...
         </p>
@@ -30,20 +29,17 @@ export default function ResultsPage() {
     );
   }
 
-  // Find user's entry
   const userEntry = finalLeaderboard.find(
     (entry) => entry.username === username
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-3 sm:px-4 lg:px-6 py-6 sm:py-12">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 px-3 sm:px-4 lg:px-6 py-6 sm:py-12">
       <div className="w-full max-w-3xl mx-auto">
-        {/* Header */}
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-900 mb-6 sm:mb-10">
            Quiz Complete!
         </h1>
 
-        {/* User's result (highlighted) */}
         {userEntry && (
           <div className="bg-gradient-to-br from-green-500 to-emerald-600 border-4 border-green-400 rounded-lg sm:rounded-2xl p-6 sm:p-8 text-center text-white mb-6 sm:mb-10 shadow-xl">
             <div className="text-4xl sm:text-5xl lg:text-6xl mb-2 sm:mb-3">
@@ -69,7 +65,6 @@ export default function ResultsPage() {
           </div>
         )}
 
-        {/* Final Leaderboard */}
         <div className="bg-white rounded-lg sm:rounded-2xl shadow-xl border border-gray-200 p-5 sm:p-6 lg:p-8 mb-6 sm:mb-10">
           <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
              Final Leaderboard
@@ -81,7 +76,7 @@ export default function ResultsPage() {
                 key={entry.username}
                 className={`flex justify-between items-center p-3 sm:p-4 rounded-lg sm:rounded-xl border-2 transition-all duration-200 ${
                   entry.username === username
-                    ? "bg-blue-50 border-blue-300"
+                    ? "bg-green-50 border-green-300"
                     : "bg-white border-gray-200"
                 }`}
               >
@@ -113,13 +108,12 @@ export default function ResultsPage() {
           </div>
         </div>
 
-        {/* Questions & Answers Section */}
         {questions && questions.length > 0 && (
           <div className="bg-white rounded-lg sm:rounded-2xl shadow-xl border border-gray-200 p-5 sm:p-6 lg:p-8 mb-6 sm:mb-10">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
               <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 flex items-center gap-2">
                 <svg
-                  className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600"
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -135,7 +129,7 @@ export default function ResultsPage() {
               </h2>
               <button
                 onClick={() => setShowAnswers(!showAnswers)}
-                className="w-full sm:w-auto px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 transition-all duration-200"
+                className="w-full sm:w-auto px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-green-600 bg-green-50 rounded-lg hover:bg-green-100 transition-all duration-200"
               >
                 {showAnswers ? "Hide Answers" : "Show Answers"}
               </button>
@@ -149,7 +143,7 @@ export default function ResultsPage() {
                     className="bg-gray-50 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-gray-200"
                   >
                     <div className="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
-                      <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xs sm:text-sm">
+                      <div className="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-xs sm:text-sm">
                         {index + 1}
                       </div>
                       <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 flex-grow pt-0.5">
@@ -157,7 +151,6 @@ export default function ResultsPage() {
                       </h3>
                     </div>
 
-                    {/* Correct Answer */}
                     <div className="ml-8 sm:ml-10 lg:ml-12 mb-3 sm:mb-4">
                       <div className="bg-green-50 border-l-4 border-green-500 rounded-r-lg p-3 sm:p-4">
                         <div className="flex items-start gap-2 sm:gap-3">
@@ -184,11 +177,10 @@ export default function ResultsPage() {
                       </div>
                     </div>
 
-                    {/* Explanation */}
-                    <div className="ml-8 sm:ml-10 lg:ml-12 bg-blue-50 border-l-4 border-blue-500 rounded-r-lg p-3 sm:p-4">
+                    <div className="ml-8 sm:ml-10 lg:ml-12 bg-green-50 border-l-4 border-green-500 rounded-r-lg p-3 sm:p-4">
                       <div className="flex items-start gap-2 sm:gap-3">
                         <svg
-                          className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 flex-shrink-0 mt-0.5"
+                          className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 flex-shrink-0 mt-0.5"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -201,10 +193,10 @@ export default function ResultsPage() {
                           />
                         </svg>
                         <div>
-                          <p className="text-xs sm:text-sm font-bold text-blue-900 mb-1">
+                          <p className="text-xs sm:text-sm font-bold text-green-900 mb-1">
                              Explanation
                           </p>
-                          <p className="text-xs sm:text-sm text-blue-800 leading-relaxed">
+                          <p className="text-xs sm:text-sm text-green-800 leading-relaxed">
                             {q.explanation}
                           </p>
                         </div>
@@ -217,12 +209,11 @@ export default function ResultsPage() {
           </div>
         )}
 
-        {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-6 sm:mb-10">
           <Link href="/" onClick={() => setHomeLoading(true)} className="flex-1 sm:flex-none">
             <button
               disabled={homeLoading}
-              className={`w-full px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm lg:text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 ${
+              className={`w-full px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm lg:text-base font-semibold text-white bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 ${
                 homeLoading ? "opacity-75 cursor-wait" : "cursor-pointer"
               }`}
             >
@@ -297,7 +288,6 @@ export default function ResultsPage() {
           </Link>
         </div>
 
-        {/* Room code display */}
         <div className="text-center text-xs sm:text-sm text-gray-600">
           <p>
             Room code:{" "}

@@ -10,7 +10,6 @@ const AppBar = () => {
 
   const pathname = usePathname();
 
-  // Hide navbar on these pages
   const hideOnPages = ["/login", "/register", "/verifyemail", "/attemptquiz"];
 
   if (
@@ -30,7 +29,7 @@ const AppBar = () => {
           href="/"
           className="flex title-font font-medium items-center text-gray-900"
         >
-          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center shrink-0">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center shrink-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -60,7 +59,7 @@ const AppBar = () => {
           className={`inline-flex items-center border-0 py-1.5 sm:py-2 px-3 sm:px-4 focus:outline-none rounded-lg cursor-pointer text-xs sm:text-sm font-semibold transition-all duration-200 ${
             isUserLoggedIn
               ? "bg-red-600 text-white hover:bg-red-700 focus:ring-4 focus:ring-red-300"
-              : "bg-indigo-700 text-white hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300"
+              : "bg-emerald-700 text-white hover:bg-emerald-800 focus:ring-4 focus:ring-emerald-300"
           }`}
         >
           {isUserLoggedIn ? "Log out" : "Sign in"}

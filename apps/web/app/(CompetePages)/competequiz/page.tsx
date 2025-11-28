@@ -64,9 +64,9 @@ export default function QuestionPage() {
 
   if (!currentQuestion) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-linear-to-br from-green-50 via-emerald-50 to-teal-50 flex items-center justify-center px-4">
         <div className="text-center">
-          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mb-3 sm:mb-4 animate-pulse">
+          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full mb-3 sm:mb-4 animate-pulse">
             <svg
               className="w-6 h-6 sm:w-8 sm:h-8 text-white animate-spin"
               fill="none"
@@ -103,12 +103,10 @@ export default function QuestionPage() {
   const progressPercentage = (timeLeft / currentQuestion.timeLimit) * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-3 sm:px-4 lg:px-8 py-4 sm:py-8">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 px-3 sm:px-4 lg:px-8 py-4 sm:py-8">
       <div className="w-full max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-3 sm:gap-6">
-          {/* Main Question Area */}
           <div className="lg:col-span-3 space-y-4 sm:space-y-6">
-            {/* Progress Bar with Timer */}
             <div className="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 border border-gray-200 shadow-md">
               <div className="flex items-center justify-between mb-2 sm:mb-3">
                 <span className="text-xs sm:text-sm font-semibold text-gray-700">
@@ -135,13 +133,11 @@ export default function QuestionPage() {
               </div>
             </div>
 
-            {/* Question */}
             <div className="bg-white rounded-lg sm:rounded-2xl shadow-xl border border-gray-200 p-5 sm:p-8 lg:p-10">
               <h2 className="text-lg sm:text-2xl lg:text-3xl font-bold text-gray-900 text-center mb-6 sm:mb-10 lg:mb-12 leading-relaxed">
                 {currentQuestion.question}
               </h2>
 
-              {/* Answer Options */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 lg:gap-4">
                 {currentQuestion.options.map((option, index) => (
                   <button
@@ -151,7 +147,7 @@ export default function QuestionPage() {
                     className={`group p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl border-2 transition-all duration-300 text-left shadow-sm ${
                       answered
                         ? "bg-gray-100 border-gray-300 cursor-not-allowed opacity-60"
-                        : "bg-white border-gray-300 hover:border-blue-500 hover:bg-blue-50 hover:shadow-md cursor-pointer"
+                        : "bg-white border-gray-300 hover:border-green-500 hover:bg-green-50 hover:shadow-md cursor-pointer"
                     }`}
                   >
                     <div className="flex items-start gap-2 sm:gap-3 lg:gap-4">
@@ -159,7 +155,7 @@ export default function QuestionPage() {
                         className={`flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-lg flex items-center justify-center font-bold text-base sm:text-lg transition-all duration-300 ${
                           answered
                             ? "bg-gray-200 text-gray-600"
-                            : "bg-gray-100 text-gray-700 group-hover:bg-blue-100 group-hover:text-blue-600"
+                            : "bg-gray-100 text-gray-700 group-hover:bg-green-100 group-hover:text-green-600"
                         }`}
                       >
                         {String.fromCharCode(65 + index)}
@@ -172,7 +168,6 @@ export default function QuestionPage() {
                 ))}
               </div>
 
-              {/* Answer Submitted Message */}
               {answered && (
                 <div className="mt-6 sm:mt-8 p-3 sm:p-4 bg-green-50 border-l-4 border-green-500 rounded-r-lg">
                   <div className="flex items-start gap-2 sm:gap-3">
@@ -201,7 +196,6 @@ export default function QuestionPage() {
             </div>
           </div>
 
-          {/* Leaderboard Sidebar */}
           <div className="lg:col-span-1 order-first lg:order-last">
             <div className="bg-white rounded-lg sm:rounded-2xl shadow-xl border border-gray-200 p-4 sm:p-6 sticky top-4 sm:top-6 lg:top-8">
               <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 mb-3 sm:mb-4 flex items-center gap-2">
@@ -230,7 +224,7 @@ export default function QuestionPage() {
                       key={entry.username}
                       className={`p-2 sm:p-3 rounded-lg transition-all duration-200 ${
                         entry.username === username
-                          ? "bg-blue-50 border-2 border-blue-300 shadow-sm"
+                          ? "bg-green-50 border-2 border-green-300 shadow-sm"
                           : "bg-gray-50 border border-gray-200"
                       }`}
                     >
@@ -260,7 +254,7 @@ export default function QuestionPage() {
                               {entry.username.substring(0, 10)}
                               {entry.username.length > 10 && "..."}
                               {entry.username === username && (
-                                <span className="text-xs text-blue-600 flex-shrink-0">
+                                <span className="text-xs text-green-600 flex-shrink-0">
                                   (You)
                                 </span>
                               )}
@@ -281,9 +275,8 @@ export default function QuestionPage() {
                 </div>
               )}
 
-              {/* Your Current Rank */}
               {leaderboard.some((entry) => entry.username === username) && (
-                <div className="mt-3 sm:mt-4 p-2 sm:p-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border-2 border-blue-200">
+                <div className="mt-3 sm:mt-4 p-2 sm:p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border-2 border-green-200">
                   <p className="text-xs text-gray-600 mb-1 font-medium">
                     YOUR RANK
                   </p>

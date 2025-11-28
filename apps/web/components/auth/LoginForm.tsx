@@ -35,7 +35,6 @@ const LoginForm = () => {
     });
 
     if (result?.error) {
-      // Check if error is about email verification
       if (result.error.toLowerCase().includes("verify")) {
         setError("Please verify your email before logging in.");
         setNeedsVerification(true);
@@ -46,7 +45,6 @@ const LoginForm = () => {
       return;
     }
 
-    // Success - redirect
     router.push(callbackUrl);
   };
 
@@ -78,11 +76,10 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-linear-to-br from-green-50 via-emerald-50 to-teal-50 flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md">
-        {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-r from-blue-600 to-purple-600 rounded-xl mb-4">
+          <div className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-r from-green-600 to-emerald-600 rounded-xl mb-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -100,7 +97,6 @@ const LoginForm = () => {
           <p className="text-gray-600">Sign in to your Quiz Up account</p>
         </div>
 
-        {/* Alert Messages */}
         {error && (
           <div
             className={`mb-6 p-4 rounded-lg border-l-4 flex items-start gap-3 ${
@@ -136,9 +132,7 @@ const LoginForm = () => {
           </div>
         )}
 
-        {/* Login Card */}
         <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
-          {/* Email/Password Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -150,7 +144,7 @@ const LoginForm = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all duration-200 bg-gray-50 focus:bg-white"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all duration-200 bg-gray-50 focus:bg-white"
                 placeholder="you@example.com"
                 required
               />
@@ -166,7 +160,7 @@ const LoginForm = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, password: e.target.value })
                 }
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all duration-200 bg-gray-50 focus:bg-white"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all duration-200 bg-gray-50 focus:bg-white"
                 placeholder="••••••••"
                 required
               />
@@ -175,7 +169,7 @@ const LoginForm = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold py-2.5 rounded-lg hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-md hover:shadow-lg"
+              className="w-full bg-linear-to-r from-green-600 to-emerald-600 text-white font-semibold py-2.5 rounded-lg hover:from-green-700 hover:to-emerald-700 focus:ring-4 focus:ring-green-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-md hover:shadow-lg"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -191,7 +185,6 @@ const LoginForm = () => {
             </button>
           </form>
 
-          {/* Divider */}
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
@@ -204,10 +197,9 @@ const LoginForm = () => {
               </div>
             </div>
 
-            {/* Google Login */}
             <button
               onClick={handleGoogleSignIn}
-              className="mt-5 w-full bg-emerald-50 border-2 border-gray-200 text-gray-700 font-medium py-2.5 rounded-lg hover:bg-gray-50 hover:border-gray-300 flex items-center justify-center gap-3 transition-all duration-200"
+              className="mt-5 w-full bg-white border-2 border-gray-200 text-gray-700 font-medium py-2.5 rounded-lg hover:bg-gray-50 hover:border-gray-300 flex items-center justify-center gap-3 transition-all duration-200"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path
@@ -231,10 +223,9 @@ const LoginForm = () => {
             </button>
           </div>
 
-          {/* Sign Up Link */}
           <p className="text-center text-sm text-gray-600 mt-6">
             Don&apos;t have an account?{" "}
-            <Link href="/register" className="text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-200">
+            <Link href="/register" className="text-green-600 font-semibold hover:text-green-700 transition-colors duration-200">
               Sign up
             </Link>
           </p>

@@ -40,7 +40,7 @@ const RegisterForm = () => {
 
   if (success) {
     return (
-      <div className=" min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4 pt-20 pb-12">
+      <div className=" min-h-screen bg-linear-to-br from-green-50 via-emerald-50 to-teal-50 flex items-center justify-center px-4 pt-20 pb-12">
         <div className="w-full max-w-md bg-white rounded-xl shadow-lg border border-gray-200 p-8 text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-r from-green-400 to-green-600 rounded-full mb-6">
             <svg
@@ -62,14 +62,14 @@ const RegisterForm = () => {
           </h1>
           <p className="text-gray-600 mb-6">
             We&apos;ve sent a verification link to{" "}
-            <strong className="text-blue-600">{formData.email}</strong>
+            <strong className="text-green-600">{formData.email}</strong>
           </p>
           <p className="text-sm text-gray-500 mb-8">
             Please click the link in the email to verify your account.
           </p>
           <Link
             href="/login"
-            className="inline-flex items-center justify-center w-full bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold py-2.5 rounded-lg hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-md hover:shadow-lg"
+            className="inline-flex items-center justify-center w-full bg-linear-to-r from-green-600 to-emerald-600 text-white font-semibold py-2.5 rounded-lg hover:from-green-700 hover:to-emerald-700 focus:ring-4 focus:ring-green-300 transition-all duration-200 shadow-md hover:shadow-lg"
           >
             Go to Login
           </Link>
@@ -79,18 +79,15 @@ const RegisterForm = () => {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center px-4 py-5">
+    <div className="min-h-screen bg-linear-to-br from-green-50 via-emerald-50 to-teal-50 flex items-center justify-center px-4 py-5">
       <div className="w-full max-w-md">
-        {/* Header */}
         <div className="text-center mb-8">
-          
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Create Account
           </h1>
           <p className="text-gray-600">Join Quiz Up and start learning</p>
         </div>
 
-        {/* Alert Messages */}
         {error && (
           <div className="mb-6 p-4 rounded-lg border-l-4 bg-red-50 border-red-500 flex items-start gap-3">
             <svg
@@ -108,9 +105,7 @@ const RegisterForm = () => {
           </div>
         )}
 
-        {/* Register Card */}
         <div className="bg-white rounded-xl shadow-lg border border-gray-200 px-8 py-4">
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -122,7 +117,7 @@ const RegisterForm = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all duration-200 bg-gray-50 focus:bg-white"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all duration-200 bg-gray-50 focus:bg-white"
                 placeholder="John Doe"
                 required
               />
@@ -138,7 +133,7 @@ const RegisterForm = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all duration-200 bg-gray-50 focus:bg-white"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all duration-200 bg-gray-50 focus:bg-white"
                 placeholder="you@example.com"
                 required
               />
@@ -154,7 +149,7 @@ const RegisterForm = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, password: e.target.value })
                 }
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all duration-200 bg-gray-50 focus:bg-white"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all duration-200 bg-gray-50 focus:bg-white"
                 placeholder="••••••••"
                 minLength={6}
                 required
@@ -167,7 +162,7 @@ const RegisterForm = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold py-2.5 rounded-lg hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-md hover:shadow-lg"
+              className="w-full bg-linear-to-r from-green-600 to-emerald-600 text-white font-semibold py-2.5 rounded-lg hover:from-green-700 hover:to-emerald-700 focus:ring-4 focus:ring-green-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-md hover:shadow-lg"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -198,7 +193,6 @@ const RegisterForm = () => {
             </button>
           </form>
 
-          {/* Divider */}
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
@@ -211,10 +205,9 @@ const RegisterForm = () => {
               </div>
             </div>
 
-            {/* Google Sign Up */}
             <button
               onClick={() => signIn("google", { callbackUrl: "/quizzes" })}
-              className="mt-5 w-full bg-emerald-100 border-2 border-gray-200 text-gray-700 font-medium py-2.5 rounded-lg hover:bg-gray-50 hover:border-gray-300 flex items-center justify-center gap-3 transition-all duration-200"
+              className="mt-5 w-full bg-white border-2 border-gray-200 text-gray-700 font-medium py-2.5 rounded-lg hover:bg-gray-50 hover:border-gray-300 flex items-center justify-center gap-3 transition-all duration-200"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path
@@ -238,12 +231,11 @@ const RegisterForm = () => {
             </button>
           </div>
 
-          {/* Login Link */}
           <p className="text-center text-sm text-gray-600 mt-6">
             Already have an account?{" "}
             <Link
               href="/login"
-              className="text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-200"
+              className="text-green-600 font-semibold hover:text-green-700 transition-colors duration-200"
             >
               Login
             </Link>

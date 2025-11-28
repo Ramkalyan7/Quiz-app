@@ -27,13 +27,11 @@ const QuizComponent = ({
   const handleClick = (e: React.MouseEvent) => {
     setLoading(true);
 
-    // Auto-remove loader after 3 seconds
     timeoutRef.current = setTimeout(() => {
       setLoading(false);
     }, 3000);
   };
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (timeoutRef.current) {
@@ -44,8 +42,8 @@ const QuizComponent = ({
 
   return (
     <Link href={`/attemptquiz/${id}`} onClick={handleClick}>
-      <div className="h-full bg-white rounded-lg sm:rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-blue-400 overflow-hidden cursor-pointer group relative">
-        <div className="h-1 sm:h-1.5 bg-gradient-to-r from-blue-500 to-purple-600"></div>
+      <div className="h-full bg-white rounded-lg sm:rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-green-400 overflow-hidden cursor-pointer group relative">
+        <div className="h-1 sm:h-1.5 bg-gradient-to-r from-green-500 to-emerald-600"></div>
 
         {isFromHistory && (
           <div className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-2 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold shadow-lg z-10">
@@ -57,7 +55,7 @@ const QuizComponent = ({
 
         <div className="p-4 sm:p-6 flex flex-col h-full space-y-3 sm:space-y-4">
           <div className="grow">
-            <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 line-clamp-3 group-hover:text-blue-600 transition-colors duration-200 leading-snug">
+            <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 line-clamp-3 group-hover:text-green-600 transition-colors duration-200 leading-snug">
               {title.length > 100 ? `${title.substring(0, 100)}...` : title}
             </h3>
           </div>
@@ -65,7 +63,7 @@ const QuizComponent = ({
           <div className="space-y-3 sm:space-y-4 flex flex-col-reverse">
             <button
               disabled={loading}
-              className={`inline-flex items-center justify-center gap-2 w-full px-4 sm:px-5 py-2.5 sm:py-3 text-sm sm:text-base font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg sm:rounded-xl hover:from-blue-700 hover:to-indigo-700 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-md hover:shadow-lg group/btn ${
+              className={`inline-flex items-center justify-center gap-2 w-full px-4 sm:px-5 py-2.5 sm:py-3 text-sm sm:text-base font-bold text-white bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg sm:rounded-xl hover:from-green-700 hover:to-emerald-700 focus:ring-4 focus:ring-green-300 transition-all duration-200 shadow-md hover:shadow-lg group/btn ${
                 loading ? "opacity-75 cursor-wait" : ""
               }`}
             >
@@ -138,7 +136,7 @@ const QuizComponent = ({
                   return (
                     <span
                       key={tag}
-                      className="inline-flex items-center bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-blue-200 hover:border-blue-400 hover:bg-blue-100 transition-all duration-200"
+                      className="inline-flex items-center bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 text-xs font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-green-200 hover:border-green-400 hover:bg-green-100 transition-all duration-200"
                     >
                       <svg
                         className="w-2.5 h-2.5 sm:w-3 sm:h-3 mr-1"

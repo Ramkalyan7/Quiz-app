@@ -40,7 +40,6 @@ export default function Compete() {
     joinRoom(roomCode, name);
   };
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (hostTimeoutRef.current) {
@@ -53,9 +52,8 @@ export default function Compete() {
   }, []);
 
   return (
-    <div className="md:pt-20 min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <div className="md:pt-20 min-h-screen bg-linear-to-br from-green-50 via-emerald-50 to-teal-50 px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
       <div className="max-w-4xl mx-auto">
-        {/* Header Section */}
         <div className="text-center mb-8 sm:mb-12 pt-15">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2 sm:mb-3">
             Multiplayer Quiz
@@ -65,10 +63,8 @@ export default function Compete() {
           </p>
         </div>
 
-        {/* Two Column Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          {/* Host a Quiz Card */}
-          <div className="bg-linear-to-br from-purple-600 to-pink-600 rounded-xl sm:rounded-2xl shadow-xl border border-purple-300 p-6 sm:p-10 text-white hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+          <div className="bg-linear-to-br from-emerald-600 to-teal-600 rounded-xl sm:rounded-2xl shadow-xl border border-emerald-300 p-6 sm:p-10 text-white hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
             <div className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-white/20 rounded-2xl mb-4 sm:mb-6 backdrop-blur">
               <svg
                 className="w-6 h-6 sm:w-8 sm:h-8"
@@ -129,7 +125,7 @@ export default function Compete() {
             <button
               onClick={handleHostQuiz}
               disabled={hostLoading}
-              className={`w-full bg-white text-purple-600 font-bold py-3 sm:py-4 rounded-xl hover:bg-gray-100 focus:ring-4 focus:ring-purple-300 transition-all duration-300 shadow-lg hover:shadow-xl text-base sm:text-lg flex items-center justify-center gap-2 ${
+              className={`w-full bg-white text-emerald-600 font-bold py-3 sm:py-4 rounded-xl hover:bg-gray-100 focus:ring-4 focus:ring-emerald-300 transition-all duration-300 shadow-lg hover:shadow-xl text-base sm:text-lg flex items-center justify-center gap-2 ${
                 hostLoading ? "opacity-75 cursor-wait" : "cursor-pointer"
               }`}
             >
@@ -177,9 +173,8 @@ export default function Compete() {
             </button>
           </div>
 
-          {/* Join a Quiz Card */}
           <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl border border-gray-200 p-6 sm:p-10 hover:shadow-2xl transition-all duration-300">
-            <div className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-linear-to-r from-blue-600 to-purple-600 rounded-2xl mb-4 sm:mb-6">
+            <div className="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-linear-to-r from-green-600 to-emerald-600 rounded-2xl mb-4 sm:mb-6">
               <svg
                 className="w-6 h-6 sm:w-8 sm:h-8 text-white"
                 fill="none"
@@ -204,7 +199,6 @@ export default function Compete() {
             </p>
 
             <form className="space-y-4 sm:space-y-6" onSubmit={handleJoinQuiz}>
-              {/* Room Code Input */}
               <div>
                 <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2">
                   Room Code
@@ -218,7 +212,7 @@ export default function Compete() {
                   placeholder="e.g., QUIZ42"
                   maxLength={6}
                   required
-                  className={`w-full px-4 sm:px-6 py-3 sm:py-4 text-xl sm:text-2xl font-bold text-center text-gray-900 bg-gray-50 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all duration-200 uppercase ${
+                  className={`w-full px-4 sm:px-6 py-3 sm:py-4 text-xl sm:text-2xl font-bold text-center text-gray-900 bg-gray-50 border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all duration-200 uppercase ${
                     joinLoading ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 />
@@ -227,7 +221,6 @@ export default function Compete() {
                 </p>
               </div>
 
-              {/* Username Input */}
               <div>
                 <label className="block text-xs sm:text-sm font-semibold text-gray-700 mb-2">
                   Your Name
@@ -239,17 +232,16 @@ export default function Compete() {
                   disabled={joinLoading}
                   type="text"
                   placeholder="Enter your name"
-                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base text-gray-900 bg-gray-50 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all duration-200 ${
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 text-sm sm:text-base text-gray-900 bg-gray-50 border-2 border-gray-300 rounded-xl focus:border-green-500 focus:ring-2 focus:ring-green-200 outline-none transition-all duration-200 ${
                     joinLoading ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                 />
               </div>
 
-              {/* Join Button */}
               <button
                 type="submit"
                 disabled={joinLoading}
-                className={`w-full bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold py-3 sm:py-4 rounded-xl hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition-all duration-300 shadow-lg hover:shadow-xl text-base sm:text-lg flex items-center justify-center gap-2 ${
+                className={`w-full bg-linear-to-r from-green-600 to-emerald-600 text-white font-semibold py-3 sm:py-4 rounded-xl hover:from-green-700 hover:to-emerald-700 focus:ring-4 focus:ring-green-300 transition-all duration-300 shadow-lg hover:shadow-xl text-base sm:text-lg flex items-center justify-center gap-2 ${
                   joinLoading ? "opacity-75 cursor-wait" : "cursor-pointer"
                 }`}
               >
@@ -299,7 +291,6 @@ export default function Compete() {
           </div>
         </div>
 
-        {/* Features Section */}
         <div className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
           <div className="bg-white rounded-xl p-5 sm:p-6 border border-gray-200 text-center shadow-md hover:shadow-lg transition-all duration-300">
             <h3 className="font-bold text-base sm:text-lg text-gray-900 mb-1 sm:mb-2">
@@ -329,8 +320,7 @@ export default function Compete() {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <div className="mt-10 sm:mt-12 bg-linear-to-r from-blue-600 via-purple-600 to-pink-600 rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8 text-white text-center">
+        <div className="mt-10 sm:mt-12 bg-linear-to-r from-green-600 via-emerald-600 to-teal-600 rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8 text-white text-center">
           <h2 className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-3">
             Ready to Compete?
           </h2>
@@ -342,7 +332,7 @@ export default function Compete() {
             <button
               onClick={handleHostQuiz}
               disabled={hostLoading}
-              className={`px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base bg-white text-purple-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg ${
+              className={`px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base bg-white text-emerald-600 font-bold rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg ${
                 hostLoading ? "opacity-75 cursor-wait" : "cursor-pointer"
               }`}
             >

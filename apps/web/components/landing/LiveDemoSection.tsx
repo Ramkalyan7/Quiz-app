@@ -53,7 +53,7 @@ function PlayerCard({ name, placement, points, color, answers }: PlayerProps) {
 
 export default function LiveDemoSection() {
   return (
-    <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-600 to-purple-600">
+    <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-green-600 to-emerald-600">
       <div className="max-w-4xl mx-auto text-center text-white space-y-6 sm:space-y-8">
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
           See Multiplayer in Action
@@ -67,7 +67,7 @@ export default function LiveDemoSection() {
             name="You"
             placement="1st Place"
             points={45}
-            color="from-blue-400 to-blue-600"
+            color="from-green-400 to-green-600"
             answers={[
               { question: "Question 1", status: "correct" },
               { question: "Question 2", status: "correct" },
@@ -78,7 +78,7 @@ export default function LiveDemoSection() {
             name="Friend"
             placement="2nd Place"
             points={38}
-            color="from-purple-400 to-purple-600"
+            color="from-emerald-400 to-emerald-600"
             answers={[
               { question: "Question 1", status: "correct" },
               { question: "Question 2", status: "incorrect" },

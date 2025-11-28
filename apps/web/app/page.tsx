@@ -9,14 +9,13 @@ import LiveDemoSection from "../components/landing/LiveDemoSection";
 import { isAuthenticated } from "../lib/session";
 
 export default async function LandingPage() {
-
-    const isUserLoggedIn = await isAuthenticated();
+  const isUserLoggedIn = await isAuthenticated();
 
   if (isUserLoggedIn) {
     redirect("/quizzes");
   }
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-linear-to-br from-green-50 via-emerald-50 to-teal-50">
       <HeroSection />
       <HowItWorksSection />
       <FeaturesSection />

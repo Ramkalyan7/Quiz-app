@@ -39,11 +39,10 @@ export function QuizResultPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 px-3 sm:px-4 lg:px-10 py-6 sm:py-12">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 px-3 sm:px-4 lg:px-10 py-6 sm:py-12">
       <div className="w-full max-w-2xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl sm:rounded-2xl mb-2 sm:mb-4">
+          <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl sm:rounded-2xl mb-2 sm:mb-4">
             <svg
               className="w-6 h-6 sm:w-8 sm:h-8 text-white"
               fill="none"
@@ -66,9 +65,7 @@ export function QuizResultPage() {
           </p>
         </div>
 
-        {/* Main Result Card */}
         <div className="bg-white rounded-lg sm:rounded-2xl shadow-xl border border-gray-200 p-5 sm:p-8 lg:p-10 mb-6 sm:mb-8">
-          {/* Score Display */}
           <div className="text-center mb-8 sm:mb-10 hidden sm:block">
             <div className="inline-flex items-center justify-center mb-4 sm:mb-6">
               <div className="relative w-24 h-24 sm:w-32 sm:h-32">
@@ -99,8 +96,8 @@ export function QuizResultPage() {
                       x2="100%"
                       y2="100%"
                     >
-                      <stop offset="0%" stopColor="#3b82f6" />
-                      <stop offset="100%" stopColor="#9333ea" />
+                      <stop offset="0%" stopColor="#10b981" />
+                      <stop offset="100%" stopColor="#059669" />
                     </linearGradient>
                   </defs>
                 </svg>
@@ -128,10 +125,9 @@ export function QuizResultPage() {
             </div>
           </div>
 
-          {/* Stats Grid */}
           <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200">
-            <div className="text-center p-3 sm:p-4 bg-blue-50 rounded-lg border border-blue-200">
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-600 mb-0.5 sm:mb-1">
+            <div className="text-center p-3 sm:p-4 bg-green-50 rounded-lg border border-green-200">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-600 mb-0.5 sm:mb-1">
                 {results.questionCount}
               </div>
               <div className="text-xs sm:text-sm text-gray-600">
@@ -139,8 +135,8 @@ export function QuizResultPage() {
               </div>
             </div>
 
-            <div className="text-center p-3 sm:p-4 bg-green-50 rounded-lg border border-green-200">
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-600 mb-0.5 sm:mb-1">
+            <div className="text-center p-3 sm:p-4 bg-emerald-50 rounded-lg border border-emerald-200">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-emerald-600 mb-0.5 sm:mb-1">
                 {results.correctCount}
               </div>
               <div className="text-xs sm:text-sm text-gray-600">
@@ -157,23 +153,22 @@ export function QuizResultPage() {
           </div>
         </div>
 
-        {/* Feedback Message */}
         <div
           className={`rounded-lg p-4 sm:p-6 mb-6 sm:mb-8 border-l-4 ${
             isPassed
               ? "bg-green-50 border-green-500"
-              : "bg-blue-50 border-blue-500"
+              : "bg-emerald-50 border-emerald-500"
           }`}
         >
           <p
             className={`font-semibold mb-1 sm:mb-2 text-sm sm:text-base ${
-              isPassed ? "text-green-900" : "text-blue-900"
+              isPassed ? "text-green-900" : "text-emerald-900"
             }`}
           >
             {isPassed ? " Great Job!" : " Keep Learning"}
           </p>
           <p
-            className={`text-xs sm:text-sm ${isPassed ? "text-green-800" : "text-blue-800"}`}
+            className={`text-xs sm:text-sm ${isPassed ? "text-green-800" : "text-emerald-800"}`}
           >
             {isPassed
               ? "You've successfully completed this quiz! Your performance shows a good understanding of the material."
@@ -181,12 +176,11 @@ export function QuizResultPage() {
           </p>
         </div>
 
-        {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
           <button
             onClick={handleTryAgain}
             disabled={tryAgainLoading}
-            className={`flex-1 inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm lg:text-base font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg hover:from-blue-700 hover:to-purple-700 focus:ring-4 focus:ring-blue-300 transition-all duration-200 shadow-md hover:shadow-lg ${
+            className={`flex-1 inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm lg:text-base font-semibold text-white bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg hover:from-green-700 hover:to-emerald-700 focus:ring-4 focus:ring-green-300 transition-all duration-200 shadow-md hover:shadow-lg ${
               tryAgainLoading ? "opacity-75 cursor-wait" : "cursor-pointer"
             }`}
           >
