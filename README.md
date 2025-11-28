@@ -1,58 +1,124 @@
-# Turborepo Tailwind CSS starter
+# Quiz App
 
-This Turborepo starter is maintained by the Turborepo core team.
+Monorepo Quiz application built with Turborepo. This repository contains a Next.js web frontend and an Express-based quiz server, plus shared packages (UI components and common utilities).
 
-## Using this example
+## Repository structure
 
-Run the following command:
+- apps/web — Next.js (React + Tailwind CSS) user-facing application (runs on port 3001 in development).
+- apps/quizServer — Express + WebSocket quiz server (TypeScript, built to dist/).
+- packages/* — shared packages used across apps (ui, common, eslint-config, tailwind-config, typescript-config).
 
-```sh
-npx create-turbo@latest -e with-tailwind
-```
+## Features
 
-## What's inside?
+- Next.js 16 frontend with React 19 and Tailwind CSS
+- Express server with WebSocket support
+- Shared UI and common utilities via workspace packages
+- TypeScript across the monorepo
+- Turborepo workspace scripts for building and running
 
-This Turborepo includes the following packages/apps:
+## Prerequisites
 
-### Apps and Packages
+- Node.js >= 18
+- npm 10 (or a compatible package manager)
+- (Optional) PostgreSQL or other database if your project uses Prisma — check apps/web for any database usage
 
-- `docs`: a [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `web`: another [Next.js](https://nextjs.org/) app with [Tailwind CSS](https://tailwindcss.com/)
-- `ui`: a stub React component library with [Tailwind CSS](https://tailwindcss.com/) shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+## Quick start (development)
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+1. Clone the repository:
 
-### Building packages/ui
+   git clone https://github.com/Ramkalyan7/Quiz-app.git
+   cd Quiz-app
 
-This example is set up to produce compiled styles for `ui` components into the `dist` directory. The component `.tsx` files are consumed by the Next.js apps directly using `transpilePackages` in `next.config.ts`. This was chosen for several reasons:
+2. Install dependencies (from repo root):
 
-- Make sharing one `tailwind.config.ts` to apps and packages as easy as possible.
-- Make package compilation simple by only depending on the Next.js Compiler and `tailwindcss`.
-- Ensure Tailwind classes do not overwrite each other. The `ui` package uses a `ui-` prefix for it's classes.
-- Maintain clear package export boundaries.
+   npm install
 
-Another option is to consume `packages/ui` directly from source without building. If using this option, you will need to update the `tailwind.config.ts` in your apps to be aware of your package locations, so it can find all usages of the `tailwindcss` class names for CSS compilation.
+   Note: the repository uses workspaces — installing at root will install dependencies for all packages/apps.
 
-For example, in [tailwind.config.ts](packages/tailwind-config/tailwind.config.ts):
+3. Generate Prisma client (if applicable):
 
-```js
-  content: [
-    // app content
-    `src/**/*.{js,ts,jsx,tsx}`,
-    // include packages if not transpiling
-    "../../packages/ui/*.{js,ts,jsx,tsx}",
-  ],
-```
+   npm run postinstall
 
-If you choose this strategy, you can remove the `tailwindcss` and `autoprefixer` dependencies from the `ui` package.
+4. Run the development servers (recommended from root):
 
-### Utilities
+   npm run dev
 
-This Turborepo has some additional tools already setup for you:
+   This runs Turborepo which will start apps that expose a `dev` script. Alternatively you can start apps individually:
 
-- [Tailwind CSS](https://tailwindcss.com/) for styles
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+   - Frontend (apps/web):
+     cd apps/web
+     npm install
+     npm run dev
+     Open http://localhost:3001
+
+   - Quiz server (apps/quizServer):
+     cd apps/quizServer
+     npm install
+     npm run dev
+     The server compiles TypeScript then runs dist/index.js. Check console output for the server port.
+
+## Build & Production
+
+1. Build the monorepo:
+
+   npm run build
+
+2. Start the production user app (example):
+
+   npm run start-user-app
+
+3. Start the quiz server (from apps/quizServer):
+
+   cd apps/quizServer
+   npm run build
+   npm run start
+
+Adjust hosting, process managers (pm2, systemd), or containerization (Docker) as needed.
+
+## Environment variables
+
+Both the frontend and server use dotenv — create a `.env` file in the appropriate app directory (apps/web, apps/quizServer) or at repo root depending on your setup. Typical variables you may need to provide include:
+
+- PORT (server port)
+- DATABASE_URL (if using Prisma/DB)
+- NEXTAUTH_URL and NEXTAUTH_SECRET (if using NextAuth)
+- SMTP / MAIL settings (if sending mail)
+
+Search the codebase for `process.env` to find the exact variables required by each app.
+
+## Useful scripts
+
+- npm run dev — start development servers via Turborepo
+- npm run build — build all packages (turbo run build)
+- npm run lint — run linters (turbo run lint)
+- npm run check-types — run TypeScript checks
+- npm run format — format files with Prettier
+- apps/web: npm run dev (start Next.js on port 3001)
+- apps/quizServer: npm run dev (compile then run server)
+
+## Contributing
+
+Contributions are welcome. Suggested workflow:
+
+1. Fork the repository
+2. Create a feature branch
+3. Make changes and add tests where appropriate
+4. Open a pull request with a clear description of changes
+
+Please run linters/formatters before opening PRs.
+
+## Notes
+
+- This project is a Turborepo monorepo; please be mindful of workspace-level dependencies and scripts.
+- Some packages in this repo are local workspaces (for example `@repo/ui` and `@repo/common`). When editing shared packages, you may need to rebuild them or rely on workspace transpilation.
+
+## License
+
+No license file is included in the repository. Check the repository root for a LICENSE. If you want to add a license, create a LICENSE file and update this README.
+
+---
+
+If you want, I can also:
+- Add badges (CI, license)
+- Add a screenshot or demo link
+- Create a LICENSE file
