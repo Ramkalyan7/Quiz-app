@@ -1,4 +1,4 @@
-import express, { json } from "express";
+import express from "express";
 import dotenv from "dotenv"
 import cors from "cors"
 dotenv.config();
@@ -35,15 +35,12 @@ app.post("/api/ai/quiz", async (req, res) => {
         const { prompt } = req.body;
 
         const aiResponse = await generateQuiz(prompt);
-
-        const quizData = aiResponse?.choices[0]?.message.content as string;
-        const quiz = JSON.parse(quizData);
-        const parseResult = QuizResponse.safeParse(quiz);
+        const parseResult = QuizResponse.safeParse(aiResponse);
 
         if (!parseResult?.success || parseResult.data.quiz.length == 0) {
             return res.status(503).json("Error while genrating the Quiz");
         }
-        return res.status(200).json(quiz)
+        return res.status(200).json(parseResult.data)
     } catch (error) {
         console.log(error);
         return res.status(503).json("Error while genrating the Quiz")
