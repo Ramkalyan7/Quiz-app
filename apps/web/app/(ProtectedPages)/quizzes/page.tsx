@@ -1,6 +1,6 @@
 import { prisma } from "../../../lib/prisma";
 import QuizComponent from "../../../components/QuizComponent";
-import { QuizWhereInput } from "../../../prisma/generated/prisma/models";
+import { Prisma } from "../../../prisma/generated/prisma/client";
 import PaginationBtns from "../../../components/quizzes/PaginationBtns";
 import SearchInput from "../../../components/quizzes/SearchInput";
 
@@ -24,8 +24,8 @@ const quizzes = async ({ searchParams }: Props) => {
           { title: { contains: searchQuery, mode: "insensitive" } },
           { tags: { hasSome: [searchQuery] } },
         ],
-      } as QuizWhereInput)
-    : ({} as QuizWhereInput);
+      } as Prisma.QuizWhereInput)
+    : ({} as Prisma.QuizWhereInput);
 
   const totalCount = await prisma.quiz.count({
     where: whereClause,

@@ -2,7 +2,7 @@
 
 import axios, { isAxiosError } from "axios"
 import { prisma } from "../lib/prisma";
-import { QuizResponseType } from "@repo/common";
+import { QuizQuestionType, QuizResponseType } from "@repo/common";
 
 
 const AIServerBaseUrl = process.env.AI_SERVER_BASE_URL;
@@ -64,6 +64,53 @@ export async function createRoom(quizId: string, questions: any[], userId: strin
         return {
             success: false,
             error: error.response?.data?.message || "Failed to create room",
+        };
+    }
+}
+
+export async function createRoomFromExistingQuiz(quizId: string, userId: string) {
+    try {
+        const quiz = await prisma.quiz.findUnique({
+            where: {
+                id: Number(quizId),
+            },
+            select: {
+                id: true,
+                quizData: true,
+            }
+        });
+
+        if (!quiz) {
+            return {
+                success: false,
+                error: "Quiz not found",
+            };
+        }
+
+        let questions: QuizQuestionType[];
+
+        if (typeof quiz.quizData === "string") {
+            questions = JSON.parse(quiz.quizData) as QuizQuestionType[];
+        } else {
+            return {
+                success: false,
+                error: "Stored quiz data is invalid",
+            };
+        }
+
+        if (questions.length === 0) {
+            return {
+                success: false,
+                error: "Quiz has no questions",
+            };
+        }
+
+        return await createRoom(quiz.id.toString(), questions, userId);
+    } catch (error) {
+        console.error("Failed to create room from existing quiz:", error);
+        return {
+            success: false,
+            error: "Failed to create room",
         };
     }
 }
